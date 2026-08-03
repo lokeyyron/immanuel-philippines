@@ -83,10 +83,7 @@ a {
   position: relative;
   display: grid;
   place-items: center;
-  overflow: hidden;
-  border-radius: 50%;
-  background: var(--accent);
-  color: var(--ink);
+  color: white;
   font-family: "Manrope", sans-serif;
   font-size: 0.75rem;
   font-weight: 800;
@@ -98,7 +95,7 @@ a {
   position: absolute;
   z-index: 1;
   object-fit: contain;
-  background: var(--paper);
+  filter: invert(1);
 }
 
 .nav-location {
