@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="The Immanuel Community church website is launching soon. Visit us in Iligan City."
+    />
+    <meta name="theme-color" content="#0d0e0c" />
+    <title>Immanuel Community — Launching Soon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main>
+      <section class="hero" aria-labelledby="launch-title">
+        <nav class="nav" aria-label="Main navigation">
+          <a class="brand" href="#top" aria-label="Immanuel Community home">
+            <span class="brand-mark" aria-hidden="true">
+              <img src="./assets/logo.jpeg" alt="" onerror="this.remove()" />
+              <span class="brand-fallback">IC</span>
+            </span>
+            <span>Immanuel Community</span>
+          </a>
+          <a class="nav-location" href="#location">Visit us <span aria-hidden="true">↘</span></a>
+        </nav>
+
+        <div class="hero-content" id="top">
+          <div class="hero-copy">
+            <p class="eyebrow"><span></span> God with us · Iligan City</p>
+            <h1 id="launch-title">
+              Immanuel Community<br />
+              <em>site ongoing.</em><br />
+              Launching soon.
+            </h1>
+            <p class="intro">
+              We’re thoughtfully building a place for our community to connect,
+              worship, and grow together. We can’t wait to welcome you.
+            </p>
+          </div>
+
+          <aside class="logo-stage" aria-label="Immanuel Community logo">
+            <div class="halo halo-one"></div>
+            <div class="halo halo-two"></div>
+            <div class="logo-card">
+              <img src="./assets/logo.jpeg" alt="Immanuel Community church logo" onerror="this.hidden=true; this.nextElementSibling.hidden=false" />
+              <div class="logo-placeholder" hidden>
+                <span>IC</span>
+                <small>IMMANUEL<br />COMMUNITY</small>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <a class="scroll-cue" href="#location">
+          <span>Find our church</span>
+          <span class="scroll-arrow" aria-hidden="true">↓</span>
+        </a>
+      </section>
+
+      <section class="location-section" id="location" aria-labelledby="location-title">
+        <header class="section-heading">
+          <p class="eyebrow dark"><span></span> You are welcome here</p>
+          <h2 id="location-title">Come and visit us.</h2>
+        </header>
+
+        <div class="location-grid">
+          <figure class="building-card">
+            <img
+              src="./assets/church-building.jpeg"
+              alt="The Immanuel Community church building in Iligan City"
+              onerror="this.hidden=true; this.nextElementSibling.hidden=false"
+            />
+            <div class="building-placeholder" hidden>
+              <span aria-hidden="true">IMMANUEL</span>
+              <small>Church building photo</small>
+            </div>
+            <figcaption>Our gathering place in the heart of Iligan City</figcaption>
+          </figure>
+
+          <div class="visit-card">
+            <div class="pin" aria-hidden="true">●</div>
+            <div>
+              <p class="visit-label">Visit us at</p>
+              <address>
+                2nd Floor, Rosbel Building<br />
+                Benito Labao, corner Zamora Street<br />
+                Iligan City
+              </address>
+            </div>
+            <a
+              class="directions-button"
+              href="https://www.google.com/maps/search/?api=1&query=66HP%2BXM9%2C+Iligan+City%2C+Lanao+del+Norte"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Open in Google Maps <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+
+          <div class="map-card">
+            <iframe
+              title="Map showing Rosbel Building in Iligan City"
+              src="https://www.google.com/maps?q=66HP%2BXM9%2C%20Iligan%20City%2C%20Lanao%20del%20Norte&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+            <div class="map-label"><span aria-hidden="true">●</span> Iligan City</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Immanuel Community</p>
+      <p>immanuelphilippines.church</p>
+      <p>Website launching soon</p>
+    </footer>
+  </body>
+</html>
