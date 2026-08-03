@@ -1,15 +1,20 @@
 :root {
-  --ink: #11110f;
-  --paper: #f3f0e8;
-  --paper-soft: #e6e0d4;
-  --accent: #ef5a35;
-  --accent-soft: #ff8b63;
-  --muted: #aaa79f;
+  --ink: #0d0e0c;
+  --paper: #f5f0e5;
+  --paper-soft: #e5dccb;
+  --accent: #d9b76e;
+  --accent-soft: #f0d99b;
+  --clay: #a94f38;
+  --muted: #b2afa7;
   --line: rgba(255, 255, 255, 0.16);
 }
 
 * {
   box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
 }
 
 html {
@@ -36,15 +41,16 @@ a {
   overflow: hidden;
   padding: 0 clamp(1.25rem, 4vw, 4.5rem) 2rem;
   background:
-    radial-gradient(circle at 79% 40%, rgba(239, 90, 53, 0.2), transparent 24rem),
-    linear-gradient(135deg, #11110f 0%, #171714 58%, #0b0b0a 100%);
+    radial-gradient(circle at 78% 38%, rgba(217, 183, 110, 0.24), transparent 22rem),
+    radial-gradient(circle at 95% 82%, rgba(169, 79, 56, 0.2), transparent 27rem),
+    linear-gradient(135deg, #0d0e0c 0%, #171814 58%, #080907 100%);
 }
 
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  opacity: 0.15;
+  opacity: 0.12;
   pointer-events: none;
   background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
   background-size: 72px 72px;
@@ -110,7 +116,7 @@ a {
 
 .nav-location:hover,
 .nav-location:focus-visible {
-  background: white;
+  background: var(--accent);
   color: var(--ink);
 }
 
@@ -144,7 +150,7 @@ a {
   height: 0.55rem;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 0 0.35rem rgba(239, 90, 53, 0.14);
+  box-shadow: 0 0 0 0.35rem rgba(217, 183, 110, 0.14);
 }
 
 h1,
@@ -215,15 +221,17 @@ h1 em {
   place-items: center;
   padding: 2rem;
   border-radius: 50%;
-  background: var(--paper);
+  border: 1px solid rgba(217, 183, 110, 0.45);
+  background: linear-gradient(145deg, #fffdf7, #e9deca);
   color: var(--ink);
-  box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.35);
+  box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.42), 0 0 0 0.75rem rgba(217, 183, 110, 0.06);
 }
 
 .logo-card img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+  mix-blend-mode: multiply;
 }
 
 .logo-placeholder {
@@ -269,7 +277,9 @@ h1 em {
 
 .location-section {
   padding: clamp(5rem, 10vw, 9rem) clamp(1.25rem, 4vw, 4.5rem);
-  background: var(--paper);
+  background:
+    radial-gradient(circle at 8% 88%, rgba(169, 79, 56, 0.11), transparent 24rem),
+    linear-gradient(145deg, #f7f3ea, var(--paper));
   color: var(--ink);
 }
 
@@ -307,6 +317,7 @@ h2 {
   margin: 0;
   overflow: hidden;
   border-radius: 1.25rem;
+  box-shadow: 0 1.2rem 3rem rgba(39, 31, 18, 0.1);
 }
 
 .building-card {
@@ -361,6 +372,7 @@ h2 {
   left: 2rem;
   color: white;
   font: 600 clamp(1.4rem, 2vw, 2rem)/1.2 "Manrope", sans-serif;
+  text-wrap: balance;
 }
 
 .visit-card {
@@ -370,7 +382,10 @@ h2 {
   gap: 1.25rem;
   align-items: start;
   padding: clamp(1.5rem, 3vw, 2.5rem);
-  background: var(--ink);
+  border-top: 0.28rem solid var(--accent);
+  background:
+    radial-gradient(circle at 100% 0, rgba(169, 79, 56, 0.22), transparent 15rem),
+    var(--ink);
   color: white;
 }
 
@@ -420,7 +435,7 @@ address {
 
 .directions-button:hover,
 .directions-button:focus-visible {
-  background: var(--accent-soft);
+  background: var(--accent);
 }
 
 .map-card {
@@ -436,7 +451,6 @@ address {
   position: absolute;
   inset: 0;
   border: 0;
-  filter: grayscale(1) contrast(0.92);
 }
 
 .map-label {
