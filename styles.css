@@ -78,12 +78,15 @@ a {
 }
 
 .brand-mark {
-  width: 2rem;
-  height: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
   position: relative;
   display: grid;
   place-items: center;
-  color: white;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--ink);
   font-family: "Manrope", sans-serif;
   font-size: 0.75rem;
   font-weight: 800;
@@ -95,7 +98,7 @@ a {
   position: absolute;
   z-index: 1;
   object-fit: contain;
-  filter: invert(1);
+  background: var(--paper);
 }
 
 .nav-location {
