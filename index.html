@@ -3,125 +3,142 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="The Immanuel Church PH website is launching soon. Visit us in Iligan City."
-    />
-    <meta name="theme-color" content="#0d0e0c" />
+    <meta name="description" content="Welcome to Immanuel Church PH, a community in Iligan City growing together in faith, hope, and love." />
+    <meta name="theme-color" content="#0b0d0b" />
     <title>Immanuel Church PH</title>
     <link rel="icon" type="image/png" href="./assets/favicon2.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <main>
-      <section class="hero" aria-labelledby="launch-title">
-        <nav class="nav" aria-label="Main navigation">
-          <a class="brand" href="#top" aria-label="Immanuel Church PH home">
-            <span class="brand-mark" aria-hidden="true">
-              <img src="./assets/immanuel-logo.png" alt="" onerror="this.nextElementSibling.hidden=false; this.remove()" />
-              <span class="brand-fallback" hidden>IC</span>
-            </span>
-            <span>Immanuel Church PH</span>
-          </a>
-          <a class="nav-location" href="#location">Visit us <span aria-hidden="true">↘</span></a>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Immanuel Church PH home">
+        <img src="./assets/immanuel-logo.png" alt="" />
+        <span>Immanuel Church PH</span>
+      </a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="#welcome">New here</a>
+        <a href="#connect">Connect</a>
+        <a href="#messages">Messages</a>
+        <a href="#location">Location</a>
+      </nav>
+      <a class="header-cta" href="#location">Plan your visit <span aria-hidden="true">↗</span></a>
+      <details class="mobile-menu">
+        <summary aria-label="Open navigation">Menu</summary>
+        <nav aria-label="Mobile navigation">
+          <a href="#welcome">New here</a>
+          <a href="#connect">Connect</a>
+          <a href="#messages">Messages</a>
+          <a href="#location">Location</a>
         </nav>
+      </details>
+    </header>
 
-        <div class="hero-content" id="top">
-          <div class="hero-copy">
-            <p class="eyebrow"><span></span> God with us · Iligan City</p>
-            <h1 id="launch-title">
-              Immanuel Community<br />
-              <em>site ongoing.</em><br />
-              Launching soon.
-            </h1>
-            <p class="intro">
-              We’re thoughtfully building a place for our community to connect,
-              worship, and grow together. We can’t wait to welcome you.
-            </p>
+    <main id="main-content">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero-image" aria-hidden="true"></div>
+        <div class="hero-shade" aria-hidden="true"></div>
+        <div class="hero-content">
+          <p class="kicker"><span></span> A church community in Iligan City</p>
+          <h1 id="hero-title">You are<br /><em>welcome here.</em></h1>
+          <p class="hero-intro">Come as you are and discover a community following Jesus, growing in faith, and living with purpose together.</p>
+          <div class="hero-actions">
+            <a class="button button-light" href="#location">Join us in person <span aria-hidden="true">↗</span></a>
+            <a class="text-link" href="#welcome">Meet Immanuel <span aria-hidden="true">↓</span></a>
           </div>
-
-          <aside class="logo-stage" aria-label="Immanuel Church PH logo">
-            <div class="halo halo-one"></div>
-            <div class="halo halo-two"></div>
-            <div class="logo-card">
-              <img src="./assets/updated-logo.png" alt="Immanuel Church PH logo" onerror="this.hidden=true; this.nextElementSibling.hidden=false" />
-              <div class="logo-placeholder" hidden>
-                <span>IC</span>
-                <small>IMMANUEL<br />COMMUNITY</small>
-              </div>
-            </div>
-          </aside>
         </div>
-
-        <a class="scroll-cue" href="#location">
-          <span>Find our church</span>
-          <span class="scroll-arrow" aria-hidden="true">↓</span>
-        </a>
+        <div class="hero-note" aria-label="Immanuel means God with us">
+          <span>Immanuel</span>
+          <p>God with us.<br />Hope for all.</p>
+        </div>
       </section>
 
-      <section class="location-section" id="location" aria-labelledby="location-title">
-        <header class="section-heading">
-          <p class="eyebrow dark"><span></span> You are welcome here</p>
-          <h2 id="location-title">Come and visit us.</h2>
-        </header>
-
-        <div class="location-grid">
-          <figure class="building-card">
-            <img
-              src="./assets/church-building.jpeg"
-              alt="The Immanuel Community church building in Iligan City"
-              onerror="this.hidden=true; this.nextElementSibling.hidden=false"
-            />
-            <div class="building-placeholder" hidden>
-              <span aria-hidden="true">IMMANUEL</span>
-              <small>Church building photo</small>
-            </div>
-            <figcaption>Our gathering place in the heart of Iligan City</figcaption>
-          </figure>
-
-          <div class="visit-card">
-            <div class="pin" aria-hidden="true">●</div>
-            <div>
-              <p class="visit-label">Visit us at</p>
-              <address>
-                2nd Floor, Rosbel Building<br />
-                Benito Labao, corner Zamora Street<br />
-                Iligan City
-              </address>
-            </div>
-            <a
-              class="directions-button"
-              href="https://www.google.com/maps/search/?api=1&query=66HP%2BXM9%2C+Iligan+City%2C+Lanao+del+Norte"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Open in Google Maps <span aria-hidden="true">↗</span>
-            </a>
+      <section class="welcome section" id="welcome" aria-labelledby="welcome-title">
+        <div class="section-label"><span>01</span><p>Welcome home</p></div>
+        <div class="welcome-copy">
+          <h2 id="welcome-title">Faith becomes real when we live it <em>together.</em></h2>
+          <div class="welcome-support">
+            <p>Immanuel Church PH is a place to worship, ask honest questions, build meaningful relationships, and become who God is calling you to be.</p>
+            <a class="arrow-link" href="#connect">Find your next step <span aria-hidden="true">↗</span></a>
           </div>
+        </div>
+      </section>
 
+      <section class="connect section-dark" id="connect" aria-labelledby="connect-title">
+        <div class="section-heading">
+          <p class="kicker"><span></span> There is a place for you</p>
+          <h2 id="connect-title">Take your next step.</h2>
+        </div>
+        <div class="path-grid">
+          <article class="path-card path-featured">
+            <p class="card-number">01</p>
+            <div><p class="card-eyebrow">Your first Sunday</p><h3>Plan a visit</h3><p>Know where to go, what to expect, and how to find us in the heart of Iligan City.</p></div>
+            <a href="#location" aria-label="Plan a visit">↗</a>
+          </article>
+          <article class="path-card">
+            <p class="card-number">02</p>
+            <div><p class="card-eyebrow">Life together</p><h3>Find community</h3><p>Build friendships, grow in faith, and experience church beyond a Sunday gathering.</p></div>
+            <a href="#community" aria-label="Find community">↗</a>
+          </article>
+          <article class="path-card">
+            <p class="card-number">03</p>
+            <div><p class="card-eyebrow">Make a difference</p><h3>Serve with us</h3><p>Use your gifts to welcome people, strengthen the church, and bless our city.</p></div>
+            <a href="#community" aria-label="Serve with us">↗</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="messages section" id="messages" aria-labelledby="messages-title">
+        <div class="message-visual" aria-hidden="true"><div class="message-mark">IC</div><p>Truth for<br />everyday life.</p></div>
+        <div class="message-copy">
+          <p class="kicker dark"><span></span> Listen and grow</p>
+          <h2 id="messages-title">A word for where you are.</h2>
+          <p>Explore biblical teaching designed to help you know Jesus, navigate life with wisdom, and carry hope into your week.</p>
+          <a class="button button-dark" href="#messages">Messages coming soon <span aria-hidden="true">→</span></a>
+        </div>
+      </section>
+
+      <section class="community" id="community" aria-labelledby="community-title">
+        <div class="community-copy"><p class="kicker"><span></span> More than a gathering</p><h2 id="community-title">A community shaped by <em>grace.</em></h2></div>
+        <div class="community-statements">
+          <p><span>Belong</span> Find people who will walk with you.</p>
+          <p><span>Become</span> Grow deeper in faith and character.</p>
+          <p><span>Build</span> Bring hope to families and our city.</p>
+        </div>
+      </section>
+
+      <section class="location section" id="location" aria-labelledby="location-title">
+        <div class="section-heading location-heading"><p class="kicker dark"><span></span> Visit Immanuel</p><h2 id="location-title">There’s a seat for you.</h2></div>
+        <div class="location-layout">
+          <figure class="building-card">
+            <img src="./assets/church-building.jpeg" alt="Immanuel Church PH building in Iligan City" />
+            <figcaption>Our home in Iligan City</figcaption>
+          </figure>
+          <div class="visit-card">
+            <p class="visit-label">Find us here</p>
+            <address>2nd Floor, Rosbel Building<br />Benito Labao, corner Zamora Street<br />Iligan City</address>
+            <p class="plus-code">Plus Code: 66HP+XM9</p>
+            <a class="button button-light" href="https://www.google.com/maps/search/?api=1&query=66HP%2BXM9%2C+Iligan+City%2C+Lanao+del+Norte" target="_blank" rel="noopener noreferrer">Open Google Maps <span aria-hidden="true">↗</span></a>
+          </div>
           <div class="map-card">
-            <iframe
-              title="Map showing Rosbel Building in Iligan City"
-              src="https://www.google.com/maps?q=66HP%2BXM9%2C%20Iligan%20City%2C%20Lanao%20del%20Norte&output=embed"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-            ></iframe>
-            <div class="map-label"><span aria-hidden="true">●</span> Iligan City</div>
+            <iframe title="Map showing Immanuel Church PH in Iligan City" src="https://www.google.com/maps?q=66HP%2BXM9%2C%20Iligan%20City%2C%20Lanao%20del%20Norte&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </div>
       </section>
     </main>
 
-    <footer>
-      <p>Immanuel Church PH</p>
-      <p>immanuelphilippines.church</p>
-      <p>Website launching soon</p>
+    <footer class="site-footer">
+      <div class="footer-brand"><img src="./assets/immanuel-logo.png" alt="" /><p>Immanuel Church PH</p></div>
+      <p class="footer-message">God with us.<br />Hope for all.</p>
+      <div class="footer-links">
+        <a href="https://www.facebook.com/immanuelchurchiligan" target="_blank" rel="noopener noreferrer">Facebook ↗</a>
+        <a href="#location">Visit us</a>
+        <a href="#top">Back to top ↑</a>
+      </div>
+      <p class="copyright">© 2026 Immanuel Church PH · Iligan City</p>
     </footer>
   </body>
 </html>
