@@ -347,8 +347,8 @@ h1 em, h2 em {
 .live-player-copy .button { margin-top: 2rem; }
 .live-player-frame { min-height: 25rem; position: relative; background: #050605; }
 .live-player-frame iframe { width: 100%; height: 100%; min-height: 25rem; display: block; border: 0; }
-.live-player-fallback { position: absolute; right: 1rem; bottom: .8rem; left: 1rem; margin: 0; color: rgba(255,255,255,.68); font-size: .68rem; text-align: center; pointer-events: none; }
-.live-player-fallback a { color: var(--gold-light); pointer-events: auto; }
+.live-player-fallback { margin: 0; padding: .75rem 1rem; background: #050605; color: rgba(255,255,255,.68); font-size: .68rem; text-align: center; }
+.live-player-fallback a { color: var(--gold-light); }
 .live-pulse {
   position: relative;
   background: #e46e4e;
