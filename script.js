@@ -24,10 +24,10 @@
   const updatePauseButton = () => {
     if (!pauseButton) return;
     const videoActive = isVideoSlide(activeIndex);
-    pauseButton.disabled = videoActive;
-    pauseButton.setAttribute("aria-label", videoActive ? "Carousel paused while live video is active" : paused ? "Play carousel" : "Pause carousel");
+    pauseButton.disabled = false;
+    pauseButton.setAttribute("aria-label", videoActive ? "Resume carousel" : paused ? "Play carousel" : "Pause carousel");
     const icon = pauseButton.querySelector("span");
-    if (icon) icon.textContent = videoActive ? "▮" : paused ? "▶" : "Ⅱ";
+    if (icon) icon.textContent = videoActive ? "▶" : paused ? "▶" : "Ⅱ";
   };
 
   const startAutoplay = () => {
@@ -83,7 +83,12 @@
   });
 
   pauseButton?.addEventListener("click", () => {
-    if (isVideoSlide(activeIndex)) return;
+    if (isVideoSlide(activeIndex)) {
+      paused = false;
+      showSlide(activeIndex + 1);
+      startAutoplay();
+      return;
+    }
     paused = !paused;
     updatePauseButton();
     if (paused) stopAutoplay();
@@ -168,6 +173,21 @@
   themeToggle?.addEventListener("click", () => {
     setTheme(root.dataset.theme === "light" ? "dark" : "light");
   });
+
+  const revealSections = document.querySelectorAll("main > section:not(.hero), .site-footer");
+  revealSections.forEach((section) => section.classList.add("section-reveal"));
+  if (reducedMotion || !("IntersectionObserver" in window)) {
+    revealSections.forEach((section) => section.classList.add("is-visible"));
+  } else {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    revealSections.forEach((section) => revealObserver.observe(section));
+  }
 
   document.querySelectorAll(".path-grid").forEach((grid) => {
     const cards = [...grid.querySelectorAll(".path-card")];

@@ -938,3 +938,58 @@ html[data-theme="light"] .site-footer .footer-brand img { filter: none; }
   .message-poster p { max-width: 9ch; font-size: clamp(2.5rem,11vw,4.5rem); }
   .community-statements .community-item { grid-template-columns: minmax(5rem,.45fr) minmax(0,1fr) auto; gap: .75rem; }
 }
+
+
+/* Connected section rhythm and scroll reveals. */
+.live-service::before { display: none; }
+.welcome::before {
+  width: min(52rem, 70vw);
+  top: -43%;
+  right: -17%;
+  border-color: rgba(166,79,54,.2);
+  box-shadow: 0 0 0 3rem rgba(166,79,54,.06), 0 0 0 8rem rgba(166,79,54,.035);
+}
+.messages { background: var(--surface); }
+main { background: var(--surface); }
+
+/* The mark is transparent and centered; the large ring remains a background motif. */
+.message-poster {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.45rem;
+  text-align: center;
+}
+.message-logo {
+  width: clamp(4rem, 7vw, 6.25rem);
+  height: clamp(4rem, 7vw, 6.25rem);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.message-poster p { max-width: none; }
+.message-visual::after { content: "WATCH / PLAY ↗"; }
+.visit-card::before { display: none; content: none; }
+
+.section-reveal {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition: opacity 700ms ease, transform 700ms cubic-bezier(.22,.61,.36,1);
+  will-change: opacity, transform;
+}
+.section-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-reveal,
+  .section-reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
