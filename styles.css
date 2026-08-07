@@ -1180,3 +1180,62 @@ main { background: var(--surface); }
     width: 4.25rem;
   }
 }
+
+
+/* Final poster alignment and visible path-card actions. */
+.message-visual-top {
+  position: absolute;
+  z-index: 2;
+  top: clamp(1.6rem, 4vw, 3rem);
+  right: clamp(1.5rem, 4vw, 4rem);
+  left: clamp(1.5rem, 4vw, 4rem);
+  align-self: auto;
+}
+.message-visual-bottom {
+  position: absolute;
+  z-index: 2;
+  right: clamp(1.5rem, 4vw, 4rem);
+  bottom: clamp(1.4rem, 3vw, 2.6rem);
+  left: clamp(1.5rem, 4vw, 4rem);
+  align-self: auto;
+}
+.message-poster-copy {
+  top: 50%;
+  right: 7%;
+  text-align: center;
+  transform: translateY(-50%);
+}
+.message-poster-mark {
+  bottom: clamp(4rem, 7vw, 5.75rem);
+  width: clamp(3.6rem, 6.5vw, 5.4rem);
+}
+.path-card:hover > a,
+.path-card:focus-within > a,
+.path-featured:hover > a,
+.path-featured:focus-within > a {
+  border-color: var(--ink);
+  background: transparent;
+  color: var(--ink);
+}
+
+@media (max-width: 720px) {
+  .message-visual-top {
+    top: 1.35rem;
+    right: 1.4rem;
+    left: 1.4rem;
+  }
+  .message-visual-bottom {
+    right: 1.4rem;
+    bottom: 1.25rem;
+    left: 1.4rem;
+  }
+  .message-poster-copy {
+    top: 50%;
+    right: 7%;
+    width: 80%;
+  }
+  .message-poster-mark {
+    bottom: 3.35rem;
+    width: 4rem;
+  }
+}
