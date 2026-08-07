@@ -55,7 +55,7 @@
           <p class="hero-intro">Come as you are and discover a community following Jesus, growing in faith, and living with purpose together.</p>
           <div class="hero-actions">
             <a class="button button-light" href="#location">Join us in person <span aria-hidden="true">↗</span></a>
-            <a class="text-link" href="#welcome">Meet Immanuel <span aria-hidden="true">↓</span></a>
+            <a class="text-link hero-meet-link" href="#welcome"><span>Meet Immanuel</span><span class="link-arrow" aria-hidden="true">↓</span></a>
           </div>
         </div>
         <div class="hero-note" aria-label="Immanuel means God with us">
@@ -81,36 +81,26 @@
             <p class="kicker"><span class="live-pulse"></span> Live from Immanuel</p>
             <h2 id="live-title">Church doesn’t stop at <em>the room.</em></h2>
           </div>
-          <p class="live-description">When we gather online, you can worship, listen, and pray with our church family from wherever you are.</p>
-        </div>
-
-        <div class="live-player-panel">
-          <div class="live-player-copy">
-            <p class="slide-eyebrow"><span class="live-pulse"></span> Watch here</p>
-            <h3>Press play.<br /><em>Stay connected.</em></h3>
-            <p>Watch the latest service right here, then open our channel when a new livestream begins.</p>
-            <a class="button button-light" href="https://www.youtube.com/@ImmanuelChurchIligan" target="_blank" rel="noopener noreferrer">Open YouTube channel <span aria-hidden="true">↗</span></a>
-          </div>
-          <div class="live-player-frame">
-            <iframe title="Immanuel Church PH service on YouTube" src="https://www.youtube-nocookie.com/embed?listType=user_uploads&amp;list=ImmanuelChurchIligan&amp;rel=0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            <p class="live-player-fallback">If the player is unavailable, <a href="https://www.youtube.com/@ImmanuelChurchIligan" target="_blank" rel="noopener noreferrer">watch on YouTube ↗</a>.</p>
-          </div>
+          <p class="live-description">A live window into our Sunday gathering—worship, listen, and pray with our church family from wherever you are.</p>
         </div>
 
         <div class="live-carousel" role="region" aria-roledescription="carousel" aria-label="Immanuel live service" aria-live="polite">
           <div class="live-track" id="live-track">
             <article class="live-slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 3" data-slide>
-              <div class="live-art live-art-one" aria-hidden="true">
-                <div class="live-art-top"><span class="live-status"><i></i> Channel open</span><span>01 / 03</span></div>
-                <div class="live-art-center"><span class="live-word">LIVE</span><p>Worship with us<br />from Iligan City.</p></div>
-                <div class="live-art-bottom"><span>Immanuel Church PH</span><span>Sunday gathering</span></div>
+              <div class="live-art live-art-video">
+                <div class="live-art-top"><span class="live-status"><i></i> Live now</span><span>01 / 03</span></div>
+                <div class="live-video-frame">
+                  <iframe title="Latest Immanuel Church PH live service" src="https://www.youtube-nocookie.com/embed/QOHjb-_9Gbc?rel=0&amp;modestbranding=1" loading="eager" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                  <span class="live-video-badge">YouTube live</span>
+                </div>
+                <div class="live-art-bottom"><span>Immanuel Church PH</span><span>Latest gathering</span></div>
               </div>
               <div class="live-slide-copy">
-                <p class="slide-eyebrow">01 — Gather online</p>
-                <h3>Pull up a seat.<br /><em>We’re glad you’re here.</em></h3>
-                <p>Join the next service on our YouTube channel for worship, a message, and a moment to breathe with the Immanuel family.</p>
+                <p class="slide-eyebrow"><span class="live-pulse"></span> 01 — Watch live</p>
+                <h3>Gather<br /><em>with us.</em></h3>
+                <p>Press play on our latest service for worship, a message, and a moment to breathe with the Immanuel family.</p>
                 <div class="slide-actions">
-                  <a class="button button-light" href="https://www.youtube.com/@ImmanuelChurchIligan" target="_blank" rel="noopener noreferrer">Open YouTube <span aria-hidden="true">↗</span></a>
+                  <a class="button button-light" href="https://www.youtube.com/watch?v=QOHjb-_9Gbc" target="_blank" rel="noopener noreferrer">Open on YouTube <span aria-hidden="true">↗</span></a>
                   <a class="text-link" href="#location">Visit in person <span aria-hidden="true">↗</span></a>
                 </div>
               </div>
@@ -212,9 +202,9 @@
       <section class="community" id="community" aria-labelledby="community-title">
         <div class="community-copy"><p class="kicker"><span></span> More than a gathering</p><h2 id="community-title">A community shaped by <em>grace.</em></h2></div>
         <div class="community-statements">
-          <p><span>Belong</span> Find people who will walk with you.</p>
-          <p><span>Become</span> Grow deeper in faith and character.</p>
-          <p><span>Build</span> Bring hope to families and our city.</p>
+          <a class="community-item" href="#connect"><span>Belong</span><p>Find people who will walk with you.</p><b aria-hidden="true">↗</b></a>
+          <a class="community-item" href="#messages"><span>Become</span><p>Grow deeper in faith and character.</p><b aria-hidden="true">↗</b></a>
+          <a class="community-item" href="#location"><span>Build</span><p>Bring hope to families and our city.</p><b aria-hidden="true">↗</b></a>
         </div>
       </section>
 
@@ -240,9 +230,10 @@
 
     <footer class="site-footer">
       <div class="footer-brand"><img src="./assets/immanuel-logo.png" alt="" /><p>Immanuel Church PH</p></div>
-      <div class="footer-message"><span>God with us.</span><a href="https://www.youtube.com/@ImmanuelChurchIligan" target="_blank" rel="noopener noreferrer">Watch on YouTube <span aria-hidden="true">↗</span></a></div>
+      <div class="footer-message"><span>God with us.</span></div>
       <div class="footer-links">
         <a href="https://www.facebook.com/immanuelchurchiligan" target="_blank" rel="noopener noreferrer">Facebook ↗</a>
+        <a href="https://www.youtube.com/@ImmanuelChurchIligan" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a>
         <a href="#location">Visit us</a>
         <a href="#top">Back to top ↑</a>
       </div>

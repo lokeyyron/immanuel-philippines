@@ -14,6 +14,7 @@
   let timer;
   let paused = reducedMotion;
   let pointerStart;
+  const isVideoSlide = (index) => Boolean(slides[index]?.querySelector("iframe"));
 
   const stopAutoplay = () => {
     window.clearTimeout(timer);
@@ -22,14 +23,16 @@
 
   const updatePauseButton = () => {
     if (!pauseButton) return;
-    pauseButton.setAttribute("aria-label", paused ? "Play carousel" : "Pause carousel");
+    const videoActive = isVideoSlide(activeIndex);
+    pauseButton.disabled = videoActive;
+    pauseButton.setAttribute("aria-label", videoActive ? "Carousel paused while live video is active" : paused ? "Play carousel" : "Pause carousel");
     const icon = pauseButton.querySelector("span");
-    if (icon) icon.textContent = paused ? "▶" : "Ⅱ";
+    if (icon) icon.textContent = videoActive ? "▮" : paused ? "▶" : "Ⅱ";
   };
 
   const startAutoplay = () => {
     stopAutoplay();
-    if (paused || reducedMotion) return;
+    if (paused || reducedMotion || isVideoSlide(activeIndex)) return;
     timer = window.setTimeout(() => {
       showSlide(activeIndex + 1);
       startAutoplay();
@@ -52,6 +55,9 @@
       button.classList.toggle("is-active", isActive);
       button.setAttribute("aria-selected", String(isActive));
     });
+
+    updatePauseButton();
+    if (isVideoSlide(activeIndex)) stopAutoplay();
   };
 
   const restartAutoplay = () => {
@@ -77,6 +83,7 @@
   });
 
   pauseButton?.addEventListener("click", () => {
+    if (isVideoSlide(activeIndex)) return;
     paused = !paused;
     updatePauseButton();
     if (paused) stopAutoplay();
