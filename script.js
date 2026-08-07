@@ -125,6 +125,57 @@
     else startAutoplay();
   });
 
+  const root = document.documentElement;
+  const themeToggle = document.querySelector("[data-theme-toggle]");
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
+
+  const readTheme = () => {
+    try {
+      return window.localStorage.getItem("immanuel-theme");
+    } catch {
+      return null;
+    }
+  };
+
+  const setTheme = (theme) => {
+    const isLight = theme === "light";
+    root.dataset.theme = isLight ? "light" : "dark";
+    if (themeMeta) themeMeta.setAttribute("content", isLight ? "#f3eee3" : "#0b0d0b");
+    if (themeToggle) {
+      themeToggle.setAttribute("aria-pressed", String(isLight));
+      themeToggle.setAttribute("aria-label", isLight ? "Switch to dark mode" : "Switch to light mode");
+      const label = themeToggle.querySelector(".theme-toggle-label");
+      const glyph = themeToggle.querySelector(".theme-glyph");
+      if (label) label.textContent = isLight ? "Dark" : "Light";
+      if (glyph) glyph.textContent = isLight ? "☾" : "☼";
+    }
+    try {
+      window.localStorage.setItem("immanuel-theme", isLight ? "light" : "dark");
+    } catch {
+      // The theme still works when storage is unavailable.
+    }
+  };
+
+  const savedTheme = readTheme();
+  setTheme(savedTheme === "light" ? "light" : "dark");
+  themeToggle?.addEventListener("click", () => {
+    setTheme(root.dataset.theme === "light" ? "dark" : "light");
+  });
+
+  document.querySelectorAll(".path-grid").forEach((grid) => {
+    const cards = [...grid.querySelectorAll(".path-card")];
+    cards.forEach((card) => {
+      card.addEventListener("mouseenter", () => grid.classList.add("is-interacting"));
+      card.addEventListener("mouseleave", () => {
+        if (!grid.matches(":focus-within")) grid.classList.remove("is-interacting");
+      });
+      card.addEventListener("focusin", () => grid.classList.add("is-interacting"));
+      card.addEventListener("focusout", (event) => {
+        if (!grid.contains(event.relatedTarget)) grid.classList.remove("is-interacting");
+      });
+    });
+  });
+
   showSlide(0);
   updatePauseButton();
   startAutoplay();

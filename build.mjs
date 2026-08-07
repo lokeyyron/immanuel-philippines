@@ -9,4 +9,4 @@ await Promise.all([
   cp("assets", "dist/assets", { recursive: true }),
 ]);
 
-console.log("Coming-soon site built in dist/");
+console.log("Immanuel site built in dist/");
