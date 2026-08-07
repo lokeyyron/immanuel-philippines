@@ -1239,3 +1239,115 @@ main { background: var(--surface); }
     width: 4rem;
   }
 }
+
+
+/* Light theme: higher contrast, warmer accents, and a quieter decorative rhythm. */
+html[data-theme="light"] .hero {
+  color: #fff;
+}
+html[data-theme="light"] .hero .kicker,
+html[data-theme="light"] .hero .hero-note span {
+  color: #e8e4d8;
+}
+html[data-theme="light"] .hero .hero-intro,
+html[data-theme="light"] .hero .hero-note p {
+  color: #f4f1e8;
+}
+html[data-theme="light"] .hero h1 em {
+  color: #f1d78f;
+}
+html[data-theme="light"] .kicker {
+  color: #5e5b53;
+}
+html[data-theme="light"] .hero .kicker {
+  color: #e8e4d8;
+}
+html[data-theme="light"] .kicker span {
+  background: #c18b1b;
+  box-shadow: 0 0 0 .35rem rgba(193,139,27,.15);
+}
+html[data-theme="light"] .hero .kicker span {
+  background: var(--gold);
+  box-shadow: 0 0 0 .35rem rgba(222,184,94,.15);
+}
+html[data-theme="light"] .live-service .kicker,
+html[data-theme="light"] .live-service .slide-eyebrow,
+html[data-theme="light"] .live-service .live-slide-copy h3 em,
+html[data-theme="light"] .live-service .live-footnote a,
+html[data-theme="light"] .community-statements .community-item > span,
+html[data-theme="light"] .site-footer .footer-links a,
+html[data-theme="light"] .site-footer .footer-message a {
+  color: #9a650b;
+}
+html[data-theme="light"] .live-service .live-pulse {
+  background: #b86625;
+  box-shadow: 0 0 0 .35rem rgba(184,102,37,.14);
+}
+html[data-theme="light"] .live-service {
+  background:
+    radial-gradient(circle at 5% 10%, rgba(222,184,94,.22), transparent 22rem),
+    radial-gradient(circle at 94% 80%, rgba(166,79,54,.09), transparent 27rem),
+    repeating-linear-gradient(90deg, transparent 0 10rem, rgba(11,13,11,.035) 10rem 10.08rem),
+    var(--surface);
+}
+html[data-theme="light"] .connect {
+  background:
+    radial-gradient(circle at 8% 16%, rgba(222,184,94,.16), transparent 24rem),
+    radial-gradient(circle at 92% 88%, rgba(166,79,54,.07), transparent 26rem),
+    repeating-linear-gradient(90deg, transparent 0 10rem, rgba(11,13,11,.035) 10rem 10.08rem),
+    var(--surface);
+}
+html[data-theme="light"] .messages {
+  background:
+    radial-gradient(circle at 88% 12%, rgba(222,184,94,.13), transparent 23rem),
+    var(--surface);
+}
+html[data-theme="light"] .community {
+  background:
+    radial-gradient(circle at 8% 94%, rgba(166,79,54,.07), transparent 25rem),
+    repeating-linear-gradient(90deg, transparent 0 10rem, rgba(11,13,11,.035) 10rem 10.08rem),
+    var(--surface);
+}
+html[data-theme="light"] .location {
+  background:
+    radial-gradient(circle at 94% 10%, rgba(222,184,94,.15), transparent 25rem),
+    var(--surface);
+}
+html[data-theme="light"] .site-footer {
+  background:
+    radial-gradient(circle at 50% 0, rgba(222,184,94,.13), transparent 27rem),
+    repeating-linear-gradient(90deg, transparent 0 10rem, rgba(11,13,11,.035) 10rem 10.08rem),
+    var(--surface);
+}
+html[data-theme="light"] .community::before,
+html[data-theme="light"] .location::before {
+  border-color: rgba(11,13,11,.2);
+  box-shadow: 0 0 0 3rem rgba(193,139,27,.055), 0 0 0 8rem rgba(193,139,27,.025);
+}
+html[data-theme="light"] .community::after,
+html[data-theme="light"] .location::after {
+  opacity: .34;
+}
+
+/* Scroll reveals keep the section entrance visible while staggering its content. */
+.section-reveal > * {
+  opacity: 0;
+  transform: translateY(1rem);
+  transition: opacity 600ms ease, transform 700ms cubic-bezier(.22,.61,.36,1);
+}
+.section-reveal.is-visible > * {
+  opacity: 1;
+  transform: none;
+}
+.section-reveal.is-visible > *:nth-child(2) { transition-delay: 80ms; }
+.section-reveal.is-visible > *:nth-child(3) { transition-delay: 160ms; }
+.section-reveal.is-visible > *:nth-child(4) { transition-delay: 240ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .section-reveal > *,
+  .section-reveal.is-visible > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
