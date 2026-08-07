@@ -1099,3 +1099,84 @@ main { background: var(--surface); }
   .message-visual-bottom { font-size: .58rem; }
   .footer-message { justify-self: stretch; }
 }
+
+
+/* Editorial message poster: keep the mark and headline clear at every width. */
+.message-visual::before { display: none; }
+.message-poster {
+  overflow: hidden;
+  isolation: isolate;
+}
+.message-poster-ring {
+  width: min(36rem, 73%);
+  aspect-ratio: 1;
+  position: absolute;
+  z-index: 0;
+  top: 8%;
+  right: 8%;
+  border: 1px solid rgba(11,13,11,.3);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1.4rem rgba(11,13,11,.025), 0 0 0 3.5rem rgba(11,13,11,.018);
+}
+.message-poster-copy {
+  position: absolute;
+  z-index: 1;
+  top: 18%;
+  right: 7%;
+  width: min(38rem, 78%);
+  display: grid;
+  gap: .1em;
+  color: var(--ink);
+}
+.message-poster-copy span,
+.message-poster-copy em {
+  display: block;
+  margin: 0;
+  letter-spacing: -.075em;
+}
+.message-poster-copy span {
+  font: 800 clamp(2.5rem, 4.6vw, 5.5rem)/.84 "Manrope", sans-serif;
+  white-space: nowrap;
+}
+.message-poster-copy em {
+  font: 400 clamp(2.8rem, 5vw, 5.8rem)/.82 Georgia, serif;
+  white-space: nowrap;
+  letter-spacing: -.08em;
+}
+.message-poster-mark {
+  position: absolute;
+  z-index: 1;
+  left: clamp(1.5rem, 5vw, 4rem);
+  bottom: clamp(4rem, 8vw, 6.5rem);
+  width: clamp(3.8rem, 7vw, 6rem);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+}
+.message-poster-mark .message-logo {
+  position: static;
+  width: 100%;
+  height: 100%;
+}
+.message-poster p { display: block; }
+
+@media (max-width: 720px) {
+  .message-poster-ring {
+    width: min(22rem, 76%);
+    top: 12%;
+    right: 8%;
+    box-shadow: 0 0 0 .9rem rgba(11,13,11,.025), 0 0 0 2rem rgba(11,13,11,.018);
+  }
+  .message-poster-copy {
+    top: 22%;
+    right: 7%;
+    width: 80%;
+  }
+  .message-poster-copy span { font-size: clamp(1.9rem, 8.8vw, 3.3rem); }
+  .message-poster-copy em { font-size: clamp(2.15rem, 9.4vw, 3.6rem); }
+  .message-poster-mark {
+    left: 1.25rem;
+    bottom: 3.75rem;
+    width: 4.25rem;
+  }
+}
