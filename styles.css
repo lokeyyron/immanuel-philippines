@@ -252,10 +252,148 @@ h1 em, h2 em {
 .welcome-support p, .message-copy > p { margin: 0; color: var(--muted-dark); line-height: 1.75; }
 .arrow-link { white-space: nowrap; text-decoration-color: var(--line-dark); }
 
+.live-service {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 5% 12%, rgba(222,184,94,.2), transparent 22rem),
+    radial-gradient(circle at 92% 78%, rgba(166,79,54,.2), transparent 28rem),
+    var(--ink);
+}
+.live-service::before {
+  content: "";
+  position: absolute;
+  width: 48rem;
+  aspect-ratio: 1;
+  top: -24rem;
+  right: -22rem;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4rem rgba(255,255,255,.025), 0 0 0 9rem rgba(255,255,255,.02);
+  pointer-events: none;
+}
+.live-intro {
+  max-width: 90rem;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(17rem,.42fr);
+  align-items: end;
+  gap: clamp(2rem,8vw,9rem);
+  margin-inline: auto;
+}
+.live-intro .section-heading h2 { max-width: 11ch; }
+.live-description { max-width: 25rem; margin: 0 0 .45rem; color: var(--muted-light); line-height: 1.75; }
+.live-pulse {
+  position: relative;
+  background: #e46e4e;
+  box-shadow: 0 0 0 .35rem rgba(228,110,78,.14);
+  animation: live-pulse 1.8s ease-in-out infinite;
+}
+@keyframes live-pulse {
+  0%, 100% { box-shadow: 0 0 0 .25rem rgba(228,110,78,.12); }
+  50% { box-shadow: 0 0 0 .55rem rgba(228,110,78,.03); }
+}
+.live-carousel {
+  max-width: 90rem;
+  position: relative;
+  margin: clamp(3.5rem,7vw,7rem) auto 0;
+  overflow: hidden;
+}
+.live-track {
+  display: flex;
+  transition: transform 600ms cubic-bezier(.22,.61,.36,1);
+  will-change: transform;
+}
+.live-slide {
+  min-width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0,1.07fr) minmax(20rem,.93fr);
+  gap: 1px;
+  background: var(--line-light);
+}
+.live-art {
+  min-height: 36rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: clamp(1.5rem,3vw,2.8rem);
+  isolation: isolate;
+}
+.live-art::before, .live-art::after { content: ""; position: absolute; z-index: -1; border-radius: 50%; pointer-events: none; }
+.live-art::before {
+  width: 80%;
+  aspect-ratio: 1;
+  top: 4%;
+  right: -25%;
+  border: 1px solid rgba(255,255,255,.25);
+  box-shadow: 0 0 0 2.5rem rgba(255,255,255,.055), 0 0 0 6rem rgba(255,255,255,.04);
+}
+.live-art::after {
+  width: 42%;
+  aspect-ratio: 1;
+  bottom: -12%;
+  left: -12%;
+  border: 1px solid rgba(11,13,11,.24);
+}
+.live-art-one {
+  background:
+    linear-gradient(135deg, rgba(11,13,11,.12), transparent 42%),
+    radial-gradient(circle at 68% 31%, rgba(241,215,143,.98), transparent 4.7rem),
+    linear-gradient(150deg, #b45a3f 0%, #6d3029 47%, #181512 100%);
+  color: white;
+}
+.live-art-two {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.6), transparent 50%),
+    var(--gold-light);
+  color: var(--ink);
+}
+.live-art-two::before { border-color: rgba(11,13,11,.3); box-shadow: 0 0 0 2.5rem rgba(11,13,11,.05), 0 0 0 6rem rgba(11,13,11,.035); }
+.live-art-two::after { border-color: rgba(11,13,11,.28); }
+.live-art-three {
+  background:
+    linear-gradient(90deg, rgba(5,7,5,.78), rgba(5,7,5,.18)),
+    url("./assets/church-building.jpeg") center / cover no-repeat;
+  color: white;
+}
+.live-art-three::before { width: 92%; top: -12%; right: -32%; }
+.live-art-top, .live-art-bottom { display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-size: .64rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+.live-art-top { color: rgba(255,255,255,.72); }
+.live-art-two .live-art-top { color: rgba(11,13,11,.64); }
+.live-status { display: inline-flex; align-items: center; gap: .6rem; }
+.live-status i { width: .48rem; height: .48rem; display: block; border-radius: 50%; background: #e46e4e; box-shadow: 0 0 0 .28rem rgba(228,110,78,.15); }
+.live-art-center { position: relative; z-index: 1; }
+.live-word { display: block; font: 800 clamp(4.6rem,10vw,9.5rem)/.78 "Manrope", sans-serif; letter-spacing: -.12em; }
+.live-art-center p { margin: 1.25rem 0 0; font: 600 clamp(1.25rem,2.5vw,2.2rem)/1.1 "Manrope", sans-serif; letter-spacing: -.045em; }
+.live-art-bottom { padding-top: 1.2rem; border-top: 1px solid rgba(255,255,255,.28); color: rgba(255,255,255,.72); }
+.live-art-two .live-art-bottom { border-color: rgba(11,13,11,.25); color: rgba(11,13,11,.65); }
+.live-art-list { position: relative; z-index: 1; display: grid; gap: .5rem; align-self: flex-end; margin-top: -3rem; font-size: .64rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.live-art-list span { padding: .5rem .75rem; border: 1px solid rgba(11,13,11,.28); background: rgba(255,255,255,.16); }
+.live-slide-copy { display: flex; flex-direction: column; justify-content: center; min-height: 36rem; padding: clamp(2rem,5vw,5rem); background: var(--ink-soft); }
+.slide-eyebrow { margin: 0 0 1.8rem; color: var(--gold-light); font-size: .67rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+.live-slide-copy h3 { max-width: 10ch; font-size: clamp(2.6rem,4.7vw,5.3rem); line-height: .92; }
+.live-slide-copy h3 em { display: inline-block; color: var(--gold-light); font-family: Georgia, serif; font-weight: 400; letter-spacing: -.055em; }
+.live-slide-copy > p:not(.slide-eyebrow) { max-width: 28rem; margin: 2rem 0 0; color: var(--muted-light); line-height: 1.75; }
+.slide-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 1.35rem 1.7rem; margin-top: 2.25rem; }
+.slide-actions .text-link { color: white; }
+.live-controls { display: flex; justify-content: space-between; align-items: center; gap: 2rem; padding-top: 1.4rem; }
+.live-dots { display: flex; align-items: center; gap: .5rem; }
+.live-dots button { width: 2.2rem; height: 1.8rem; display: grid; place-items: center; padding: 0; border: 0; background: transparent; cursor: pointer; }
+.live-dots button span { width: .45rem; height: .45rem; display: block; border-radius: 50%; background: var(--muted-light); transition: width 180ms ease, border-radius 180ms ease, background 180ms ease; }
+.live-dots button.is-active span, .live-dots button:hover span, .live-dots button:focus-visible span { width: 1.5rem; border-radius: 999px; background: var(--gold); }
+.live-control-buttons { display: flex; gap: .55rem; }
+.carousel-button { width: 3rem; height: 3rem; display: grid; place-items: center; border: 1px solid var(--line-light); border-radius: 50%; background: transparent; color: white; font-size: 1.2rem; cursor: pointer; transition: background 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms ease; }
+.carousel-button:hover, .carousel-button:focus-visible { border-color: var(--gold); background: var(--gold); color: var(--ink); transform: translateY(-2px); }
+.carousel-pause { width: 3.4rem; border-radius: 999px; font-size: .8rem; }
+.live-footnote { max-width: 90rem; display: flex; justify-content: space-between; gap: 2rem; margin: 3.5rem auto 0; padding-top: 1.35rem; border-top: 1px solid var(--line-light); color: var(--muted-light); font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.live-footnote a { color: var(--gold-light); text-underline-offset: .35rem; }
+
 .section-dark {
   background: radial-gradient(circle at 88% 10%, rgba(166,79,54,.22), transparent 24rem), var(--ink);
   color: white;
 }
+.live-service { background: radial-gradient(circle at 5% 12%, rgba(222,184,94,.2), transparent 22rem), radial-gradient(circle at 92% 78%, rgba(166,79,54,.2), transparent 28rem), var(--ink); }
 .section-heading { max-width: 90rem; margin-inline: auto; }
 .section-heading h2 { max-width: 11ch; }
 .path-grid {
@@ -433,6 +571,11 @@ h1 em, h2 em {
   .hero-note { display: none; }
   .path-grid { grid-template-columns: 1fr; }
   .path-card { min-height: 24rem; }
+  .live-intro { grid-template-columns: 1fr; gap: 2rem; }
+  .live-description { margin: 0; }
+  .live-slide { grid-template-columns: 1fr; }
+  .live-art { min-height: 28rem; }
+  .live-slide-copy { min-height: auto; }
   .messages, .community { grid-template-columns: 1fr; }
   .message-copy { max-width: 42rem; }
 }
@@ -448,6 +591,13 @@ h1 em, h2 em {
   .hero-actions { align-items: flex-start; flex-direction: column; }
   .welcome { grid-template-columns: 1fr; }
   .welcome-support { grid-template-columns: 1fr; margin-left: 0; }
+  .live-art { min-height: 24rem; }
+  .live-art-center p { font-size: 1.25rem; }
+  .live-art-bottom { align-items: flex-start; flex-direction: column; gap: .55rem; }
+  .live-art-list { margin-top: -1rem; }
+  .live-slide-copy { padding: 2.2rem 1.5rem 2.5rem; }
+  .live-controls { align-items: flex-start; flex-direction: column; gap: 1.1rem; }
+  .live-footnote { align-items: flex-start; flex-direction: column; gap: .75rem; margin-top: 2.5rem; }
   .message-visual { min-height: 31rem; }
   .location-layout { grid-template-columns: 1fr; grid-template-areas: "building" "visit" "map"; }
   .building-card { min-height: 30rem; }
