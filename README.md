@@ -1,22 +1,25 @@
 # Immanuel Church PH
 
-A responsive church homepage for Immanuel Church PH in Iligan City. It includes
-the welcome story, live-service carousel, community pathways, messages area,
-and location details.
+The Immanuel Church PH website is a Next.js app with a routed public site: Home, Blogs, Events, Give, and Live. The homepage keeps the editorial church story and adds a bounded, video-led hero carousel so the design stays composed on very wide screens.
 
 ## Preview locally
 
 ```bash
+npm install
 npm run dev
 ```
 
-Then open `http://127.0.0.1:3000`.
+Then open `http://localhost:3000`.
 
 ## Build for Vercel
 
 ```bash
 npm run build
+npm start
 ```
 
-The `feature/homepage` branch is intended for preview deployments. Keep
-production on `main` until the homepage is approved.
+The `feature/homepage` branch is intended for preview deployments. Keep production on `main` until the homepage is approved.
+
+## Media
+
+Place the future intro video at `public/videos/intro.mp4`. Until it is added, the first carousel slide keeps the church-building poster and displays a friendly fallback. Public images live in `public/assets/`.
