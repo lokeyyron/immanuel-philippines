@@ -2085,6 +2085,19 @@ main > * { position: relative; z-index: 1; }
   from { opacity: .15; transform: translate3d(0, .7rem, 0); letter-spacing: -.045em; }
   to { opacity: 1; transform: none; letter-spacing: -.065em; }
 }
+/* Scroll-linked foreground parallax: content peels away at the viewport edges
+   and eases back toward the reader as its section returns to centre. */
+.section-reveal.is-visible > * {
+  opacity: var(--parallax-opacity, 1);
+  transform: translate3d(0, var(--parallax-shift, 0px), 0) scale(var(--parallax-scale, 1));
+  transition-delay: 0ms;
+  will-change: opacity, transform;
+}
+.section-reveal.is-visible .section-heading h2,
+.section-reveal.is-visible .welcome-copy h2 {
+  animation: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   main::before,
   .section-reveal.is-visible .section-heading h2,
@@ -2094,4 +2107,9 @@ main > * { position: relative; z-index: 1; }
     transition: none;
   }
   main::after { transform: none; transition: none; }
+  .section-reveal.is-visible > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

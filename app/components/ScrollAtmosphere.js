@@ -13,11 +13,15 @@ export default function ScrollAtmosphere() {
 
     let frame = 0;
     let previousY = window.scrollY || 0;
+    const sections = Array.from(document.querySelectorAll(".section-reveal"));
+
+    const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 
     const update = () => {
       frame = 0;
       const y = window.scrollY || 0;
-      const progress = Math.min(1, y / Math.max(1, document.documentElement.scrollHeight - window.innerHeight));
+      const viewportHeight = window.innerHeight || 1;
+      const progress = Math.min(1, y / Math.max(1, document.documentElement.scrollHeight - viewportHeight));
       const direction = y < previousY ? "up" : y > previousY ? "down" : "idle";
       const wave = Math.sin(y / 680);
       const ambientX = wave * 34 + progress * 18;
@@ -29,6 +33,25 @@ export default function ScrollAtmosphere() {
       document.documentElement.style.setProperty("--ambient-y", `${ambientY.toFixed(2)}px`);
       document.documentElement.style.setProperty("--grid-y", `${gridY.toFixed(2)}px`);
       document.documentElement.dataset.scrollDirection = direction;
+
+      // Keep the content in each section slightly behind the scroll plane.
+      // As a section leaves through either edge, it is pulled away and fades;
+      // when it comes back toward the viewport centre, it naturally returns.
+      const centre = viewportHeight * 0.5;
+      const travelRange = Math.max(viewportHeight * 0.92, 1);
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        const sectionCentre = rect.top + rect.height * 0.5;
+        const distance = clamp((sectionCentre - centre) / travelRange, -1.15, 1.15);
+        const distanceFromCentre = Math.abs(distance);
+        const fade = clamp(1 - Math.max(0, distanceFromCentre - 0.16) * 0.92, 0.16, 1);
+        const scale = 1 - Math.min(0.055, Math.max(0, distanceFromCentre - 0.12) * 0.06);
+        const shift = distance * 46;
+        section.style.setProperty("--parallax-shift", `${shift.toFixed(2)}px`);
+        section.style.setProperty("--parallax-opacity", fade.toFixed(3));
+        section.style.setProperty("--parallax-scale", scale.toFixed(3));
+      });
+
       previousY = y;
     };
 
