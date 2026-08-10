@@ -15,27 +15,42 @@ export default function HomeSections() {
         </div>
       </Reveal>
 
-      <Reveal as="section" className="live-service section section-dark" id="live-service" aria-labelledby="live-title">
-        <div className="live-intro">
+      <Reveal as="section" className="blog-spotlight section section-dark" id="blog" aria-labelledby="blog-title">
+        <div className="blog-intro">
           <div className="section-heading">
-            <p className="kicker"><span className="live-pulse" /> Live from Immanuel</p>
-            <h2 id="live-title">Church doesn’t stop at <em>the room.</em></h2>
+            <p className="kicker"><span className="live-pulse" /> From the community</p>
+            <h2 id="blog-title">Words for the <em>week.</em></h2>
           </div>
-          <p className="live-description">A live window into our Sunday gathering — worship, listen, and pray with our church family from wherever you are.</p>
+          <p className="blog-description">Devotionals, stories, and honest reflections from the Immanuel family — written by members, for members.</p>
         </div>
-        <div className="live-player-panel">
-          <div className="live-player-copy">
-            <p className="slide-eyebrow"><span className="live-pulse" /> Latest gathering</p>
-            <h3>Gather<br /><em>with us.</em></h3>
-            <p>Press play on our latest service for worship, a message, and a moment to breathe with the Immanuel family.</p>
-            <a className="button button-light" href="https://www.youtube.com/watch?v=QOHjb-_9Gbc" target="_blank" rel="noopener noreferrer">Open on YouTube <span aria-hidden="true">↗</span></a>
-          </div>
-          <div className="live-player-frame">
-            <iframe title="Latest Immanuel Church PH live service" src="https://www.youtube-nocookie.com/embed/QOHjb-_9Gbc?rel=0&modestbranding=1&playsinline=1" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
-            <p className="live-player-fallback">If the player is unavailable, <a href="https://www.youtube.com/@ImmanuelChurchIligan" target="_blank" rel="noopener noreferrer">watch the Immanuel channel</a>.</p>
-          </div>
+        <div className="blog-card-grid">
+          <Link className="blog-card blog-card-featured" href="/blogs">
+            <span className="blog-card-index">01 / DEVOTIONAL</span>
+            <div>
+              <p className="blog-card-kicker">A quiet place to begin</p>
+              <h3>Carry grace into Monday.</h3>
+              <p>Short reflections from our church family to help you listen, learn, and live the Word.</p>
+            </div>
+            <span className="blog-card-arrow" aria-hidden="true">↗</span>
+          </Link>
+          <Link className="blog-card" href="/blogs">
+            <span className="blog-card-index">02 / STORY</span>
+            <div>
+              <h3>What God is teaching us.</h3>
+              <p>Read a testimony, a question, or a small faithful step from someone in the community.</p>
+            </div>
+            <span className="blog-card-arrow" aria-hidden="true">↗</span>
+          </Link>
+          <Link className="blog-card" href="/blogs">
+            <span className="blog-card-index">03 / NOTES</span>
+            <div>
+              <h3>Save this for later.</h3>
+              <p>Explore messages and notes you can return to throughout the week.</p>
+            </div>
+            <span className="blog-card-arrow" aria-hidden="true">↗</span>
+          </Link>
         </div>
-        <div className="live-footnote"><span>Watch from anywhere</span><Link href="/live">Explore the live page <span aria-hidden="true">↗</span></Link></div>
+        <div className="blog-footnote"><span>Written by Immanuel people</span><Link href="/blogs">Explore the blog <span aria-hidden="true">↗</span></Link></div>
       </Reveal>
 
       <Reveal as="section" className="connect section-dark section" id="connect" aria-labelledby="connect-title">

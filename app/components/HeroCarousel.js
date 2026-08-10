@@ -63,17 +63,14 @@ export default function HeroCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [revealed, setRevealed] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [muted, setMuted] = useState(true);
   const [hovered, setHovered] = useState(false);
   const [introFailed, setIntroFailed] = useState(false);
   const videoRef = useRef(null);
-  const iframeRefs = useRef({});
   const activeSlide = slides[activeIndex];
 
   useEffect(() => {
     setRevealed(false);
     setIsPlaying(false);
-    setMuted(true);
     setIntroFailed(false);
     const timer = window.setTimeout(() => setRevealed(true), 3000);
     return () => window.clearTimeout(timer);
@@ -100,16 +97,6 @@ export default function HeroCarousel() {
     setActiveIndex((nextIndex + slides.length) % slides.length);
   }, []);
 
-  const toggleMute = () => {
-    const nextMuted = !muted;
-    setMuted(nextMuted);
-    if (activeSlide.kind === "local" && videoRef.current) {
-      videoRef.current.muted = nextMuted;
-      return;
-    }
-    const iframe = iframeRefs.current[activeSlide.id];
-    iframe?.contentWindow?.postMessage(JSON.stringify({ event: "command", func: nextMuted ? "mute" : "unMute", args: [] }), "*");
-  };
 
   const handleKeyDown = (event) => {
     if (event.key === "ArrowLeft") {
@@ -127,7 +114,7 @@ export default function HeroCarousel() {
       <div
         className="hero-stage"
         tabIndex={0}
-        onMouseEnter={() => setHovered(true)}
+        onMouseEnter={() => { setHovered(true); setRevealed(true); }}
         onMouseLeave={() => setHovered(false)}
         onKeyDown={handleKeyDown}
       >
@@ -147,7 +134,7 @@ export default function HeroCarousel() {
                           className="hero-media-video"
                           src={slide.src}
                           poster={slide.poster}
-                          muted={muted}
+                          muted
                           loop
                           playsInline
                           preload={isActive ? "metadata" : "none"}
@@ -157,7 +144,6 @@ export default function HeroCarousel() {
                         />
                       ) : (
                         <iframe
-                          ref={(node) => { iframeRefs.current[slide.id] = node; }}
                           className="hero-media-video"
                           title={`${slide.eyebrow} video`}
                           src={showPlayback ? youtubeUrl(slide.videoId, slide.start) : undefined}
@@ -174,13 +160,6 @@ export default function HeroCarousel() {
                         </button>
                       )}
 
-                      {isActive && isPlaying && !introFailed && (
-                        <div className="hero-media-controls">
-                          <button className="hero-sound-control" type="button" onClick={toggleMute} aria-label={muted ? "Turn sound on" : "Turn sound off"} aria-pressed={!muted}>
-                            <img className="hero-sound-icon" src={muted ? "/assets/sound-off.png" : "/assets/sound-on.png"} alt="" draggable="false" />
-                          </button>
-                        </div>
-                      )}
                     </div>
                   </div>
 
