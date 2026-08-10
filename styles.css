@@ -2162,3 +2162,372 @@ main > * { position: relative; z-index: 1; }
     animation: none;
   }
 }
+
+
+/* Live replay library */
+.live-library {
+  max-width: 96rem;
+  position: relative;
+  margin: 0 auto;
+}
+.live-library-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, .62fr);
+  align-items: end;
+  gap: clamp(2rem, 8vw, 8rem);
+  margin-bottom: clamp(2rem, 4vw, 4rem);
+}
+.live-library-heading .route-card-tag {
+  margin-top: 0;
+}
+.live-library-heading h2 {
+  max-width: 11ch;
+  margin: .8rem 0 0;
+  font: 800 clamp(2.8rem, 6vw, 6.5rem)/.86 "Manrope", sans-serif;
+  letter-spacing: -.095em;
+}
+.live-library-heading h2 em {
+  color: var(--gold-light);
+  font: 400 1em/.82 Georgia, serif;
+  letter-spacing: -.075em;
+}
+.live-library-heading > p {
+  max-width: 31rem;
+  margin: 0 0 .35rem auto;
+  color: var(--muted-light);
+  font-size: clamp(.95rem, 1.2vw, 1.1rem);
+  line-height: 1.75;
+}
+.live-feature-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(18rem, .55fr);
+  min-height: 30rem;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.17);
+  background: rgba(20, 24, 20, .8);
+  box-shadow: 0 1.5rem 4rem rgba(0,0,0,.2);
+}
+.live-feature-media {
+  min-height: 30rem;
+  position: relative;
+  display: block;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  background: #080a08;
+  color: white;
+  text-align: left;
+  cursor: pointer;
+}
+.live-feature-media img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  transition: transform 900ms cubic-bezier(.22,.61,.36,1), filter 500ms ease;
+}
+.live-feature-media:hover img,
+.live-feature-media:focus-visible img {
+  transform: scale(1.045);
+  filter: saturate(1.08);
+}
+.live-feature-wash {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(5,7,5,.1), rgba(5,7,5,.8));
+}
+.live-feature-play {
+  width: clamp(4.5rem, 8vw, 7rem);
+  aspect-ratio: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(255,255,255,.6);
+  border-radius: 50%;
+  background: rgba(11,13,11,.36);
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  transition: transform 220ms ease, background 220ms ease, color 220ms ease;
+  backdrop-filter: blur(10px);
+}
+.live-feature-media:hover .live-feature-play,
+.live-feature-media:focus-visible .live-feature-play {
+  transform: translate(-50%, -50%) scale(1.08);
+  background: var(--gold);
+  color: var(--ink);
+}
+.live-feature-label {
+  position: absolute;
+  right: clamp(1.25rem, 3vw, 3rem);
+  bottom: clamp(1.25rem, 3vw, 3rem);
+  color: rgba(255,255,255,.78);
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.live-feature-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(2rem, 5vw, 5rem);
+  border-left: 1px solid rgba(255,255,255,.14);
+  background:
+    radial-gradient(circle at 100% 0, rgba(166,79,54,.22), transparent 16rem),
+    linear-gradient(145deg, rgba(28,33,28,.92), rgba(12,15,12,.96));
+}
+.live-replay-date {
+  margin: 0;
+  color: var(--gold-light);
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.live-feature-copy h3 {
+  max-width: 10ch;
+  margin: 1rem 0 1.25rem;
+  font: 800 clamp(2.3rem, 4vw, 4.5rem)/.88 "Manrope", sans-serif;
+  letter-spacing: -.085em;
+}
+.live-feature-copy > p:not(.live-replay-date) {
+  max-width: 25rem;
+  margin: 0;
+  color: var(--muted-light);
+  line-height: 1.7;
+}
+.live-feature-copy .button {
+  align-self: flex-start;
+  margin-top: 2rem;
+}
+.live-replay-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.live-replay-card {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(8rem, .7fr) minmax(0, 1fr);
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(19,23,19,.72);
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 220ms ease, background 220ms ease, transform 220ms ease, box-shadow 220ms ease;
+}
+.live-replay-card:hover,
+.live-replay-card:focus-visible {
+  z-index: 1;
+  transform: translateY(-.3rem);
+  border-color: rgba(241,215,143,.7);
+  background: rgba(30,35,29,.94);
+  box-shadow: 0 1rem 2rem rgba(0,0,0,.18);
+}
+.live-replay-image {
+  min-height: 10rem;
+  position: relative;
+  overflow: hidden;
+  background: #080a08;
+}
+.live-replay-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(5,7,5,.16), rgba(5,7,5,.58));
+}
+.live-replay-image img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  transition: transform 500ms ease;
+}
+.live-replay-card:hover .live-replay-image img,
+.live-replay-card:focus-visible .live-replay-image img {
+  transform: scale(1.08);
+}
+.live-replay-play {
+  width: 2.6rem;
+  height: 2.6rem;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(255,255,255,.72);
+  border-radius: 50%;
+  background: rgba(11,13,11,.32);
+  font-size: .7rem;
+  transition: background 180ms ease, color 180ms ease;
+  backdrop-filter: blur(8px);
+}
+.live-replay-card:hover .live-replay-play,
+.live-replay-card:focus-visible .live-replay-play {
+  background: var(--gold);
+  color: var(--ink);
+}
+.live-replay-index {
+  position: absolute;
+  z-index: 2;
+  top: .85rem;
+  left: .85rem;
+  color: rgba(255,255,255,.72);
+  font-size: .64rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+.live-replay-body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: clamp(1rem, 2vw, 1.6rem);
+}
+.live-replay-body .live-replay-date {
+  color: var(--gold-light);
+  font-size: .58rem;
+  line-height: 1.4;
+}
+.live-replay-body strong {
+  max-width: 18ch;
+  margin-top: .7rem;
+  font: 700 clamp(1.05rem, 1.8vw, 1.55rem)/1.05 "Manrope", sans-serif;
+  letter-spacing: -.045em;
+}
+.live-replay-action {
+  margin-top: auto;
+  padding-top: 1.4rem;
+  color: var(--muted-light);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+.live-replay-action span {
+  display: inline-block;
+  margin-left: .35rem;
+  color: var(--gold-light);
+  transition: transform 180ms ease;
+}
+.live-replay-card:hover .live-replay-action span,
+.live-replay-card:focus-visible .live-replay-action span {
+  transform: translate(2px, -2px);
+}
+.live-modal {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: clamp(1rem, 4vw, 4rem);
+  background: rgba(3,5,3,.8);
+  backdrop-filter: blur(18px) saturate(1.12);
+  animation: live-modal-fade 220ms ease both;
+}
+.live-modal-card {
+  width: min(68rem, 100%);
+  max-height: min(92vh, 54rem);
+  position: relative;
+  overflow: auto;
+  border: 1px solid rgba(255,255,255,.22);
+  background: rgba(18,22,18,.96);
+  box-shadow: 0 2rem 5rem rgba(0,0,0,.4);
+  animation: live-modal-rise 420ms cubic-bezier(.22,.61,.36,1) both;
+}
+.live-modal-frame {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #050605;
+}
+.live-modal-frame iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+}
+.live-modal-close {
+  width: 2.75rem;
+  height: 2.75rem;
+  position: absolute;
+  z-index: 2;
+  top: .85rem;
+  right: .85rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,.5);
+  border-radius: 50%;
+  background: rgba(5,7,5,.58);
+  color: white;
+  font: 400 1.7rem/1 "DM Sans", sans-serif;
+  cursor: pointer;
+  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+  backdrop-filter: blur(10px);
+}
+.live-modal-close:hover,
+.live-modal-close:focus-visible {
+  transform: rotate(8deg);
+  background: var(--gold);
+  color: var(--ink);
+}
+.live-modal-details {
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+}
+.live-modal-details h2 {
+  max-width: 15ch;
+  margin: .7rem 0 1rem;
+  font: 800 clamp(2rem, 4vw, 4rem)/.9 "Manrope", sans-serif;
+  letter-spacing: -.08em;
+}
+.live-modal-details > p:not(.live-replay-date) {
+  max-width: 42rem;
+  margin: 0;
+  color: var(--muted-light);
+  line-height: 1.7;
+}
+.live-modal-details .button {
+  margin-top: 1.5rem;
+}
+@keyframes live-modal-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes live-modal-rise {
+  from { opacity: 0; transform: translateY(1rem) scale(.98); }
+  to { opacity: 1; transform: none; }
+}
+@media (max-width: 980px) {
+  .live-library-heading { grid-template-columns: 1fr; gap: 1.5rem; }
+  .live-library-heading > p { margin-left: 0; }
+  .live-feature-card { grid-template-columns: 1fr; }
+  .live-feature-media { min-height: min(54vw, 30rem); aspect-ratio: 16 / 9; }
+  .live-feature-copy { border-top: 1px solid rgba(255,255,255,.14); border-left: 0; }
+}
+@media (max-width: 640px) {
+  .live-replay-list { grid-template-columns: 1fr; }
+  .live-replay-card { grid-template-columns: minmax(7rem, .78fr) minmax(0, 1fr); }
+  .live-replay-image { min-height: 8rem; }
+  .live-feature-copy { padding: 1.6rem 1.25rem 2rem; }
+  .live-feature-copy h3 { max-width: 12ch; font-size: clamp(2.2rem, 11vw, 3.5rem); }
+  .live-feature-label { right: 1rem; bottom: 1rem; font-size: .58rem; }
+  .live-modal { padding: .65rem; }
+  .live-modal-details { padding: 1.35rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .live-feature-media img,
+  .live-feature-play,
+  .live-replay-card,
+  .live-replay-image img,
+  .live-modal,
+  .live-modal-card,
+  .live-modal-close { animation: none; transition: none; }
+}
