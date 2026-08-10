@@ -24,7 +24,6 @@ export default function HomeSections() {
             <p className="kicker"><span className="live-pulse" /> From the community</p>
             <h2 id="blog-title">Words for the <em>week.</em></h2>
           </div>
-          <p className="blog-description">Devotionals, stories, and honest reflections from the Immanuel family — written by members, for members.</p>
         </div>
         <div className="blog-card-grid">
           <Link className="blog-card blog-card-featured" href="/blogs">
@@ -54,18 +53,6 @@ export default function HomeSections() {
           </Link>
         </div>
         <div className="blog-footnote"><span>Written by Immanuel people</span><Link href="/blogs">Explore the blog <span aria-hidden="true">↗</span></Link></div>
-      </Reveal>
-
-      <Reveal as="section" className="connect section-dark section" id="connect" aria-labelledby="connect-title">
-        <div className="section-heading">
-          <p className="kicker"><span /> There is a place for you</p>
-          <h2 id="connect-title">Take your next step.</h2>
-        </div>
-        <div className="path-grid">
-          <article className="path-card path-featured"><p className="card-number">01</p><div><p className="card-eyebrow">Your first Sunday</p><h3>Plan a visit</h3><p>Know where to go, what to expect, and how to find us in the heart of Iligan City.</p></div><Link href="/events#visit" aria-label="Plan a visit">↗</Link></article>
-          <article className="path-card"><p className="card-number">02</p><div><p className="card-eyebrow">Life together</p><h3>Find community</h3><p>Build friendships, grow in faith, and experience church beyond a Sunday gathering.</p></div><Link href="/events" aria-label="Find community">↗</Link></article>
-          <article className="path-card"><p className="card-number">03</p><div><p className="card-eyebrow">Make a difference</p><h3>Serve with us</h3><p>Use your gifts to welcome people, strengthen the church, and bless our city.</p></div><Link href="/blogs" aria-label="Find ways to serve">↗</Link></article>
-        </div>
       </Reveal>
 
       <Reveal as="section" className="community" id="community" aria-labelledby="community-title">
