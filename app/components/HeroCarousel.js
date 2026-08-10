@@ -111,23 +111,6 @@ export default function HeroCarousel() {
     iframe?.contentWindow?.postMessage(JSON.stringify({ event: "command", func: nextMuted ? "mute" : "unMute", args: [] }), "*");
   };
 
-  const togglePlayback = () => {
-    if (activeSlide.kind === "local" && introFailed) return;
-    const nextPlaying = !isPlaying;
-    setRevealed(true);
-    setIsPlaying(nextPlaying);
-
-    if (activeSlide.kind === "local") {
-      const video = videoRef.current;
-      if (nextPlaying) video?.play().catch(() => setIsPlaying(false));
-      else video?.pause();
-      return;
-    }
-
-    const iframe = iframeRefs.current[activeSlide.id];
-    iframe?.contentWindow?.postMessage(JSON.stringify({ event: "command", func: nextPlaying ? "playVideo" : "pauseVideo", args: [] }), "*");
-  };
-
   const handleKeyDown = (event) => {
     if (event.key === "ArrowLeft") {
       event.preventDefault();
@@ -191,14 +174,10 @@ export default function HeroCarousel() {
                         </button>
                       )}
 
-                      {isActive && (slide.kind === "youtube" || !introFailed) && (
+                      {isActive && isPlaying && !introFailed && (
                         <div className="hero-media-controls">
-                          <button className="hero-playback-control" type="button" onClick={togglePlayback} aria-label={isPlaying ? "Pause video" : "Play video"} aria-pressed={isPlaying}>
-                            <img className="hero-playback-icon" src={isPlaying ? "/assets/pause.png" : "/assets/play.png"} alt="" draggable="false" />
-                          </button>
-                          <button className="hero-sound-control" type="button" onClick={toggleMute} aria-label={muted ? "Unmute video" : "Mute video"} aria-pressed={!muted}>
-                            <span className={`volume-mark ${muted ? "is-muted" : ""}`} aria-hidden="true">◖</span>
-                            <span>{muted ? "Sound off" : "Sound on"}</span>
+                          <button className="hero-sound-control" type="button" onClick={toggleMute} aria-label={muted ? "Turn sound on" : "Turn sound off"} aria-pressed={!muted}>
+                            <img className="hero-sound-icon" src={muted ? "/assets/sound-off.png" : "/assets/sound-on.png"} alt="" draggable="false" />
                           </button>
                         </div>
                       )}
@@ -206,7 +185,6 @@ export default function HeroCarousel() {
                   </div>
 
                   <div className="hero-slide-overlay" aria-hidden="true" />
-                  <div className="hero-slide-topline"><span>{String(index + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}</span><span>{slide.kind === "local" ? "Immanuel original" : "YouTube video"}</span></div>
                   <div className="hero-slide-content">
                     <div className="hero-slide-heading">
                       <p className="kicker"><span /> {slide.eyebrow}</p>
