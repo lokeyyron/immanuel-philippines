@@ -1,5 +1,6 @@
 import SiteFooter from "./components/SiteFooter";
 import SiteHeader from "./components/SiteHeader";
+import ScrollAtmosphere from "./components/ScrollAtmosphere";
 import "../styles.css";
 
 export const metadata = {
@@ -12,6 +13,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+        <ScrollAtmosphere />
         <a className="skip-link" href="#main-content">Skip to content</a>
         <SiteHeader />
         {children}

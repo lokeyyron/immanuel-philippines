@@ -985,6 +985,10 @@ main { background: var(--surface); }
   opacity: 1;
   transform: none;
 }
+/* Entering from above gets a matching lift when scrolling upward. */
+html[data-scroll-direction="up"] .section-reveal:not(.is-visible) {
+  transform: translateY(-1.5rem);
+}
 
 @media (prefers-reduced-motion: reduce) {
   .section-reveal,
@@ -1986,11 +1990,16 @@ main::before {
   z-index: -1;
   inset: -24%;
   background:
-    radial-gradient(circle at 12% 18%, rgba(222,184,94,.11), transparent 26rem),
-    radial-gradient(circle at 82% 34%, rgba(166,79,54,.13), transparent 32rem),
-    radial-gradient(circle at 45% 88%, rgba(39,56,43,.22), transparent 30rem),
+    radial-gradient(circle at 12% 18%, rgba(222,184,94,.13), transparent 26rem),
+    radial-gradient(circle at 82% 34%, rgba(166,79,54,.15), transparent 32rem),
+    radial-gradient(circle at 45% 88%, rgba(39,56,43,.24), transparent 30rem),
     #0b0d0b;
-  animation: ambient-drift 34s ease-in-out infinite alternate;
+  background-size: 120% 120%, 125% 125%, 118% 118%, auto;
+  background-position: 0% 0%, 100% 50%, 50% 100%, 0 0;
+  transform: translate3d(var(--ambient-x, 0px), var(--ambient-y, 0px), 0) scale(1.04);
+  will-change: transform, background-position;
+  transition: transform 650ms cubic-bezier(.22,.61,.36,1);
+  animation: ambient-colour-drift 34s ease-in-out infinite alternate;
   pointer-events: none;
 }
 main::after {
@@ -1999,13 +2008,18 @@ main::after {
   z-index: -1;
   inset: 0;
   opacity: .15;
-  background: repeating-linear-gradient(90deg, transparent 0 10rem, rgba(255,255,255,.05) 10rem 10.08rem);
+  background:
+    repeating-linear-gradient(90deg, transparent 0 10rem, rgba(255,255,255,.05) 10rem 10.08rem),
+    repeating-linear-gradient(0deg, transparent 0 13rem, rgba(222,184,94,.035) 13rem 13.08rem);
+  transform: translate3d(0, var(--grid-y, 0px), 0);
+  will-change: transform;
+  transition: transform 900ms cubic-bezier(.22,.61,.36,1);
   pointer-events: none;
 }
 main > * { position: relative; z-index: 1; }
-@keyframes ambient-drift {
-  0% { transform: translate3d(-1%, -1%, 0) scale(1); }
-  100% { transform: translate3d(1%, 1.5%, 0) scale(1.04); }
+@keyframes ambient-colour-drift {
+  0%, 100% { background-position: 0% 0%, 100% 50%, 50% 100%, 0 0; }
+  50% { background-position: 13% 8%, 86% 42%, 42% 88%, 0 0; }
 }
 .welcome,
 .announcements,
@@ -2074,5 +2088,10 @@ main > * { position: relative; z-index: 1; }
 @media (prefers-reduced-motion: reduce) {
   main::before,
   .section-reveal.is-visible .section-heading h2,
-  .section-reveal.is-visible .welcome-copy h2 { animation: none; }
+  .section-reveal.is-visible .welcome-copy h2 {
+    animation: none;
+    transform: none;
+    transition: none;
+  }
+  main::after { transform: none; transition: none; }
 }
