@@ -9,7 +9,6 @@ export default function SiteFooter() {
       </div>
       <div className="footer-message">
         <span>God with us.</span>
-        <a href="https://www.youtube.com/@ImmanuelChurchIligan" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a>
       </div>
       <div className="footer-links">
         <a href="https://www.facebook.com/immanuelchurchiligan" target="_blank" rel="noopener noreferrer">Facebook ↗</a>

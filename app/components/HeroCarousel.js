@@ -14,7 +14,6 @@ const slides = [
     kind: "local",
     src: "/videos/intro.mp4",
     poster: "/assets/church-building.jpeg",
-    posterLabel: "Intro video · add intro.mp4 when ready",
   },
   {
     id: "sermon",
@@ -22,11 +21,11 @@ const slides = [
     title: <><span>Watch the</span><em>latest sermon.</em></>,
     description: "A message for the ordinary week — biblical teaching, honest questions, and hope to carry with you.",
     cta: "Watch latest sermon",
-    href: "https://www.youtube.com/watch?v=gSHd1MulCt8",
+    href: "https://www.youtube.com/watch?v=oZOAVExNEdY&t=8s",
     kind: "youtube",
-    videoId: "gSHd1MulCt8",
+    videoId: "oZOAVExNEdY",
+    start: 8,
     poster: "/assets/ptrkhan.jpg",
-    posterLabel: "Pastor Khan Santos · sermon video",
   },
   {
     id: "worship",
@@ -38,12 +37,20 @@ const slides = [
     kind: "youtube",
     videoId: "MZQZTn8hsf8",
     poster: null,
-    posterLabel: "Immanuel Worship · thumbnail coming soon",
   },
 ];
 
-function youtubeUrl(videoId, muted) {
-  return `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=${muted ? 1 : 0}&rel=0&modestbranding=1&playsinline=1&enablejsapi=1`;
+function youtubeUrl(videoId, start = 0) {
+  const params = new URLSearchParams({
+    autoplay: "1",
+    mute: "1",
+    rel: "0",
+    modestbranding: "1",
+    playsinline: "1",
+    enablejsapi: "1",
+  });
+  if (start) params.set("start", String(start));
+  return `https://www.youtube-nocookie.com/embed/${videoId}?${params.toString()}`;
 }
 
 function ActionLink({ href, children }) {
@@ -55,6 +62,7 @@ function ActionLink({ href, children }) {
 export default function HeroCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [revealed, setRevealed] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [muted, setMuted] = useState(true);
   const [hovered, setHovered] = useState(false);
   const [introFailed, setIntroFailed] = useState(false);
@@ -64,6 +72,7 @@ export default function HeroCarousel() {
 
   useEffect(() => {
     setRevealed(false);
+    setIsPlaying(false);
     setMuted(true);
     setIntroFailed(false);
     const timer = window.setTimeout(() => setRevealed(true), 3000);
@@ -71,8 +80,14 @@ export default function HeroCarousel() {
   }, [activeIndex]);
 
   useEffect(() => {
-    if (!revealed || activeSlide.kind !== "local") return;
-    videoRef.current?.play().catch(() => {});
+    if (!revealed || activeSlide.kind !== "local" || introFailed) return;
+    const playPromise = videoRef.current?.play();
+    if (!playPromise) return;
+    playPromise.then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
+  }, [activeSlide.kind, activeIndex, revealed, introFailed]);
+
+  useEffect(() => {
+    if (revealed && activeSlide.kind === "youtube") setIsPlaying(true);
   }, [activeSlide.kind, activeIndex, revealed]);
 
   useEffect(() => {
@@ -94,6 +109,23 @@ export default function HeroCarousel() {
     }
     const iframe = iframeRefs.current[activeSlide.id];
     iframe?.contentWindow?.postMessage(JSON.stringify({ event: "command", func: nextMuted ? "mute" : "unMute", args: [] }), "*");
+  };
+
+  const togglePlayback = () => {
+    if (activeSlide.kind === "local" && introFailed) return;
+    const nextPlaying = !isPlaying;
+    setRevealed(true);
+    setIsPlaying(nextPlaying);
+
+    if (activeSlide.kind === "local") {
+      const video = videoRef.current;
+      if (nextPlaying) video?.play().catch(() => setIsPlaying(false));
+      else video?.pause();
+      return;
+    }
+
+    const iframe = iframeRefs.current[activeSlide.id];
+    iframe?.contentWindow?.postMessage(JSON.stringify({ event: "command", func: nextPlaying ? "playVideo" : "pauseVideo", args: [] }), "*");
   };
 
   const handleKeyDown = (event) => {
@@ -120,9 +152,10 @@ export default function HeroCarousel() {
           <div className="hero-carousel-track" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
             {slides.map((slide, index) => {
               const isActive = index === activeIndex;
-              const showPlayback = isActive && revealed;
+              const showPlayback = isActive && revealed && !introFailed;
+              const showPoster = isActive && (!revealed || (slide.kind === "local" && introFailed));
               return (
-                <article className={`hero-slide ${isActive ? "is-active" : ""}`} key={slide.id} aria-hidden={!isActive}>
+                <article className={`hero-slide ${isActive ? "is-active" : ""} ${isActive && isPlaying ? "is-playing" : ""}`} key={slide.id} aria-hidden={!isActive}>
                   <div className="hero-slide-media">
                     <div className={`hero-media-layer ${slide.poster ? "has-poster" : "is-abstract"}`}>
                       {slide.kind === "local" ? (
@@ -136,7 +169,7 @@ export default function HeroCarousel() {
                           playsInline
                           preload={isActive ? "metadata" : "none"}
                           autoPlay={showPlayback}
-                          onError={() => setIntroFailed(true)}
+                          onError={() => { setIntroFailed(true); setIsPlaying(false); }}
                           aria-label="Immanuel Church PH intro video"
                         />
                       ) : (
@@ -144,31 +177,26 @@ export default function HeroCarousel() {
                           ref={(node) => { iframeRefs.current[slide.id] = node; }}
                           className="hero-media-video"
                           title={`${slide.eyebrow} video`}
-                          src={showPlayback ? youtubeUrl(slide.videoId, muted) : undefined}
+                          src={showPlayback ? youtubeUrl(slide.videoId, slide.start) : undefined}
                           loading={isActive ? "eager" : "lazy"}
                           allow="autoplay; encrypted-media; picture-in-picture"
                           allowFullScreen
                         />
                       )}
 
-                      {isActive && !revealed && (
-                        <button className="hero-media-poster" type="button" onClick={() => setRevealed(true)} onMouseEnter={() => setRevealed(true)} aria-label={`Play ${slide.eyebrow} video`}>
+                      {showPoster && (
+                        <button className={`hero-media-poster ${introFailed ? "is-static" : ""}`} type="button" disabled={introFailed} onClick={() => setRevealed(true)} aria-label={`Play ${slide.eyebrow} video`}>
                           {slide.poster ? <img src={slide.poster} alt="" /> : <span className="hero-abstract-poster" aria-hidden="true"><i /><i /><i /></span>}
                           <span className="hero-poster-shade" aria-hidden="true" />
-                          <span className="hero-poster-content"><small>{slide.posterLabel}</small><strong>Hover or tap to play <b aria-hidden="true">↗</b></strong></span>
                         </button>
                       )}
 
-                      {isActive && introFailed && (
-                        <div className="hero-media-missing">
-                          <span>intro.mp4</span>
-                          <p>Add the video to <code>public/videos/</code> when it is ready. The church photo will remain as the poster.</p>
-                        </div>
-                      )}
-
-                      {isActive && (
+                      {isActive && (slide.kind === "youtube" || !introFailed) && (
                         <div className="hero-media-controls">
-                          <button type="button" onClick={toggleMute} aria-label={muted ? "Unmute video" : "Mute video"} aria-pressed={!muted}>
+                          <button className="hero-playback-control" type="button" onClick={togglePlayback} aria-label={isPlaying ? "Pause video" : "Play video"} aria-pressed={isPlaying}>
+                            <img className="hero-playback-icon" src={isPlaying ? "/assets/pause.png" : "/assets/play.png"} alt="" draggable="false" />
+                          </button>
+                          <button className="hero-sound-control" type="button" onClick={toggleMute} aria-label={muted ? "Unmute video" : "Mute video"} aria-pressed={!muted}>
                             <span className={`volume-mark ${muted ? "is-muted" : ""}`} aria-hidden="true">◖</span>
                             <span>{muted ? "Sound off" : "Sound on"}</span>
                           </button>
