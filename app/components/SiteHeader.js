@@ -36,8 +36,10 @@ export default function SiteHeader() {
       </nav>
 
       <div className="header-tools">
-        <Link className="header-cta" href="/events#visit">
-          Plan your visit <span aria-hidden="true">↗</span>
+        <Link className="header-cta header-member-cta" href="/members" aria-label="Members">
+          <img src="/assets/account.png" alt="" />
+          <span>Members</span>
+          <span aria-hidden="true">↗</span>
         </Link>
         <button
           className="mobile-menu-button"
@@ -57,7 +59,11 @@ export default function SiteHeader() {
               {item.label}<span aria-hidden="true">↗</span>
             </Link>
           ))}
-          <Link href="/events#visit">Plan your visit <span aria-hidden="true">↗</span></Link>
+          <Link className="mobile-member-link" href="/members">
+            <img src="/assets/account.png" alt="" />
+            <span>Members</span>
+            <span aria-hidden="true">↗</span>
+          </Link>
         </nav>
       )}
     </header>
