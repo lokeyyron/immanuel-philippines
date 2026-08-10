@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Reveal from "./Reveal";
+import Announcements from "./Announcements";
 
 export default function HomeSections() {
   return (
@@ -14,6 +15,8 @@ export default function HomeSections() {
           </div>
         </div>
       </Reveal>
+
+      <Announcements />
 
       <Reveal as="section" className="blog-spotlight section section-dark" id="blog" aria-labelledby="blog-title">
         <div className="blog-intro">
@@ -63,15 +66,6 @@ export default function HomeSections() {
           <article className="path-card"><p className="card-number">02</p><div><p className="card-eyebrow">Life together</p><h3>Find community</h3><p>Build friendships, grow in faith, and experience church beyond a Sunday gathering.</p></div><Link href="/events" aria-label="Find community">↗</Link></article>
           <article className="path-card"><p className="card-number">03</p><div><p className="card-eyebrow">Make a difference</p><h3>Serve with us</h3><p>Use your gifts to welcome people, strengthen the church, and bless our city.</p></div><Link href="/blogs" aria-label="Find ways to serve">↗</Link></article>
         </div>
-      </Reveal>
-
-      <Reveal as="section" className="messages section" id="messages" aria-labelledby="messages-title">
-        <div className="message-visual" aria-hidden="true">
-          <div className="message-visual-top"><span>Immanuel / Messages</span><span>01</span></div>
-          <div className="message-poster"><span className="message-poster-ring" /><div className="message-poster-copy"><span>Truth for</span><em>everyday life.</em></div><span className="message-poster-mark"><img className="message-logo" src="/assets/immanuel-logo.png" alt="" /></span></div>
-          <div className="message-visual-bottom"><span>Listen</span><span>Learn</span><span>Live</span></div>
-        </div>
-        <div className="message-copy"><p className="kicker dark"><span /> Listen and grow</p><h2 id="messages-title">A word for where you are.</h2><p>Explore biblical teaching from Immanuel designed to help you know Jesus, navigate life with wisdom, and carry hope into your week.</p><a className="button button-dark" href="https://www.youtube.com/@ImmanuelChurchIligan" target="_blank" rel="noopener noreferrer">Watch on YouTube <span aria-hidden="true">↗</span></a></div>
       </Reveal>
 
       <Reveal as="section" className="community" id="community" aria-labelledby="community-title">
