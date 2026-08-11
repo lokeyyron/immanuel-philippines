@@ -2,75 +2,76 @@
 
 import { useEffect, useState } from "react";
 import EditorialPage from "../components/EditorialPage";
+import Reveal from "../components/Reveal";
 
 
 const liveVideos = [
   {
-    id: "6oNlRTmU66M",
-    title: "Sunday Gathering — Live replay 01",
-    date: "Latest live stream",
-    description: "Join the Immanuel Church PH family for worship, teaching, and prayer from Iligan City.",
+    id: "gSHd1MukCt8",
+    start: 12,
+    title: "GALATIANS Part 2 | Ptr. Khan Santos",
+    date: "August 9, 2026",
+    description: "A Sunday gathering from Immanuel Church PH with worship, teaching, and prayer from Iligan City.",
   },
   {
-    id: "s_6YF4DI0tU",
-    title: "Sunday Gathering — Live replay 02",
-    date: "Previous live stream · 02",
+    id: "5zBP_tOX5fU",
+    title: "Stepping out of the Comfort Zone | Ptr. Gemma Santos",
+    date: "July 26, 2026",
     description: "A full Immanuel gathering to watch again, share with a friend, and carry into the week.",
   },
   {
-    id: "87GR9xFP06g",
-    title: "Sunday Gathering — Live replay 03",
-    date: "Previous live stream · 03",
+    id: "zlswqSI0o5Q",
+    title: "Stepping out of the Comfort Zone | Ptr. Gemma Santos",
+    date: "July 26, 2026",
     description: "Worship, a message, and a place to slow down with the Immanuel community.",
   },
   {
-    id: "U4VqD0aCtGI",
-    title: "Sunday Gathering — Live replay 04",
-    date: "Previous live stream · 04",
-    description: "Press play for a Sunday service from Immanuel Church PH.",
+    id: "1aSxh_JJrCg",
+    title: "After Obedience | Ptr. Khan Santos",
+    date: "July 19, 2026",
+    description: "A Sunday service from the Immanuel family, available to revisit whenever you need a moment with God.",
   },
   {
-    id: "NgUBF0z6B9Q",
-    title: "Sunday Gathering — Live replay 05",
-    date: "Previous live stream · 05",
+    id: "eNVMv4UEwn0",
+    title: "After Obedience | Ptr. Khan Santos",
+    date: "July 19, 2026",
     description: "Make room for worship and a timely word from the Immanuel family.",
   },
   {
     id: "GQC7AoKEugw",
-    title: "Sunday Gathering — Live replay 06",
-    date: "Previous live stream · 06",
+    title: "James The Just | Ptr. Khan Santos",
+    date: "July 12, 2026",
     description: "A replay of our Sunday gathering, available whenever you need a moment with God.",
   },
   {
-    id: "eNVMv4UEwn0",
-    title: "Sunday Gathering — Live replay 07",
-    date: "Previous live stream · 07",
+    id: "NgUBF0z6B9Q",
+    title: "Church Part 4 | Ptr. Khan Santos",
+    date: "July 5, 2026",
     description: "Watch the service again and stay connected to Immanuel beyond the room.",
   },
   {
-    id: "1aSxh_JJrCg",
-    title: "Sunday Gathering — Live replay 08",
-    date: "Previous live stream · 08",
+    id: "U4VqD0aCtGI",
+    title: "The Gospel",
+    date: "June 28, 2026",
     description: "An encouraging service from the Immanuel Church PH YouTube channel.",
   },
   {
-    id: "zlswqSI0o5Q",
-    title: "Sunday Gathering — Live replay 09",
-    date: "Previous live stream · 09",
+    id: "87GR9xFP06g",
+    title: "The Gospel | Ptr. Nellie Bunao",
+    date: "June 28, 2026",
     description: "Worship and teaching for your everyday life, wherever you are watching from.",
   },
   {
-    id: "5zBP_tOX5fU",
-    title: "Sunday Gathering — Live replay 10",
-    date: "Previous live stream · 10",
+    id: "s_6YF4DI0tU",
+    title: "Father's Sunday Celebration",
+    date: "June 21, 2026",
     description: "A previous Immanuel service, ready to revisit at your own pace.",
   },
   {
-    id: "gSHd1MukCt8",
-    start: 12,
-    title: "Sunday Gathering — Live replay 11",
-    date: "Previous live stream · 11",
-    description: "The earlier replay in this collection, starting at the requested moment.",
+    id: "6oNlRTmU66M",
+    title: "Church Part 3 | Ptr. Khan Santos",
+    date: "June 14, 2026",
+    description: "The earliest replay in this collection, starting with a message from Ptr. Khan Santos.",
   },
 ];
 
@@ -98,7 +99,7 @@ function ReplayCard({ video, index, onOpen }) {
         <span className="live-replay-index">{String(index + 2).padStart(2, "0")}</span>
       </span>
       <span className="live-replay-body">
-        <span className="live-replay-date">{video.date}</span>
+        <time className="live-replay-date" dateTime={video.date}>{video.date}</time>
         <strong>{video.title}</strong>
         <span className="live-replay-action">Watch replay <span aria-hidden="true">↗</span></span>
       </span>
@@ -133,7 +134,7 @@ function ReplayModal({ video, onClose }) {
           />
         </div>
         <div className="live-modal-details">
-          <p className="live-replay-date">{video.date}</p>
+          <time className="live-replay-date" dateTime={video.date}>{video.date}</time>
           <h2 id="live-modal-title">{video.title}</h2>
           <p>{video.description}</p>
           <a className="button button-light" href={watchUrlFor(video)} target="_blank" rel="noopener noreferrer">
@@ -162,7 +163,7 @@ export default function LivePage() {
             <p className="route-card-tag">Latest first · {liveVideos.length} replays</p>
             <h2 id="live-library-title">Make room for <em>the replay.</em></h2>
           </div>
-          <p>Choose a gathering below to watch it in a focused player. The newest stream is featured first, followed by the earlier replays in the order supplied by Immanuel.</p>
+          <p>Choose a gathering below to watch it in a focused player. The newest stream is featured first, followed by earlier replays from newest to oldest.</p>
         </div>
 
         <article className="live-feature-card">
@@ -170,10 +171,9 @@ export default function LivePage() {
             <img src={thumbnailFor(latest)} alt="Latest Immanuel Church PH live replay" />
             <span className="live-feature-wash" aria-hidden="true" />
             <span className="live-feature-play" aria-hidden="true">▶</span>
-            <span className="live-feature-label">Featured replay · 01</span>
           </button>
           <div className="live-feature-copy">
-            <p className="live-replay-date">{latest.date}</p>
+            <time className="live-replay-date" dateTime={latest.date}>{latest.date}</time>
             <h3>{latest.title}</h3>
             <p>{latest.description}</p>
             <button className="button button-light" type="button" onClick={() => setSelectedVideo(latest)}>
@@ -183,7 +183,11 @@ export default function LivePage() {
         </article>
 
         <div className="live-replay-list" aria-label="Earlier live replays">
-          {liveVideos.slice(1).map((video, index) => <ReplayCard key={video.id} video={video} index={index} onOpen={setSelectedVideo} />)}
+          {liveVideos.slice(1).map((video, index) => (
+            <Reveal as="div" className="live-replay-reveal" key={video.id}>
+              <ReplayCard video={video} index={index} onOpen={setSelectedVideo} />
+            </Reveal>
+          ))}
         </div>
       </section>
 
