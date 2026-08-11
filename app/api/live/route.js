@@ -33,7 +33,10 @@ function formatDate(published) {
     month: "long",
     day: "numeric",
     year: "numeric",
-    timeZone: "Asia/Manila",
+    // YouTube publishes these timestamps in UTC. Keeping the calendar date
+    // in that source timezone avoids late-night broadcasts rolling forward
+    // to the next day in the card labels.
+    timeZone: "UTC",
   }).format(date);
 }
 

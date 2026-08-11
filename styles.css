@@ -2177,6 +2177,13 @@ main > * { position: relative; z-index: 1; }
   gap: clamp(2rem, 8vw, 8rem);
   margin-bottom: clamp(2rem, 4vw, 4rem);
 }
+.live-library-heading,
+.live-feature-card {
+  opacity: var(--parallax-opacity, 1);
+  transform: translate3d(0, var(--parallax-shift, 0px), 0);
+  transition: opacity 160ms linear, transform 220ms ease-out;
+  will-change: opacity, transform;
+}
 .live-library-heading .route-card-tag {
   margin-top: 0;
 }
@@ -2296,10 +2303,10 @@ main > * { position: relative; z-index: 1; }
   text-transform: uppercase;
 }
 .live-feature-copy h3 {
-  max-width: 10ch;
+  max-width: none;
   margin: 1rem 0 1.25rem;
-  font: 800 clamp(2.3rem, 4vw, 4.5rem)/.88 "Manrope", sans-serif;
-  letter-spacing: -.085em;
+  font: 800 clamp(2rem, 3.2vw, 4rem)/.94 "Manrope", sans-serif;
+  letter-spacing: -.075em;
 }
 .live-feature-copy > p:not(.live-replay-date) {
   max-width: 25rem;
@@ -2553,12 +2560,14 @@ main > * { position: relative; z-index: 1; }
   .live-replay-card { grid-template-columns: minmax(7rem, .72fr) minmax(0, 1fr); }
   .live-replay-image { min-height: 9rem; }
   .live-feature-copy { padding: 1.6rem 1.25rem 2rem; }
-  .live-feature-copy h3 { max-width: 12ch; font-size: clamp(2.2rem, 11vw, 3.5rem); }
+  .live-feature-copy h3 { max-width: none; font-size: clamp(2rem, 10vw, 3.5rem); }
   .live-feature-label { right: 1rem; bottom: 1rem; font-size: .58rem; }
   .live-modal { padding: .65rem; }
   .live-modal-details { padding: 1.35rem; }
 }
 @media (prefers-reduced-motion: reduce) {
+  .live-library-heading,
+  .live-feature-card { transition: none; transform: none; opacity: 1; }
   .live-feature-media img,
   .live-feature-play,
   .live-replay-card,

@@ -19,6 +19,9 @@ export default function ScrollAtmosphere() {
     const sections = Array.from(document.querySelectorAll(
       ".section-reveal:not(.route-content):not(.live-replay-reveal)"
     ));
+    const liveTargets = Array.from(document.querySelectorAll(
+      ".live-library-heading, .live-feature-card, .live-replay-reveal"
+    ));
 
     const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 
@@ -55,6 +58,20 @@ export default function ScrollAtmosphere() {
         section.style.setProperty("--parallax-shift", `${shift.toFixed(2)}px`);
         section.style.setProperty("--parallax-opacity", fade.toFixed(3));
         section.style.setProperty("--parallax-scale", scale.toFixed(3));
+      });
+
+      // Live content follows the same plane, but with a softer fade. This
+      // lets cards dissolve as they leave the viewport and return naturally
+      // when the reader scrolls back to them.
+      liveTargets.forEach((target) => {
+        const rect = target.getBoundingClientRect();
+        const targetCentre = rect.top + rect.height * 0.5;
+        const distance = clamp((targetCentre - centre) / Math.max(viewportHeight * 1.15, 1), -1.2, 1.2);
+        const distanceFromCentre = Math.abs(distance);
+        const fade = clamp(1 - Math.max(0, distanceFromCentre - 0.28) * 1.35, 0.08, 1);
+        const shift = distance * 28;
+        target.style.setProperty("--parallax-shift", `${shift.toFixed(2)}px`);
+        target.style.setProperty("--parallax-opacity", fade.toFixed(3));
       });
 
       previousY = y;
