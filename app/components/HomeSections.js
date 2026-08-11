@@ -6,7 +6,7 @@ export default function HomeSections() {
   return (
     <>
       <Reveal as="section" className="welcome section" id="welcome" aria-labelledby="welcome-title">
-        <div className="section-label"><span>01</span><p>Welcome home</p></div>
+        <div className="section-label"><p>Welcome home</p></div>
         <div className="welcome-copy">
           <h2 id="welcome-title">Faith becomes real when we live it <em>together.</em></h2>
           <div className="welcome-support">
@@ -21,13 +21,13 @@ export default function HomeSections() {
       <Reveal as="section" className="blog-spotlight section section-dark" id="journal" aria-labelledby="journal-title">
         <div className="blog-intro">
           <div className="section-heading">
-            <p className="kicker"><span className="live-pulse" /> From the community</p>
+            <p className="kicker"><span className="live-pulse" /> From the journal</p>
             <h2 id="journal-title">Words for the <em>week.</em></h2>
           </div>
         </div>
         <div className="blog-card-grid">
           <Link className="blog-card blog-card-featured" href="/journal">
-            <span className="blog-card-index">01 / DEVOTIONAL</span>
+            <span className="blog-card-index">01 / JOURNAL</span>
             <div>
               <p className="blog-card-kicker">A quiet place to begin</p>
               <h3>Carry grace into Monday.</h3>
@@ -36,7 +36,7 @@ export default function HomeSections() {
             <span className="blog-card-arrow" aria-hidden="true">↗</span>
           </Link>
           <Link className="blog-card" href="/journal">
-            <span className="blog-card-index">02 / STORY</span>
+            <span className="blog-card-index">02 / REFLECTION</span>
             <div>
               <h3>What God is teaching us.</h3>
               <p>Read a testimony, a question, or a small faithful step from someone in the community.</p>

@@ -46,18 +46,24 @@ export default function ScrollAtmosphere() {
       // As a section leaves through either edge, it is pulled away and fades;
       // when it comes back toward the viewport centre, it naturally returns.
       const centre = viewportHeight * 0.5;
-      const travelRange = Math.max(viewportHeight * 0.92, 1);
+      const travelRange = Math.max(viewportHeight * 0.78, 1);
       sections.forEach((section) => {
         const rect = section.getBoundingClientRect();
         const sectionCentre = rect.top + rect.height * 0.5;
         const distance = clamp((sectionCentre - centre) / travelRange, -1.15, 1.15);
         const distanceFromCentre = Math.abs(distance);
-        const fade = clamp(1 - Math.max(0, distanceFromCentre - 0.16) * 0.92, 0.16, 1);
-        const scale = 1 - Math.min(0.055, Math.max(0, distanceFromCentre - 0.12) * 0.06);
-        const shift = distance * 46;
+        // Keep the movement subtle at the centre, then let each section peel
+        // away as it leaves the viewport. This makes the effect noticeable on
+        // both downward and upward scrolls without moving the layout itself.
+        const fade = clamp(1 - Math.max(0, distanceFromCentre - 0.12) * 1.2, 0.08, 1);
+        const scale = 1 - Math.min(0.09, Math.max(0, distanceFromCentre - 0.08) * 0.095);
+        const shift = distance * 88;
+        const blur = Math.min(5, Math.max(0, distanceFromCentre - 0.2) * 5.5);
         section.style.setProperty("--parallax-shift", `${shift.toFixed(2)}px`);
         section.style.setProperty("--parallax-opacity", fade.toFixed(3));
         section.style.setProperty("--parallax-scale", scale.toFixed(3));
+        section.style.setProperty("--parallax-blur", `${blur.toFixed(2)}px`);
+        section.dataset.scrollPhase = distance < -0.2 ? "leaving-up" : distance > 0.2 ? "entering-down" : "center";
       });
 
       // Live content follows the same plane, but with a softer fade. This
@@ -69,9 +75,11 @@ export default function ScrollAtmosphere() {
         const distance = clamp((targetCentre - centre) / Math.max(viewportHeight * 1.15, 1), -1.2, 1.2);
         const distanceFromCentre = Math.abs(distance);
         const fade = clamp(1 - Math.max(0, distanceFromCentre - 0.28) * 1.35, 0.08, 1);
-        const shift = distance * 28;
+        const shift = distance * 42;
+        const blur = Math.min(3, Math.max(0, distanceFromCentre - 0.28) * 3.2);
         target.style.setProperty("--parallax-shift", `${shift.toFixed(2)}px`);
         target.style.setProperty("--parallax-opacity", fade.toFixed(3));
+        target.style.setProperty("--parallax-blur", `${blur.toFixed(2)}px`);
       });
 
       previousY = y;

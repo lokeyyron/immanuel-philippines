@@ -3522,3 +3522,66 @@ a {
   .blog-index-hero-grid,
   .blog-post-grid { transform: none; transition: none; }
 }
+
+/* Final responsive polish: the drawer owns the viewport on small screens,
+   while the page foreground gets a clear, reversible scroll-parallax pass. */
+.site-header {
+  z-index: 90;
+  overflow: visible;
+}
+.site-header.menu-is-open { z-index: 90; }
+.site-menu-scrim {
+  width: 100vw;
+  height: 100dvh;
+  z-index: 70;
+}
+.site-menu-panel {
+  top: 0;
+  bottom: 0;
+  width: min(28rem, 100vw);
+  max-height: 100dvh;
+  z-index: 80;
+}
+.announcements-heading {
+  grid-template-columns: 1fr;
+}
+.announcements-heading .section-heading {
+  max-width: none;
+}
+.section-reveal.is-visible > * {
+  filter: blur(var(--parallax-blur, 0px));
+  transition:
+    opacity 260ms linear,
+    transform 420ms cubic-bezier(.22,.61,.36,1),
+    filter 420ms ease;
+}
+.section-reveal.is-visible[data-scroll-phase="leaving-up"] > *,
+.section-reveal.is-visible[data-scroll-phase="entering-down"] > * {
+  will-change: opacity, transform, filter;
+}
+.live-library-heading,
+.live-feature-card,
+.live-replay-reveal {
+  filter: blur(var(--parallax-blur, 0px));
+  transition: opacity 320ms linear, transform 420ms cubic-bezier(.22,.61,.36,1), filter 420ms ease;
+  will-change: opacity, transform, filter;
+}
+
+@media (max-width: 720px) {
+  .site-menu-panel {
+    width: 100vw;
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+  .site-menu-panel-head { padding-top: .15rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-reveal.is-visible > *,
+  .live-library-heading,
+  .live-feature-card,
+  .live-replay-reveal {
+    filter: none;
+    transition: none;
+  }
+}

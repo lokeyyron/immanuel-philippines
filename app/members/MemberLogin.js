@@ -33,7 +33,7 @@ export default function MemberLogin() {
         </div>
 
         <div className="member-login-card">
-          <div className="member-login-card-top"><span>Member access</span><span>01 / 01</span></div>
+          <div className="member-login-card-top"><span>Member access</span></div>
           <form className="member-login-form" onSubmit={handleSubmit}>
             <label htmlFor="member-username">Username</label>
             <input id="member-username" name="username" type="text" autoComplete="username" value={username} onChange={(event) => setUsername(event.target.value)} placeholder="Your username" />

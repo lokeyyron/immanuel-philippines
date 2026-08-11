@@ -23,10 +23,9 @@ export default function Announcements() {
     <Reveal as="section" className="announcements section section-dark" id="announcements" aria-labelledby="announcements-title">
       <div className="announcements-heading">
         <div className="section-heading">
-          <p className="kicker"><span /> Keep an eye out</p>
+          <p className="kicker"><span /> Announcements</p>
           <h2 id="announcements-title">What’s <em>happening.</em></h2>
         </div>
-        <p className="announcements-description">A simple bulletin for the moments, gatherings, and invitations shaping our church family.</p>
       </div>
 
       <div className="announcement-carousel" role="region" aria-roledescription="carousel" aria-label="Church announcements">
