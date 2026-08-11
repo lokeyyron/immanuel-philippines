@@ -189,13 +189,14 @@ export default function LivePage() {
   }, []);
 
   return (
-    <EditorialPage
-      eyebrow="Immanuel / Live"
-      title="Gather"
-      accent="with us."
-      description="A replay library for Sunday gatherings from Immanuel Church PH — worship, listen, and pray with the church family from wherever you are."
-    >
-      <section className="live-library" aria-labelledby="live-library-title">
+    <>
+      <EditorialPage
+        eyebrow="Immanuel / Live"
+        title="Gather"
+        accent="with us."
+        description="A replay library for Sunday gatherings from Immanuel Church PH — worship, listen, and pray with the church family from wherever you are."
+      >
+        <section className="live-library" aria-labelledby="live-library-title">
         <div className="live-library-heading">
           <div>
             <p className="live-library-meta">Newest first · {liveVideos.length} replays</p>
@@ -227,9 +228,10 @@ export default function LivePage() {
             </Reveal>
           ))}
         </div>
-      </section>
+        </section>
+      </EditorialPage>
 
       {selectedVideo ? <ReplayModal video={selectedVideo} onClose={() => setSelectedVideo(null)} /> : null}
-    </EditorialPage>
+    </>
   );
 }
