@@ -21,7 +21,7 @@ const slides = [
     title: <><span>Watch the</span><em>latest sermon.</em></>,
     description: "A message for the ordinary week — biblical teaching, honest questions, and hope to carry with you.",
     cta: "Watch latest sermon",
-    href: "https://www.youtube.com/watch?v=oZOAVExNEdY&t=8s",
+    href: "/live",
     kind: "youtube",
     videoId: "oZOAVExNEdY",
     start: 8,

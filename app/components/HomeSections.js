@@ -18,15 +18,15 @@ export default function HomeSections() {
 
       <Announcements />
 
-      <Reveal as="section" className="blog-spotlight section section-dark" id="blog" aria-labelledby="blog-title">
+      <Reveal as="section" className="blog-spotlight section section-dark" id="journal" aria-labelledby="journal-title">
         <div className="blog-intro">
           <div className="section-heading">
             <p className="kicker"><span className="live-pulse" /> From the community</p>
-            <h2 id="blog-title">Words for the <em>week.</em></h2>
+            <h2 id="journal-title">Words for the <em>week.</em></h2>
           </div>
         </div>
         <div className="blog-card-grid">
-          <Link className="blog-card blog-card-featured" href="/blogs">
+          <Link className="blog-card blog-card-featured" href="/journal">
             <span className="blog-card-index">01 / DEVOTIONAL</span>
             <div>
               <p className="blog-card-kicker">A quiet place to begin</p>
@@ -35,7 +35,7 @@ export default function HomeSections() {
             </div>
             <span className="blog-card-arrow" aria-hidden="true">↗</span>
           </Link>
-          <Link className="blog-card" href="/blogs">
+          <Link className="blog-card" href="/journal">
             <span className="blog-card-index">02 / STORY</span>
             <div>
               <h3>What God is teaching us.</h3>
@@ -43,7 +43,7 @@ export default function HomeSections() {
             </div>
             <span className="blog-card-arrow" aria-hidden="true">↗</span>
           </Link>
-          <Link className="blog-card" href="/blogs">
+          <Link className="blog-card" href="/journal">
             <span className="blog-card-index">03 / NOTES</span>
             <div>
               <h3>Save this for later.</h3>
@@ -52,14 +52,14 @@ export default function HomeSections() {
             <span className="blog-card-arrow" aria-hidden="true">↗</span>
           </Link>
         </div>
-        <div className="blog-footnote"><span>Written by Immanuel people</span><Link href="/blogs">Explore the blog <span aria-hidden="true">↗</span></Link></div>
+        <div className="blog-footnote"><span>Written by Immanuel people</span><Link href="/journal">Explore the journal <span aria-hidden="true">↗</span></Link></div>
       </Reveal>
 
       <Reveal as="section" className="community" id="community" aria-labelledby="community-title">
         <div className="community-copy"><p className="kicker"><span /> More than a gathering</p><h2 id="community-title">A community shaped by <em>grace.</em></h2></div>
         <div className="community-statements">
           <Link className="community-item" href="/events"><span>Belong</span><p>Find people who will walk with you.</p><b aria-hidden="true">↗</b></Link>
-          <Link className="community-item" href="/blogs"><span>Become</span><p>Grow deeper in faith and character.</p><b aria-hidden="true">↗</b></Link>
+          <Link className="community-item" href="/journal"><span>Become</span><p>Grow deeper in faith and character.</p><b aria-hidden="true">↗</b></Link>
           <Link className="community-item" href="/give"><span>Build</span><p>Bring hope to families and our city.</p><b aria-hidden="true">↗</b></Link>
         </div>
       </Reveal>

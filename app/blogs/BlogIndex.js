@@ -1,13 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 function BlogCard({ post, index, duplicate = false }) {
   return (
     <Link
       className={`blog-stream-card blog-stream-card-tone-${index % 4}`}
-      href={`/blogs/${post.slug}`}
+      href={`/journal/${post.slug}`}
       tabIndex={duplicate ? -1 : 0}
       aria-hidden={duplicate}
     >
@@ -22,6 +22,60 @@ function BlogCard({ post, index, duplicate = false }) {
         <span className="blog-stream-card-arrow" aria-hidden="true">↗</span>
       </footer>
     </Link>
+  );
+}
+
+function BlogMarqueeRow({ row, rowIndex }) {
+  const [dragX, setDragX] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const pointerRef = useRef({ id: null, startX: 0, moved: false });
+
+  const handlePointerDown = (event) => {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+    pointerRef.current = { id: event.pointerId, startX: event.clientX, moved: false };
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+    setIsDragging(true);
+  };
+
+  const handlePointerMove = (event) => {
+    if (!isDragging || pointerRef.current.id !== event.pointerId) return;
+    const delta = pointerRef.current.startX - event.clientX;
+    if (Math.abs(delta) > 6) pointerRef.current.moved = true;
+    setDragX(delta);
+  };
+
+  const endDrag = (event) => {
+    if (pointerRef.current.id !== event.pointerId) return;
+    event.currentTarget.releasePointerCapture?.(event.pointerId);
+    pointerRef.current.id = null;
+    setIsDragging(false);
+    setDragX(0);
+  };
+
+  const handleClickCapture = (event) => {
+    if (!pointerRef.current.moved) return;
+    event.preventDefault();
+    event.stopPropagation();
+    pointerRef.current.moved = false;
+  };
+
+  return (
+    <div
+      className={`blog-marquee-row blog-marquee-row-${rowIndex} ${isDragging ? "is-dragging" : ""}`}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={endDrag}
+      onPointerCancel={endDrag}
+      onClickCapture={handleClickCapture}
+      style={{ "--drag-x": `${dragX}px` }}
+      role="group"
+      aria-label={`Drag journal row ${rowIndex + 1}`}
+    >
+      <div className="blog-marquee-track">
+        {row.map((post, index) => <BlogCard key={`${post.slug}-primary`} post={post} index={index + rowIndex} />)}
+        {row.map((post, index) => <BlogCard key={`${post.slug}-duplicate`} post={post} index={index + rowIndex} duplicate />)}
+      </div>
+    </div>
   );
 }
 
@@ -55,7 +109,7 @@ export default function BlogIndex({ posts }) {
 
           <form className="blog-search" role="search" onSubmit={(event) => event.preventDefault()}>
             <span className="blog-search-icon" aria-hidden="true">⌕</span>
-            <label className="sr-only" htmlFor="blog-search-input">Search blogs</label>
+            <label className="sr-only" htmlFor="blog-search-input">Search journal</label>
             <input
               id="blog-search-input"
               type="search"
@@ -64,30 +118,25 @@ export default function BlogIndex({ posts }) {
               placeholder="Search a word, story, or author"
               autoComplete="off"
             />
-            {query && <button className="blog-search-clear" type="button" onClick={() => setQuery("")} aria-label="Clear blog search">×</button>}
+            {query && <button className="blog-search-clear" type="button" onClick={() => setQuery("")} aria-label="Clear journal search">×</button>}
             <span className="blog-search-count">{filteredPosts.length} {filteredPosts.length === 1 ? "story" : "stories"}</span>
           </form>
         </div>
       </section>
 
-      <section className="blog-stream" aria-label="Immanuel blog stories">
+      <section className="blog-stream" aria-label="Immanuel journal stories">
         <div className="blog-stream-heading">
           <div>
             <p className="blog-index-kicker"><span /> From the community</p>
             <h2>Keep <em>moving.</em></h2>
           </div>
-          <p>Hover a card to pause the stream. Select one to read the full reflection.</p>
+          <p>Drag a row to explore. Select a card to read the full reflection.</p>
         </div>
 
         {rows.length > 0 ? (
           <div className="blog-marquee-stack">
             {rows.map((row, rowIndex) => (
-              <div className={`blog-marquee-row blog-marquee-row-${rowIndex}`} key={`row-${rowIndex}`}>
-                <div className="blog-marquee-track">
-                  {row.map((post, index) => <BlogCard key={`${post.slug}-primary`} post={post} index={index + rowIndex} />)}
-                  {row.map((post, index) => <BlogCard key={`${post.slug}-duplicate`} post={post} index={index + rowIndex} duplicate />)}
-                </div>
-              </div>
+              <BlogMarqueeRow row={row} rowIndex={rowIndex} key={`row-${rowIndex}`} />
             ))}
           </div>
         ) : (

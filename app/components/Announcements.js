@@ -8,7 +8,7 @@ const announcements = [
   { category: "Community", date: "Coming soon", title: "Make room for one another.", body: "A new community gathering is taking shape. Details will be shared here soon.", symbol: "02", tone: "rust" },
   { category: "Worship", date: "Coming soon", title: "Songs for the journey.", body: "Watch this space for the next Immanuel Worship night and rehearsal updates.", symbol: "03", tone: "olive" },
   { category: "Care", date: "Coming soon", title: "Small acts, lasting hope.", body: "We are preparing a practical way for our church family to care for Iligan together.", symbol: "04", tone: "ink" },
-  { category: "Church family", date: "Coming soon", title: "Your story belongs here.", body: "Member stories, devotionals, and shared milestones will find a home in our blog.", symbol: "05", tone: "cream" },
+  { category: "Church family", date: "Coming soon", title: "Your story belongs here.", body: "Member stories, devotionals, and shared milestones will find a home in our journal.", symbol: "05", tone: "cream" },
 ];
 
 export default function Announcements() {
