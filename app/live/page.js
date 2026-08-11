@@ -77,16 +77,16 @@ const liveVideos = [
 const youtubeChannel = "https://www.youtube.com/@ImmanuelChurchIligan";
 
 function thumbnailFor(video) {
-  return \`https://i.ytimg.com/vi/\${video.id}/hqdefault.jpg\`;
+  return `https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`;
 }
 
 function watchUrlFor(video) {
-  return \`https://www.youtube.com/watch?v=\${video.id}\${video.start ? \`&t=\${video.start}s\` : ""}\`;
+  return `https://www.youtube.com/watch?v=${video.id}${video.start ? `&t=${video.start}s` : ""}`;
 }
 
 function embedUrlFor(video) {
-  const start = video.start ? \`&start=\${video.start}\` : "";
-  return \`https://www.youtube-nocookie.com/embed/\${video.id}?rel=0&modestbranding=1&playsinline=1\${start}\`;
+  const start = video.start ? `&start=${video.start}` : "";
+  return `https://www.youtube-nocookie.com/embed/${video.id}?rel=0&modestbranding=1&playsinline=1${start}`;
 }
 
 function ReplayCard({ video, index, onOpen }) {
@@ -166,7 +166,7 @@ export default function LivePage() {
         </div>
 
         <article className="live-feature-card">
-          <button className="live-feature-media" type="button" onClick={() => setSelectedVideo(latest)} aria-label={\`Watch \${latest.title}\`}>
+          <button className="live-feature-media" type="button" onClick={() => setSelectedVideo(latest)} aria-label={`Watch ${latest.title}`}>
             <img src={thumbnailFor(latest)} alt="Latest Immanuel Church PH live replay" />
             <span className="live-feature-wash" aria-hidden="true" />
             <span className="live-feature-play" aria-hidden="true">▶</span>
