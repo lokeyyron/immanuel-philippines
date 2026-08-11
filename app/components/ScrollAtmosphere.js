@@ -13,7 +13,12 @@ export default function ScrollAtmosphere() {
 
     let frame = 0;
     let previousY = window.scrollY || 0;
-    const sections = Array.from(document.querySelectorAll(".section-reveal"));
+    // Route content and individual replay rows have their own reveal timing.
+    // Keeping them out of the global fade prevents a row from appearing late
+    // or becoming too dim while the page-level canvas moves behind it.
+    const sections = Array.from(document.querySelectorAll(
+      ".section-reveal:not(.route-content):not(.live-replay-reveal)"
+    ));
 
     const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 

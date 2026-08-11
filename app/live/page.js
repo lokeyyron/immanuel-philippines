@@ -5,77 +5,102 @@ import EditorialPage from "../components/EditorialPage";
 import Reveal from "../components/Reveal";
 
 
-const liveVideos = [
+const fallbackLiveVideos = [
   {
     id: "gSHd1MukCt8",
     start: 12,
     title: "GALATIANS Part 2 | Ptr. Khan Santos",
     date: "August 9, 2026",
+    published: "2026-08-09T15:27:27+00:00",
     description: "A Sunday gathering from Immanuel Church PH with worship, teaching, and prayer from Iligan City.",
   },
   {
     id: "5zBP_tOX5fU",
     title: "Stepping out of the Comfort Zone | Ptr. Gemma Santos",
     date: "July 26, 2026",
+    published: "2026-07-26T15:29:55+00:00",
     description: "A full Immanuel gathering to watch again, share with a friend, and carry into the week.",
   },
   {
     id: "zlswqSI0o5Q",
     title: "Stepping out of the Comfort Zone | Ptr. Gemma Santos",
     date: "July 26, 2026",
+    published: "2026-07-26T15:15:50+00:00",
     description: "Worship, a message, and a place to slow down with the Immanuel community.",
   },
   {
     id: "1aSxh_JJrCg",
     title: "After Obedience | Ptr. Khan Santos",
     date: "July 19, 2026",
+    published: "2026-07-19T16:04:43+00:00",
     description: "A Sunday service from the Immanuel family, available to revisit whenever you need a moment with God.",
   },
   {
     id: "eNVMv4UEwn0",
     title: "After Obedience | Ptr. Khan Santos",
     date: "July 19, 2026",
+    published: "2026-07-19T14:26:52+00:00",
     description: "Make room for worship and a timely word from the Immanuel family.",
   },
   {
     id: "GQC7AoKEugw",
     title: "James The Just | Ptr. Khan Santos",
     date: "July 12, 2026",
+    published: "2026-07-12T15:24:17+00:00",
     description: "A replay of our Sunday gathering, available whenever you need a moment with God.",
   },
   {
     id: "NgUBF0z6B9Q",
     title: "Church Part 4 | Ptr. Khan Santos",
     date: "July 5, 2026",
+    published: "2026-07-05T15:27:07+00:00",
     description: "Watch the service again and stay connected to Immanuel beyond the room.",
   },
   {
     id: "U4VqD0aCtGI",
     title: "The Gospel",
     date: "June 28, 2026",
+    published: "2026-06-28T15:38:06+00:00",
     description: "An encouraging service from the Immanuel Church PH YouTube channel.",
   },
   {
     id: "87GR9xFP06g",
     title: "The Gospel | Ptr. Nellie Bunao",
     date: "June 28, 2026",
+    published: "2026-06-28T15:25:10+00:00",
     description: "Worship and teaching for your everyday life, wherever you are watching from.",
   },
   {
     id: "s_6YF4DI0tU",
     title: "Father's Sunday Celebration",
     date: "June 21, 2026",
+    published: "2026-06-21T15:29:55+00:00",
     description: "A previous Immanuel service, ready to revisit at your own pace.",
   },
   {
     id: "6oNlRTmU66M",
     title: "Church Part 3 | Ptr. Khan Santos",
     date: "June 14, 2026",
+    published: "2026-06-14T16:08:58+00:00",
     description: "The earliest replay in this collection, starting with a message from Ptr. Khan Santos.",
   },
 ];
 
-const youtubeChannel = "https://www.youtube.com/@ImmanuelChurchIligan";
+function mergeLiveVideos(remoteVideos) {
+  const merged = new Map(fallbackLiveVideos.map((video) => [video.id, video]));
+  remoteVideos.forEach((video) => {
+    if (!video?.id) return;
+    const previous = merged.get(video.id);
+    merged.set(video.id, {
+      ...previous,
+      ...video,
+      description: video.description || previous?.description || "A replay from the Immanuel Church PH family.",
+    });
+  });
+  return [...merged.values()]
+    .sort((a, b) => new Date(b.published || 0) - new Date(a.published || 0))
+    .slice(0, 20);
+}
 
 function thumbnailFor(video) {
   return `https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`;
@@ -90,16 +115,15 @@ function embedUrlFor(video) {
   return `https://www.youtube-nocookie.com/embed/${video.id}?rel=0&modestbranding=1&playsinline=1${start}`;
 }
 
-function ReplayCard({ video, index, onOpen }) {
+function ReplayCard({ video, onOpen }) {
   return (
     <button className="live-replay-card" type="button" onClick={() => onOpen(video)}>
       <span className="live-replay-image">
         <img src={thumbnailFor(video)} alt="" loading="lazy" />
         <span className="live-replay-play" aria-hidden="true">▶</span>
-        <span className="live-replay-index">{String(index + 2).padStart(2, "0")}</span>
       </span>
       <span className="live-replay-body">
-        <time className="live-replay-date" dateTime={video.date}>{video.date}</time>
+        <time className="live-replay-date" dateTime={video.published}>{video.date}</time>
         <strong>{video.title}</strong>
         <span className="live-replay-action">Watch replay <span aria-hidden="true">↗</span></span>
       </span>
@@ -134,7 +158,7 @@ function ReplayModal({ video, onClose }) {
           />
         </div>
         <div className="live-modal-details">
-          <time className="live-replay-date" dateTime={video.date}>{video.date}</time>
+          <time className="live-replay-date" dateTime={video.published}>{video.date}</time>
           <h2 id="live-modal-title">{video.title}</h2>
           <p>{video.description}</p>
           <a className="button button-light" href={watchUrlFor(video)} target="_blank" rel="noopener noreferrer">
@@ -148,7 +172,21 @@ function ReplayModal({ video, onClose }) {
 
 export default function LivePage() {
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [liveVideos, setLiveVideos] = useState(fallbackLiveVideos);
   const latest = liveVideos[0];
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/live", { cache: "no-store" })
+      .then((response) => response.ok ? response.json() : null)
+      .then((payload) => {
+        if (!cancelled && Array.isArray(payload?.videos) && payload.videos.length) {
+          setLiveVideos(mergeLiveVideos(payload.videos));
+        }
+      })
+      .catch(() => undefined);
+    return () => { cancelled = true; };
+  }, []);
 
   return (
     <EditorialPage
@@ -160,7 +198,7 @@ export default function LivePage() {
       <section className="live-library" aria-labelledby="live-library-title">
         <div className="live-library-heading">
           <div>
-            <p className="route-card-tag">Latest first · {liveVideos.length} replays</p>
+            <p className="live-library-meta">Newest first · {liveVideos.length} replays</p>
             <h2 id="live-library-title">Make room for <em>the replay.</em></h2>
           </div>
           <p>Choose a gathering below to watch it in a focused player. The newest stream is featured first, followed by earlier replays from newest to oldest.</p>
@@ -173,7 +211,7 @@ export default function LivePage() {
             <span className="live-feature-play" aria-hidden="true">▶</span>
           </button>
           <div className="live-feature-copy">
-            <time className="live-replay-date" dateTime={latest.date}>{latest.date}</time>
+            <time className="live-replay-date" dateTime={latest.published}>{latest.date}</time>
             <h3>{latest.title}</h3>
             <p>{latest.description}</p>
             <button className="button button-light" type="button" onClick={() => setSelectedVideo(latest)}>
@@ -183,21 +221,13 @@ export default function LivePage() {
         </article>
 
         <div className="live-replay-list" aria-label="Earlier live replays">
-          {liveVideos.slice(1).map((video, index) => (
+          {liveVideos.slice(1).map((video) => (
             <Reveal as="div" className="live-replay-reveal" key={video.id}>
-              <ReplayCard video={video} index={index} onOpen={setSelectedVideo} />
+              <ReplayCard video={video} onOpen={setSelectedVideo} />
             </Reveal>
           ))}
         </div>
       </section>
-
-      <div className="channel-strip">
-        <div>
-          <p className="route-card-tag">Keep watching</p>
-          <h2>Immanuel Church PH on YouTube</h2>
-        </div>
-        <a className="arrow-link" href={youtubeChannel} target="_blank" rel="noopener noreferrer">Visit the channel <span aria-hidden="true">↗</span></a>
-      </div>
 
       {selectedVideo ? <ReplayModal video={selectedVideo} onClose={() => setSelectedVideo(null)} /> : null}
     </EditorialPage>

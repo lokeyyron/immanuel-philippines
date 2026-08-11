@@ -19,7 +19,9 @@ export default function Reveal({ as: Tag = "section", className = "", children, 
       // continuously by ScrollAtmosphere instead of replaying a keyframe.
       element.classList.add("is-visible");
       observer.disconnect();
-    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    // Start just before a section enters the viewport so the motion feels
+    // attached to the scroll instead of arriving after the content is visible.
+    }, { threshold: 0.03, rootMargin: "0px 0px 20% 0px" });
     observer.observe(element);
     return () => observer.disconnect();
   }, []);
