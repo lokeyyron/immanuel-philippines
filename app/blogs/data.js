@@ -1,0 +1,118 @@
+export const blogPosts = [
+  {
+    slug: "making-room-for-stillness",
+    title: "Making room for stillness",
+    excerpt: "A small practice for noticing God in the spaces between the noise.",
+    author: "Mika Reyes",
+    date: "August 8, 2026",
+    category: "Devotional",
+    pullQuote: "Stillness is not an empty room. It is a room where we can finally listen.",
+    body: [
+      "There are days when every moment feels spoken for. Messages arrive, tasks stack up, and the quiet places in our day disappear before we notice they were there.",
+      "Stillness begins with a small decision: to stop long enough to receive the moment we are already in. We can breathe, name what we are carrying, and remember that God is not waiting for us at the finish line. He is present here.",
+      "This week, try leaving five minutes open before you reach for your phone. Let the quiet be a welcome, not a test. Bring one honest sentence to God and stay with it.",
+    ],
+  },
+  {
+    slug: "a-table-with-room",
+    title: "A table with room",
+    excerpt: "What hospitality looks like when belonging starts before the first hello.",
+    author: "Jon Carlo Dela Cruz",
+    date: "August 3, 2026",
+    category: "Community",
+    pullQuote: "A generous table is less about having everything ready and more about making room.",
+    body: [
+      "We often imagine hospitality as a polished moment: a clean room, a prepared meal, a confident welcome. But the most meaningful invitations are rarely perfect.",
+      "At church, belonging can begin with a chair pulled closer, a name remembered, or a question asked without rushing toward an answer. These small acts tell someone, ‘You do not have to perform to be here.’",
+      "Look around this week for one place where you can widen the circle. It might be a Sunday seat, a group chat, or a conversation that has been waiting for your attention.",
+    ],
+  },
+  {
+    slug: "when-prayer-feels-small",
+    title: "When prayer feels small",
+    excerpt: "An honest reflection for the days when you have more questions than words.",
+    author: "Khan Santos",
+    date: "July 27, 2026",
+    category: "Reflection",
+    pullQuote: "A small prayer is still a direction of the heart.",
+    body: [
+      "Some prayers arrive as paragraphs. Others are only a name, a sigh, or a sentence we repeat because it is all we have. Neither is too small for God.",
+      "Faith is not measured by how impressive our words sound. It is practiced by turning toward God again, even when the turn is quiet and unfinished.",
+      "If prayer feels difficult today, begin with what is true: ‘God, I am here.’ Let that be enough to open the door.",
+    ],
+  },
+  {
+    slug: "the-work-of-showing-up",
+    title: "The work of showing up",
+    excerpt: "Why faithful presence can matter more than having the perfect plan.",
+    author: "Leah Mae Villanueva",
+    date: "July 21, 2026",
+    category: "Faith in practice",
+    pullQuote: "Consistency is one of the quietest ways love becomes visible.",
+    body: [
+      "We are drawn to beginnings with big energy: a new habit, a new project, a new promise. But a life of faith is often shaped by the ordinary return.",
+      "Showing up does not mean every week feels the same. It means we keep making space for the people and practices that help us become more like Jesus, even when our motivation changes.",
+      "Choose one small place to return to this week. Bring your whole self, not a polished version. There is grace in the repetition.",
+    ],
+  },
+  {
+    slug: "hope-with-its-sleeves-rolled-up",
+    title: "Hope with its sleeves rolled up",
+    excerpt: "A look at the practical, patient work of carrying hope into Iligan City.",
+    author: "Ruth Anne Lim",
+    date: "July 15, 2026",
+    category: "City life",
+    pullQuote: "Hope is not passive optimism; it is love choosing the next faithful step.",
+    body: [
+      "Hope is easy to talk about when it stays abstract. It becomes real when it takes a shape: a meal shared, a need noticed, a neighbor listened to, a promise kept.",
+      "Our city does not need perfect people. It needs communities willing to stay close, learn what is needed, and keep serving when the first excitement fades.",
+      "Ask where your attention could become an act of care. The next faithful step may be smaller than you expect, but small steps can still change the direction of a street, a home, or a week.",
+    ],
+  },
+  {
+    slug: "learning-to-listen-together",
+    title: "Learning to listen together",
+    excerpt: "The kind of conversation that makes space for wisdom, doubt, and growth.",
+    author: "Paolo Mendoza",
+    date: "July 7, 2026",
+    category: "Life together",
+    pullQuote: "Listening is a way of saying: your story is worth my attention.",
+    body: [
+      "A community grows deeper when people can bring more than conclusions. Questions, doubts, and unfinished thoughts all have a place at the table.",
+      "Listening is not waiting for our turn to speak. It is choosing curiosity over quick fixes and trusting that understanding can be a form of care.",
+      "This week, practice staying with one conversation a little longer. Ask one more question. Notice what changes when someone does not have to hurry toward an answer.",
+    ],
+  },
+  {
+    slug: "the-gift-of-a-second-look",
+    title: "The gift of a second look",
+    excerpt: "How a slower glance can turn an everyday moment into an invitation to gratitude.",
+    author: "Andrea S. Flores",
+    date: "June 30, 2026",
+    category: "Everyday grace",
+    pullQuote: "Attention is one of the simplest ways we can practice gratitude.",
+    body: [
+      "Our days are full of details we have learned to pass by: the light on a familiar street, a friend’s tired smile, the sound of a room settling after people leave.",
+      "A second look interrupts the speed of assumption. It lets us receive what is already here, and it trains our hearts to notice gifts before they become memories.",
+      "Take one familiar route today and look for something you usually miss. Let gratitude begin with attention.",
+    ],
+  },
+  {
+    slug: "a-faith-that-keeps-learning",
+    title: "A faith that keeps learning",
+    excerpt: "Why growing in faith means staying curious, teachable, and open to one another.",
+    author: "Immanuel Community",
+    date: "June 23, 2026",
+    category: "Formation",
+    pullQuote: "A living faith is not afraid of the next honest question.",
+    body: [
+      "Faith is not a certificate we earn and frame. It is a living relationship that keeps inviting us to grow in wisdom, humility, and love.",
+      "Learning can happen in Scripture, in conversation, in service, and in the moments when another person helps us see what we could not see alone.",
+      "Bring your questions with you. The goal is not to have every answer at once, but to keep walking toward Jesus with an open heart.",
+    ],
+  },
+];
+
+export function getBlogPost(slug) {
+  return blogPosts.find((post) => post.slug === slug);
+}
