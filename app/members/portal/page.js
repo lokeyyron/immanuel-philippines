@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "../../../lib/supabase/client";
 
@@ -9,13 +10,14 @@ const portalCards = [
   { label: "Events", title: "Make room to gather", body: "See upcoming church moments and save your place when sign-ups are connected.", icon: "□", status: "Coming soon" },
   { label: "Journal", title: "Share a reflection", body: "Write a devotional or story for the Immanuel family to read and carry.", icon: "✦", status: "Coming soon" },
   { label: "Giving", title: "See your giving history", body: "A private record of gifts and receipts once online giving is connected.", icon: "♡", status: "Planned" },
-  { label: "Profile", title: "Keep your details close", body: "Update your contact details and communication preferences in one place.", icon: "◎", status: "Planned" },
+  { label: "Profile", title: "Keep your details close", body: "Update your display name, username, and password in one place.", icon: "◎", status: "Available" },
   { label: "Care", title: "Ask for prayer", body: "Share a care request with the right church leader, privately and thoughtfully.", icon: "✧", status: "Planned" },
 ];
 
 export default function MemberPortalPage() {
   const router = useRouter();
   const [ready, setReady] = useState(false);
+  const [user, setUser] = useState(null);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   useEffect(() => {
@@ -33,6 +35,7 @@ export default function MemberPortalPage() {
         router.replace("/members?redirected=1");
         return;
       }
+      setUser(user);
       setReady(true);
     });
 
@@ -56,8 +59,8 @@ export default function MemberPortalPage() {
   return (
     <main id="main-content" className="member-portal-page">
       <section className="member-portal-hero">
-        <div><p className="kicker"><span /> Immanuel / Member portal</p><h1>Good to see you, <em>family.</em></h1></div>
-        <div className="member-portal-hero-actions"><span className="member-preview-badge">Preview space</span><p>A gentle home base for groups, gatherings, stories, and care.</p><button className="member-logout button" type="button" onClick={logOut} disabled={isLoggingOut}>{isLoggingOut ? "Signing out…" : "Log out"} <span aria-hidden="true">↗</span></button></div>
+        <div><p className="kicker"><span /> Immanuel / Member portal</p><h1>Good to see you, <em>{user?.user_metadata?.display_name || "family"}.</em></h1></div>
+        <div className="member-portal-hero-actions"><span className="member-preview-badge">Preview space</span><p>A gentle home base for groups, gatherings, stories, and care.</p><div className="member-portal-hero-buttons"><Link className="member-profile-link button" href="/members/portal/profile">Profile <span aria-hidden="true">◎</span></Link><button className="member-logout button" type="button" onClick={logOut} disabled={isLoggingOut}>{isLoggingOut ? "Signing out…" : "Log out"} <span aria-hidden="true">↗</span></button></div></div>
       </section>
 
       <section className="member-portal-week" aria-labelledby="member-portal-week-title">
@@ -72,7 +75,12 @@ export default function MemberPortalPage() {
       <section className="member-portal-grid" aria-labelledby="member-portal-space-title">
         <div className="member-portal-grid-heading"><p className="kicker"><span /> Your space</p><h2 id="member-portal-space-title">Everything that helps you <em>belong.</em></h2></div>
         <div className="member-portal-card-grid">
-          {portalCards.map((card) => <article className="member-portal-card" key={card.label}><div className="member-portal-card-top"><span className="member-portal-icon" aria-hidden="true">{card.icon}</span><span className="member-portal-card-status">{card.status}</span></div><p>{card.label}</p><h3>{card.title}</h3><span>{card.body}</span><b aria-hidden="true">↗</b></article>)}
+          {portalCards.map((card) => {
+            const content = <><div className="member-portal-card-top"><span className="member-portal-icon" aria-hidden="true">{card.icon}</span><span className="member-portal-card-status">{card.status}</span></div><p>{card.label}</p><h3>{card.title}</h3><span>{card.body}</span><b aria-hidden="true">↗</b></>;
+            return card.label === "Profile"
+              ? <Link className="member-portal-card" href="/members/portal/profile" key={card.label}>{content}</Link>
+              : <article className="member-portal-card" key={card.label}>{content}</article>;
+          })}
         </div>
       </section>
       <p className="member-portal-footer-note">This preview is intentionally private-by-design. Real accounts, records, and publishing permissions will be connected before launch.</p>

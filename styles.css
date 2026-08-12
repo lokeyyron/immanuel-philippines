@@ -3804,6 +3804,39 @@ a {
 .member-portal-card:hover > span:not(.member-portal-icon):not(.member-portal-card-status) { color: rgba(11,13,11,.68); }
 .member-portal-footer-note { width: min(100%, 76rem); margin: 1.5rem auto 0; color: rgba(255,255,255,.42); font-size: .68rem; line-height: 1.55; }
 
+.member-portal-hero-buttons { display: flex; flex-wrap: wrap; gap: .65rem; }
+.member-profile-link { border-color: rgba(241,215,143,.44); color: var(--text); background: rgba(255,255,255,.07); }
+.member-profile-link:hover, .member-profile-link:focus-visible { border-color: var(--gold-light); background: rgba(241,215,143,.16); color: var(--text); }
+.member-portal-card { display: block; color: inherit; text-decoration: none; }
+.member-profile-page { padding-top: clamp(8rem, 13vw, 11rem); }
+.member-profile-shell { width: min(100%, 76rem); display: grid; grid-template-columns: minmax(0, 1fr) minmax(20rem, .72fr); align-items: center; gap: clamp(3rem, 10vw, 9rem); margin: 0 auto; }
+.member-profile-intro { min-width: 0; }
+.member-profile-back { display: inline-flex; margin-bottom: clamp(2.6rem, 6vw, 5rem); color: var(--muted-light); font-size: .72rem; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; transition: color 180ms ease, transform 180ms ease; }
+.member-profile-back:hover, .member-profile-back:focus-visible { color: var(--text); transform: translateX(-.25rem); }
+.member-profile-intro h1 { max-width: 8ch; margin: 1rem 0 1.7rem; font: 800 clamp(3.5rem, 8vw, 7rem)/.84 "Manrope", sans-serif; letter-spacing: -.1em; }
+.member-profile-intro h1 em { color: var(--gold-light); font-family: Georgia, serif; font-weight: 400; }
+.member-profile-intro > p:not(.kicker) { max-width: 31rem; color: var(--text-soft); font-size: clamp(1rem, 1.5vw, 1.25rem); line-height: 1.7; }
+.member-profile-account-note { display: grid; gap: .35rem; max-width: 31rem; margin-top: 2.8rem; padding-top: 1rem; border-top: 1px solid var(--line-light); }
+.member-profile-account-note span { color: var(--gold-light); font-size: .62rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.member-profile-account-note strong { overflow: hidden; color: var(--muted-light); font-size: .8rem; font-weight: 500; text-overflow: ellipsis; }
+.member-profile-card { min-width: 0; padding: clamp(1.4rem, 3vw, 2.4rem); border: 1px solid rgba(255,255,255,.22); border-radius: 1.4rem .5rem 1.4rem .5rem; background: linear-gradient(145deg, rgba(255,255,255,.13), rgba(255,255,255,.035)); box-shadow: inset 0 1px rgba(255,255,255,.18), 0 1.8rem 4rem rgba(0,0,0,.28); backdrop-filter: blur(18px) saturate(120%); }
+.member-profile-card-head { display: flex; align-items: start; justify-content: space-between; gap: 1rem; padding-bottom: 1.25rem; border-bottom: 1px solid rgba(255,255,255,.16); }
+.member-profile-card h2 { margin: .85rem 0 0; color: var(--text); font: 700 clamp(1.5rem, 3vw, 2.2rem)/1 "Manrope", sans-serif; letter-spacing: -.07em; }
+.member-profile-mark { display: grid; width: 2.4rem; height: 2.4rem; place-items: center; border: 1px solid rgba(241,215,143,.46); border-radius: .7rem; color: var(--gold-light); font-size: 1.2rem; }
+.member-profile-card > label { display: block; margin-top: 1.2rem; margin-bottom: .45rem; color: rgba(255,255,255,.72); font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.member-profile-card > input { width: 100%; min-height: 3.1rem; padding: .75rem .9rem; border: 1px solid rgba(255,255,255,.22); border-radius: .65rem; outline: none; background: rgba(0,0,0,.22); color: var(--text); font: inherit; }
+.member-profile-card > input::placeholder { color: rgba(255,255,255,.4); }
+.member-profile-card > input:focus { border-color: var(--gold-light); box-shadow: 0 0 0 3px rgba(241,215,143,.13); }
+.member-profile-field-note { margin: .55rem 0 0; color: rgba(255,255,255,.46); font-size: .68rem; line-height: 1.5; }
+.member-profile-divider { display: flex; align-items: center; gap: .7rem; margin: 1.6rem 0 -.1rem; color: var(--gold-light); font-size: .62rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.member-profile-divider::after { content: ""; height: 1px; flex: 1; background: rgba(255,255,255,.14); }
+.member-profile-error, .member-profile-notice { margin: 1rem 0 0; font-size: .76rem; line-height: 1.45; }
+.member-profile-error { color: #ffb0a0; }
+.member-profile-notice { color: #d9efad; }
+.member-profile-save { width: 100%; justify-content: center; margin-top: 1.35rem; border: 0; background: var(--gold); color: var(--ink); }
+.member-profile-save:hover, .member-profile-save:focus-visible { background: var(--gold-light); color: var(--ink); }
+.member-profile-security-note { margin: 1rem 0 0; color: rgba(255,255,255,.42); font-size: .65rem; line-height: 1.5; }
+
 @media (max-width: 980px) {
   .member-login-highlights { margin-top: 2rem; }
   .member-portal-week-grid,
@@ -3820,6 +3853,8 @@ a {
   .member-portal-week-grid article { min-height: 12.5rem; }
   .member-portal-grid-heading h2 { max-width: 10ch; }
   .member-portal-footer-note { line-height: 1.55; }
+  .member-profile-shell { grid-template-columns: 1fr; gap: 3rem; }
+  .member-profile-page { padding-top: 7.5rem; }
 }
 
 .member-login-login-note {
