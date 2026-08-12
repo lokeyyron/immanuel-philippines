@@ -3548,6 +3548,17 @@ a {
 .announcements-heading .section-heading {
   max-width: none;
 }
+.announcements-heading h2 {
+  max-width: none;
+  white-space: nowrap;
+  font-size: clamp(2.35rem, 7vw, 7rem);
+}
+.blog-stream-heading {
+  grid-template-columns: 1fr;
+}
+.blog-stream-heading > div {
+  max-width: none;
+}
 .section-reveal.is-visible > * {
   filter: blur(var(--parallax-blur, 0px));
   transition:
@@ -3568,6 +3579,10 @@ a {
 }
 
 @media (max-width: 720px) {
+  .announcements-heading h2 {
+    white-space: nowrap;
+    font-size: clamp(2.05rem, 8.2vw, 3.8rem);
+  }
   .site-menu-panel {
     width: 100vw;
     padding-right: 1rem;
@@ -3584,4 +3599,230 @@ a {
     filter: none;
     transition: none;
   }
+}
+
+/* Keep the header fluid at every viewport width. The drawer is rendered as a
+   body-level overlay, so it cannot be clipped by the header's glass surface. */
+.site-header {
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+}
+.site-menu-scrim { z-index: 150; }
+.site-menu-panel { z-index: 160; }
+.site-brand-cluster,
+.brand {
+  min-width: 0;
+}
+.brand span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.site-menu-panel {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: min(29rem, 100vw);
+  height: 100dvh;
+  max-height: 100dvh;
+  box-sizing: border-box;
+}
+
+@media (max-width: 980px) {
+  .site-header {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}
+
+@media (max-width: 720px) {
+  .site-header {
+    min-height: clamp(4.25rem, 14vw, 5rem);
+    padding-inline: clamp(.75rem, 4vw, 1rem);
+  }
+  .site-brand-cluster { gap: clamp(.45rem, 2.5vw, .8rem); }
+  .brand { gap: .55rem; }
+  .brand span { max-width: 54vw; font-size: clamp(.76rem, 3.6vw, .88rem); }
+  .site-menu-panel {
+    width: 100vw;
+    max-width: 100vw;
+    padding-top: clamp(5.1rem, 16vw, 6.3rem);
+  }
+}
+
+/* Member space: a calm preview of the areas a real church portal will hold. */
+.member-login-side {
+  min-width: 0;
+  display: grid;
+  gap: 1rem;
+}
+.member-login-card-top {
+  align-items: center;
+}
+.member-preview-badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: .38rem .62rem;
+  border: 1px solid rgba(241,215,143,.38);
+  border-radius: 999px;
+  color: var(--gold-light);
+  font-size: .58rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.member-login-highlights {
+  display: grid;
+  gap: .7rem;
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+}
+.member-login-highlight {
+  display: grid;
+  grid-template-columns: 2.15rem minmax(0, 1fr);
+  align-items: start;
+  gap: .8rem;
+  max-width: 28rem;
+  padding: .78rem 0;
+  border-top: 1px solid rgba(255,255,255,.13);
+}
+.member-login-highlight-icon {
+  width: 1.9rem;
+  height: 1.9rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(241,215,143,.48);
+  border-radius: .65rem;
+  color: var(--gold-light);
+}
+.member-login-highlight strong { display: block; color: var(--text); font-size: .86rem; font-weight: 700; }
+.member-login-highlight p { margin: .2rem 0 0; color: var(--muted-light); font-size: .76rem; line-height: 1.45; }
+.member-login-side-note {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .95rem 1rem;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: .75rem;
+  background: rgba(255,255,255,.045);
+  color: rgba(255,255,255,.55);
+  font-size: .62rem;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+.member-login-side-note span { color: var(--gold-light); }
+.member-login-side-note p { margin: 0; text-align: right; }
+
+.member-portal-page {
+  overflow: clip;
+}
+.member-portal-hero-actions {
+  display: grid;
+  justify-items: start;
+  gap: .85rem;
+}
+.member-portal-hero-actions > p { margin: 0; color: var(--text-soft); line-height: 1.6; }
+.member-portal-week,
+.member-portal-grid {
+  width: min(100%, 76rem);
+  margin-inline: auto;
+}
+.member-portal-week {
+  margin-bottom: clamp(4.5rem, 9vw, 8rem);
+}
+.member-portal-section-head,
+.member-portal-grid-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+.member-portal-section-head h2,
+.member-portal-grid-heading h2 {
+  max-width: 12ch;
+  margin: 0;
+  font: 800 clamp(2.5rem, 5.5vw, 5.8rem)/.88 "Manrope", sans-serif;
+  letter-spacing: -.09em;
+}
+.member-portal-section-head h2 em,
+.member-portal-grid-heading h2 em { color: var(--gold-light); font-family: Georgia, serif; font-weight: 400; }
+.member-portal-section-note { color: rgba(255,255,255,.48); font-size: .65rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.member-portal-week-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: rgba(255,255,255,.16);
+}
+.member-portal-week-grid article {
+  min-height: 14rem;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.2rem, 2.5vw, 2rem);
+  background: linear-gradient(145deg, rgba(255,255,255,.1), rgba(255,255,255,.025));
+  transition: background 260ms ease, transform 260ms cubic-bezier(.22,.61,.36,1);
+}
+.member-portal-week-grid article:hover { background: linear-gradient(145deg, rgba(222,184,94,.26), rgba(166,79,54,.16)); transform: translateY(-.35rem); }
+.member-portal-card-label { color: var(--gold-light); font-size: .62rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.member-portal-week-grid h3 { max-width: 12ch; margin: 2.8rem 0 .7rem; font: 800 clamp(1.45rem, 2.5vw, 2.25rem)/.95 "Manrope", sans-serif; letter-spacing: -.07em; }
+.member-portal-week-grid p { max-width: 22rem; margin: 0; color: var(--muted-light); font-size: .85rem; line-height: 1.55; }
+.member-portal-week-grid strong { margin-top: auto; padding-top: 1.2rem; color: var(--text); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; }
+.member-portal-grid {
+  display: block;
+  background: transparent;
+}
+.member-portal-grid-heading { align-items: end; margin-bottom: 2rem; }
+.member-portal-grid-heading .kicker { margin-bottom: .8rem; }
+.member-portal-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: rgba(255,255,255,.16);
+}
+.member-portal-card {
+  min-height: 18rem;
+  padding: clamp(1.25rem, 2.6vw, 2.2rem);
+  background: rgba(18,22,18,.9);
+  transition: background 260ms ease, color 260ms ease, transform 260ms cubic-bezier(.22,.61,.36,1);
+}
+.member-portal-card:hover { background: linear-gradient(145deg, rgba(222,184,94,.95), rgba(166,79,54,.88)); }
+.member-portal-card-top { display: flex; align-items: start; justify-content: space-between; gap: .75rem; }
+.member-portal-card-status { color: rgba(255,255,255,.42); font-size: .57rem; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
+.member-portal-card:hover .member-portal-card-status { color: rgba(11,13,11,.55); }
+.member-portal-card > p { margin: 2.2rem 0 .65rem; }
+.member-portal-card h3 { max-width: 11ch; margin: 0 0 .9rem; font: 800 clamp(1.55rem, 2.6vw, 2.5rem)/.93 "Manrope", sans-serif; letter-spacing: -.08em; }
+.member-portal-card > span:not(.member-portal-icon):not(.member-portal-card-status) { max-width: 20rem; display: block; color: var(--muted-light); line-height: 1.55; }
+.member-portal-card:hover > span:not(.member-portal-icon):not(.member-portal-card-status) { color: rgba(11,13,11,.68); }
+.member-portal-footer-note { width: min(100%, 76rem); margin: 1.5rem auto 0; color: rgba(255,255,255,.42); font-size: .68rem; line-height: 1.55; }
+
+@media (max-width: 980px) {
+  .member-login-highlights { margin-top: 2rem; }
+  .member-portal-week-grid,
+  .member-portal-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 720px) {
+  .member-login-side-note { align-items: flex-start; flex-direction: column; gap: .35rem; }
+  .member-login-side-note p { text-align: left; }
+  .member-portal-section-head,
+  .member-portal-grid-heading { align-items: flex-start; flex-direction: column; gap: .7rem; }
+  .member-portal-week-grid,
+  .member-portal-card-grid { grid-template-columns: 1fr; }
+  .member-portal-week-grid article { min-height: 12.5rem; }
+  .member-portal-grid-heading h2 { max-width: 10ch; }
+  .member-portal-footer-note { line-height: 1.55; }
+}
+
+.member-login-login-note {
+  margin: 0 0 .65rem;
+  color: rgba(255,255,255,.58);
+  font-size: .68rem;
+  line-height: 1.5;
+}
+.member-login-submit:disabled,
+.member-logout:disabled {
+  cursor: wait;
+  opacity: .58;
+  transform: none;
 }

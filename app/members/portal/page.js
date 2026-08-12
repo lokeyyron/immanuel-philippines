@@ -2,41 +2,80 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { createClient } from "../../../lib/supabase/client";
 
 const portalCards = [
-  { label: "Journal", title: "Share a reflection", body: "Write a devotional or story for the Immanuel family.", icon: "✦" },
-  { label: "Community", title: "Find your people", body: "Cell groups, care updates, and the next step together.", icon: "♧" },
-  { label: "Giving", title: "Your giving history", body: "A private view of your future giving records.", icon: "♡" },
+  { label: "My groups", title: "Find your people", body: "Cell groups, care updates, and conversations between Sundays.", icon: "♧", status: "Coming soon" },
+  { label: "Events", title: "Make room to gather", body: "See upcoming church moments and save your place when sign-ups are connected.", icon: "□", status: "Coming soon" },
+  { label: "Journal", title: "Share a reflection", body: "Write a devotional or story for the Immanuel family to read and carry.", icon: "✦", status: "Coming soon" },
+  { label: "Giving", title: "See your giving history", body: "A private record of gifts and receipts once online giving is connected.", icon: "♡", status: "Planned" },
+  { label: "Profile", title: "Keep your details close", body: "Update your contact details and communication preferences in one place.", icon: "◎", status: "Planned" },
+  { label: "Care", title: "Ask for prayer", body: "Share a care request with the right church leader, privately and thoughtfully.", icon: "✧", status: "Planned" },
 ];
 
 export default function MemberPortalPage() {
   const router = useRouter();
   const [ready, setReady] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   useEffect(() => {
-    if (window.sessionStorage.getItem("immanuel-member-preview") !== "1") {
-      router.replace("/members");
-      return;
+    let active = true;
+    const supabase = createClient();
+
+    if (!supabase) {
+      router.replace("/members?setup=1");
+      return () => { active = false; };
     }
-    setReady(true);
+
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (!active) return;
+      if (!user) {
+        router.replace("/members?redirected=1");
+        return;
+      }
+      setReady(true);
+    });
+
+    return () => { active = false; };
   }, [router]);
 
   if (!ready) return <main className="member-portal-page member-portal-loading" aria-live="polite">Opening your member space…</main>;
 
-  const logOut = () => {
-    window.sessionStorage.removeItem("immanuel-member-preview");
-    router.push("/members");
+  const logOut = async () => {
+    const supabase = createClient();
+    if (!supabase) {
+      router.replace("/members");
+      return;
+    }
+    setIsLoggingOut(true);
+    await supabase.auth.signOut();
+    router.replace("/members");
+    router.refresh();
   };
 
   return (
     <main id="main-content" className="member-portal-page">
       <section className="member-portal-hero">
-        <div><p className="kicker"><span /> Immanuel / Member portal</p><h1>A place to <em>belong.</em></h1></div>
-        <div><p>Welcome to the first glimpse of the member space. We’ll keep adding thoughtful tools for connection and care.</p><button className="member-logout button" type="button" onClick={logOut}>Log out <span aria-hidden="true">↗</span></button></div>
+        <div><p className="kicker"><span /> Immanuel / Member portal</p><h1>Good to see you, <em>family.</em></h1></div>
+        <div className="member-portal-hero-actions"><span className="member-preview-badge">Preview space</span><p>A gentle home base for groups, gatherings, stories, and care.</p><button className="member-logout button" type="button" onClick={logOut} disabled={isLoggingOut}>{isLoggingOut ? "Signing out…" : "Log out"} <span aria-hidden="true">↗</span></button></div>
       </section>
-      <section className="member-portal-grid" aria-label="Member portal features">
-        {portalCards.map((card) => <article className="member-portal-card" key={card.label}><span className="member-portal-icon" aria-hidden="true">{card.icon}</span><p>{card.label}</p><h2>{card.title}</h2><span>{card.body}</span><b aria-hidden="true">↗</b></article>)}
+
+      <section className="member-portal-week" aria-labelledby="member-portal-week-title">
+        <div className="member-portal-section-head"><div><p className="kicker"><span /> This week</p><h2 id="member-portal-week-title">Stay close to <em>home.</em></h2></div><span className="member-portal-section-note">A quick glance</span></div>
+        <div className="member-portal-week-grid">
+          <article><span className="member-portal-card-label">Next gathering</span><h3>Sunday worship</h3><p>Come as you are. There’s a seat waiting for you.</p><strong>Sunday · 10:00 AM</strong></article>
+          <article><span className="member-portal-card-label">Journal prompt</span><h3>What is God teaching you?</h3><p>Read a reflection or make room for your own story.</p><strong>Read &amp; reflect ↗</strong></article>
+          <article><span className="member-portal-card-label">Care corner</span><h3>Need prayer?</h3><p>A future private path to ask for support from the church family.</p><strong>Coming soon</strong></article>
+        </div>
       </section>
+
+      <section className="member-portal-grid" aria-labelledby="member-portal-space-title">
+        <div className="member-portal-grid-heading"><p className="kicker"><span /> Your space</p><h2 id="member-portal-space-title">Everything that helps you <em>belong.</em></h2></div>
+        <div className="member-portal-card-grid">
+          {portalCards.map((card) => <article className="member-portal-card" key={card.label}><div className="member-portal-card-top"><span className="member-portal-icon" aria-hidden="true">{card.icon}</span><span className="member-portal-card-status">{card.status}</span></div><p>{card.label}</p><h3>{card.title}</h3><span>{card.body}</span><b aria-hidden="true">↗</b></article>)}
+        </div>
+      </section>
+      <p className="member-portal-footer-note">This preview is intentionally private-by-design. Real accounts, records, and publishing permissions will be connected before launch.</p>
     </main>
   );
 }

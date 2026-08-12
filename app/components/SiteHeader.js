@@ -69,7 +69,8 @@ export default function SiteHeader() {
   }, [menuOpen]);
 
   return (
-    <header className={`site-header ${menuOpen ? "menu-is-open" : ""}`}>
+    <>
+      <header className={`site-header ${menuOpen ? "menu-is-open" : ""}`}>
       <div className="site-brand-cluster">
         <button
           className="menu-trigger"
@@ -102,6 +103,7 @@ export default function SiteHeader() {
         </Link>
       </div>
 
+      </header>
       {menuOpen && (
         <>
           <button className="site-menu-scrim" type="button" aria-label="Close navigation" onClick={() => setMenuOpen(false)} />
@@ -117,6 +119,6 @@ export default function SiteHeader() {
           </aside>
         </>
       )}
-    </header>
+    </>
   );
 }

@@ -130,7 +130,6 @@ export default function BlogIndex({ posts }) {
             <p className="blog-index-kicker"><span /> From the community</p>
             <h2>Keep <em>moving.</em></h2>
           </div>
-          <p>Drag a row to explore. Select a card to read the full reflection.</p>
         </div>
 
         {rows.length > 0 ? (
