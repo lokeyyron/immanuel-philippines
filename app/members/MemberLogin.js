@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "../../lib/supabase/client";
 import { isSupabaseConfigured } from "../../lib/supabase/config";
+import { memberAuthEmail } from "../../lib/supabase/member-identity";
 
 const memberHighlights = [
   { icon: "♧", label: "Groups", body: "Find your people and stay close between Sundays." },
@@ -13,7 +14,7 @@ const memberHighlights = [
 
 export default function MemberLogin() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -22,8 +23,10 @@ export default function MemberLogin() {
     event.preventDefault();
     setError("");
 
-    if (!email.trim() || !password) {
-      setError("Enter your email and password to continue.");
+    const authEmail = memberAuthEmail(username);
+
+    if (!authEmail || !password) {
+      setError("Enter your username and password to continue.");
       return;
     }
 
@@ -35,7 +38,7 @@ export default function MemberLogin() {
 
     setIsSubmitting(true);
     const { error: signInError } = await supabase.auth.signInWithPassword({
-      email: email.trim(),
+      email: authEmail,
       password,
     });
 
@@ -73,15 +76,15 @@ export default function MemberLogin() {
           <div className="member-login-card">
             <div className="member-login-card-top"><span>Member access</span><span className="member-preview-badge">Preview</span></div>
             <form className="member-login-form" onSubmit={handleSubmit}>
-              <label htmlFor="member-email">Email address</label>
-              <input id="member-email" name="email" type="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.com" />
+              <label htmlFor="member-username">Username</label>
+              <input id="member-username" name="username" type="text" autoComplete="username" value={username} onChange={(event) => setUsername(event.target.value)} placeholder="your username" />
               <label htmlFor="member-password">Password</label>
               <input id="member-password" name="password" type="password" autoComplete="current-password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Your password" />
               {error && <p className="member-login-error" role="alert">{error}</p>}
               <button className="member-login-submit button" type="submit" disabled={isSubmitting}>{isSubmitting ? "Signing in…" : "Enter member space"} <span aria-hidden="true">↗</span></button>
             </form>
             <p className="member-login-help">If you do not have an account, contact your Discipler.</p>
-            <p className="member-login-login-note">Use the email address your Discipler registered for you. Public sign-up is disabled.</p>
+            <p className="member-login-login-note">Use the username your Discipler gave you. Public sign-up is disabled.</p>
             <p className="member-login-disclaimer">{isSupabaseConfigured ? "Secure sign-in is connected. Member tools are still being built." : "This is a front-end preview. Secure sign-in is waiting for the church project settings."}</p>
           </div>
           <div className="member-login-side-note"><span>COMING TOGETHER</span><p>Groups · Gatherings · Journal · Care</p></div>

@@ -40,9 +40,9 @@ The member page now uses Supabase Auth with cookie-based sessions. The portal ro
    - `http://localhost:3000/auth/callback`
    - the Vercel preview URL followed by `/auth/callback`
 
-5. In **Authentication → Users**, choose **Add user** or **Send invitation** for each member. Do not place a `SUPABASE_SECRET_KEY` in `.env.local` for this front-end; it is reserved for a future server-only admin invite endpoint.
+5. In **Authentication → Users**, choose **Add user** for each member. Supabase Auth requires an email identity internally, so create the account with the username alias `username@members.immanuelphilippines.church` (replace `username` with the member's lowercase username), set a strong password, and enable **Auto Confirm User**. Give the member only the username and password. Do not place a `SUPABASE_SECRET_KEY` in `.env.local` for this front-end; it is reserved for a future server-only admin invite endpoint.
 
-The login form accepts the email address registered by the Discipler and a password. Password reset, roles, group membership, journal permissions, and giving records should be added after the church confirms the member data model. Until the environment variables are added, the UI shows a setup message and cannot authenticate anyone.
+The member login form asks for a username and password. The app converts the username into the private alias above before calling Supabase Auth; members never need to type an email address. Older accounts created with a real email can still use that email in the username field during the transition. Password reset, roles, group membership, journal permissions, and giving records should be added after the church confirms the member data model. Until the environment variables are added, the UI shows a setup message and cannot authenticate anyone.
 
 ## Media
 
