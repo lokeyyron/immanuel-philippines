@@ -2386,7 +2386,9 @@ body.menu-open { overflow: hidden; }
   overflow: hidden;
   padding: 0;
   border: 0;
-  background: #080a08;
+  background:
+    radial-gradient(circle at 78% 24%, rgba(222,184,94,.22), transparent 26%),
+    linear-gradient(135deg, #1b211a, #080a08 62%, #2b1712);
   color: white;
   text-align: left;
   cursor: pointer;
@@ -2524,7 +2526,9 @@ body.menu-open { overflow: hidden; }
   min-height: 14rem;
   position: relative;
   overflow: hidden;
-  background: #080a08;
+  background:
+    radial-gradient(circle at 72% 24%, rgba(222,184,94,.24), transparent 28%),
+    linear-gradient(135deg, #1b211a, #080a08 62%, #2b1712);
 }
 .live-replay-image::after {
   content: "";
@@ -2539,6 +2543,10 @@ body.menu-open { overflow: hidden; }
   inset: 0;
   object-fit: cover;
   transition: transform 500ms ease;
+}
+.live-replay-image img[data-unavailable],
+.live-feature-media img[data-unavailable] {
+  display: none;
 }
 .live-replay-card:hover .live-replay-image img,
 .live-replay-card:focus-visible .live-replay-image img {
