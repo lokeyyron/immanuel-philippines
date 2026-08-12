@@ -26,7 +26,7 @@ export async function POST(request) {
     return NextResponse.json({ error: "The profile request was not valid." }, { status: 400 });
   }
 
-  const username = normalizeMemberUsername(body?.username);
+  const username = normalizeMemberUsername(body?.username || "");
   if (!isValidMemberUsername(username) || username.includes("@")) {
     return NextResponse.json({
       error: "Use 3–32 lowercase letters, numbers, dots, underscores, or hyphens for your username.",
