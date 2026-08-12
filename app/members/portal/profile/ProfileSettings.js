@@ -7,9 +7,6 @@ import { createClient } from "../../../../lib/supabase/client";
 import { isValidMemberUsername, normalizeMemberUsername } from "../../../../lib/supabase/member-identity";
 
 function usernameFromUser(user) {
-  const storedUsername = user?.user_metadata?.username;
-  if (storedUsername) return storedUsername;
-
   const email = user?.email || "";
   const aliasSuffix = "@members.immanuelphilippines.church";
   return email.endsWith(aliasSuffix) ? email.slice(0, -aliasSuffix.length) : email.split("@")[0] || "";
