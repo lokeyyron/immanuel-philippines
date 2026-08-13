@@ -18,7 +18,6 @@ export default function MemberPortalPage() {
   const router = useRouter();
   const [ready, setReady] = useState(false);
   const [user, setUser] = useState(null);
-  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -44,23 +43,11 @@ export default function MemberPortalPage() {
 
   if (!ready) return <main className="member-portal-page member-portal-loading" aria-live="polite">Opening your member space…</main>;
 
-  const logOut = async () => {
-    const supabase = createClient();
-    if (!supabase) {
-      router.replace("/members");
-      return;
-    }
-    setIsLoggingOut(true);
-    await supabase.auth.signOut();
-    router.replace("/members");
-    router.refresh();
-  };
-
   return (
     <main id="main-content" className="member-portal-page">
       <section className="member-portal-hero" id="member-portal-overview">
         <div><p className="kicker"><span /> Immanuel / Member portal</p><h1>Good to see you, <em>{user?.user_metadata?.display_name || "family"}.</em></h1></div>
-        <div className="member-portal-hero-actions"><span className="member-preview-badge">Preview space</span><p>A gentle home base for groups, gatherings, stories, and care.</p><div className="member-portal-hero-buttons"><Link className="member-profile-link button" href="/members/portal/profile">Profile <span aria-hidden="true">◎</span></Link><button className="member-logout button" type="button" onClick={logOut} disabled={isLoggingOut}>{isLoggingOut ? "Signing out…" : "Log out"} <span aria-hidden="true">↗</span></button></div></div>
+        <div className="member-portal-hero-actions"><p>A gentle home base for groups, gatherings, stories, and care.</p></div>
       </section>
 
       <section className="member-portal-quick-actions" aria-label="Member quick actions">
@@ -70,15 +57,6 @@ export default function MemberPortalPage() {
         <Link href="/journal"><span aria-hidden="true">✦</span><strong>Read a reflection</strong><b aria-hidden="true">↗</b></Link>
         <Link href="/prayer-request"><span aria-hidden="true">♡</span><strong>Ask for prayer</strong><b aria-hidden="true">↗</b></Link>
         <Link href="/give"><span aria-hidden="true">＋</span><strong>Give securely</strong><b aria-hidden="true">↗</b></Link>
-      </section>
-
-      <section className="member-portal-week" aria-labelledby="member-portal-week-title">
-        <div className="member-portal-section-head"><div><p className="kicker"><span /> This week</p><h2 id="member-portal-week-title">Stay close to <em>home.</em></h2></div><span className="member-portal-section-note">A quick glance</span></div>
-        <div className="member-portal-week-grid">
-          <article><span className="member-portal-card-label">Next gathering</span><h3>Sunday worship</h3><p>Come as you are. There’s a seat waiting for you.</p><strong>Sunday · 9:30 AM</strong></article>
-          <article><span className="member-portal-card-label">Journal prompt</span><h3>What is God teaching you?</h3><p>Read a reflection or make room for your own story.</p><strong>Read &amp; reflect ↗</strong></article>
-          <article id="member-portal-care"><span className="member-portal-card-label">Care corner</span><h3>Need prayer?</h3><p>A future private path to ask for support from the church family.</p><strong>Coming soon</strong></article>
-        </div>
       </section>
 
       <section className="member-portal-grid" id="member-portal-space" aria-labelledby="member-portal-space-title">

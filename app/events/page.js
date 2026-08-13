@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import EditorialPage from "../components/EditorialPage";
 
@@ -40,6 +40,44 @@ const events = [
   },
 ];
 
+function EventYouVersionMedia() {
+  const videoRef = useRef(null);
+  const [muted, setMuted] = useState(true);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return undefined;
+    video.muted = true;
+    const play = video.play();
+    if (play?.catch) play.catch(() => {});
+    return () => video.pause();
+  }, []);
+
+  const toggleMute = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    const nextMuted = !muted;
+    video.muted = nextMuted;
+    setMuted(nextMuted);
+    if (!nextMuted) {
+      const play = video.play();
+      if (play?.catch) play.catch(() => {});
+    }
+  };
+
+  return (
+    <div className="event-youversion-media">
+      <div className="event-video-frame">
+        <video ref={videoRef} src="/videos/YouVersion.mp4" autoPlay loop muted={muted} playsInline preload="auto" aria-label="YouVersion announcement video" />
+        <button className="event-video-mute" type="button" onClick={toggleMute} aria-label={muted ? "Unmute YouVersion video" : "Mute YouVersion video"}>
+          <img src={muted ? "/assets/sound-off.png" : "/assets/sound-on.png"} alt="" />
+        </button>
+      </div>
+      <img src="/assets/YouVersion_QR.jpeg" alt="QR code for the Immanuel YouVersion page" />
+    </div>
+  );
+}
+
 function EventModal({ event, onClose }) {
   useEffect(() => {
     const handleKeyDown = (keyboardEvent) => {
@@ -59,10 +97,7 @@ function EventModal({ event, onClose }) {
         <button className="event-modal-close" type="button" onClick={onClose} aria-label="Close event details">×</button>
         <div className={`event-modal-visual ${event.tone}`}>
           {event.youversion ? (
-            <div className="event-youversion-media">
-              <video src="/videos/YouVersion.mp4" controls playsInline preload="metadata" aria-label="YouVersion announcement video" />
-              <img src="/assets/YouVersion_QR.jpeg" alt="QR code for the Immanuel YouVersion page" />
-            </div>
+            <EventYouVersionMedia />
           ) : (
             <span aria-hidden="true">{event.title === "Sunday Worship Celebration" ? "09:30" : "✦"}</span>
           )}
