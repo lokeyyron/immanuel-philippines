@@ -6,9 +6,9 @@ export const metadata = {
   title: "Immanuel Church PH",
   description: "Immanuel Church PH — a church community in Iligan City growing in faith, hope, and love.",
   icons: {
-    icon: { url: "/favicon-immanuel-v2.svg", type: "image/svg+xml" },
-    shortcut: "/favicon-immanuel-v2.svg",
-    apple: "/favicon-immanuel-v2.svg",
+    icon: { url: "/favicon-immanuel-v3.png", type: "image/png" },
+    shortcut: "/favicon-immanuel-v3.png",
+    apple: "/favicon-immanuel-v3.png",
   },
 };
 
