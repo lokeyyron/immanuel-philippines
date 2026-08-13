@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Reveal from "./Reveal";
 
 export default function EditorialPage({ eyebrow, title, accent, description, children }) {
@@ -12,7 +11,6 @@ export default function EditorialPage({ eyebrow, title, accent, description, chi
       </Reveal>
       <Reveal as="section" className="route-content">
         {children}
-        <div className="route-back"><Link className="arrow-link" href="/">Back home <span aria-hidden="true">↗</span></Link></div>
       </Reveal>
     </main>
   );

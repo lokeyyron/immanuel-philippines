@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import Reveal from "../components/Reveal";
 
 const requestTypes = [
@@ -40,7 +39,6 @@ export default function PrayerRequestPage() {
           <button className="button button-light prayer-request-submit" type="submit">Send securely <span aria-hidden="true">↗</span></button>
           <p className="prayer-request-privacy">Your message is a placeholder for now. When connected, it will be shared only with the appropriate church care team.</p>
         </form>
-        <div className="route-back"><Link className="arrow-link" href="/">Back home <span aria-hidden="true">↗</span></Link></div>
       </Reveal>
     </main>
   );

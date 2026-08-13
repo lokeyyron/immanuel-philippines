@@ -4359,3 +4359,158 @@ a {
   .event-youversion-media > img { max-width: 8rem; }
   .member-portal-hero h1 { max-width: 11ch; white-space: normal; font-size: clamp(2.65rem, 14vw, 4.8rem); }
 }
+
+/* Latest preview polish: responsive event squares, detail routes, and portal hierarchy. */
+.events-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(.65rem, 1vw, 1rem);
+}
+.events-grid .event-card {
+  aspect-ratio: 1 / 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.event-card-link {
+  color: inherit;
+  text-decoration: none;
+}
+.event-card-link .text-link { color: inherit; }
+.event-card-link:focus-visible {
+  outline: 2px solid var(--gold-light);
+  outline-offset: 4px;
+}
+
+.event-detail-card {
+  width: min(100%, 90rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(18rem, .9fr);
+  min-height: clamp(28rem, 45vw, 42rem);
+  margin: 0 auto;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 1.25rem;
+  overflow: hidden;
+  background: rgba(255,255,255,.03);
+}
+.event-detail-art {
+  display: grid;
+  place-items: center;
+  min-height: 100%;
+  color: rgba(255,255,255,.18);
+  font: 800 clamp(4rem, 14vw, 12rem)/1 "Manrope", sans-serif;
+}
+.event-detail-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(2rem, 5vw, 5rem);
+  background: linear-gradient(145deg, rgba(24,29,25,.98), rgba(35,24,22,.96));
+}
+.event-detail-copy .route-card-tag { color: var(--gold-light); }
+.event-detail-copy h2 {
+  margin: .7rem 0 1rem;
+  color: var(--text);
+  font: 800 clamp(2.4rem, 5vw, 5rem)/.9 "Manrope", sans-serif;
+  letter-spacing: -.08em;
+}
+.event-detail-copy > p:not(.route-card-tag) {
+  max-width: 32rem;
+  color: var(--text-soft);
+  line-height: 1.65;
+}
+.event-detail-copy .button-light,
+.about-story-links .button-light,
+.about-visit-strip .button-light {
+  color: #fff;
+  border-color: rgba(255,255,255,.28);
+  background: linear-gradient(135deg, rgba(255,255,255,.2), rgba(255,255,255,.06));
+}
+.event-detail-copy .button-light:hover,
+.event-detail-copy .button-light:focus-visible,
+.about-story-links .button-light:hover,
+.about-story-links .button-light:focus-visible,
+.about-visit-strip .button-light:hover,
+.about-visit-strip .button-light:focus-visible {
+  color: var(--ink);
+  background: var(--gold);
+}
+.event-detail-youversion-media {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(14rem, .9fr);
+  align-items: center;
+  gap: clamp(1rem, 3vw, 3rem);
+  padding: clamp(1rem, 3vw, 3rem);
+  background: linear-gradient(145deg, #7a382b, #42201e);
+}
+.event-detail-youversion-media video {
+  width: 100%;
+  max-height: clamp(24rem, 52vw, 42rem);
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  border-radius: .7rem;
+}
+.event-detail-youversion-media img {
+  width: 100%;
+  max-width: clamp(10rem, 17vw, 16rem);
+  justify-self: center;
+}
+.event-detail-coming-soon {
+  margin-top: 1.5rem;
+  color: var(--gold-light);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-size: .68rem;
+  font-weight: 800;
+}
+.event-detail-back { display: inline-flex; margin-top: clamp(1.5rem, 4vw, 3rem); }
+
+/* The YouVersion artwork should read as media, not as a tiny side thumbnail. */
+.announcement-card-content.has-youversion {
+  max-width: min(98%, 100rem);
+  grid-template-columns: minmax(0, .8fr) minmax(24rem, 1.2fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+}
+.announcement-youversion-media {
+  grid-template-columns: minmax(0, 1.1fr) minmax(14rem, .9fr);
+  align-items: center;
+}
+.announcement-video-frame video {
+  height: clamp(24rem, 46vw, 40rem);
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+}
+.announcement-youversion-qr { max-width: clamp(14rem, 22vw, 20rem); }
+
+/* Portal greeting is a title block; the old “preview space” copy is intentionally gone. */
+.member-portal-hero {
+  width: min(100%, 90rem);
+  display: block;
+  margin: 0 auto clamp(3rem, 7vw, 6rem);
+  padding-top: clamp(1rem, 4vw, 3rem);
+}
+.member-portal-hero > div:last-child { display: none; }
+.member-portal-hero h1 { max-width: none; white-space: normal; font-size: clamp(2.8rem, 5.3vw, 6rem); }
+.member-portal-nav { gap: clamp(.35rem, 1vw, 1rem); flex-wrap: wrap; justify-content: center; }
+.member-portal-nav a { font-size: clamp(.52rem, .7vw, .68rem); }
+.member-portal-subbar { display: none; }
+.member-portal-profile-pill img { filter: none; background: #fff; padding: .15rem; border-radius: 50%; }
+
+@media (max-width: 980px) {
+  .events-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .events-grid .event-card { aspect-ratio: 1 / 1; }
+  .event-detail-card { grid-template-columns: 1fr; }
+  .event-detail-youversion-media { grid-template-columns: minmax(0, 1fr) minmax(8rem, .55fr); }
+  .announcement-card-content.has-youversion { grid-template-columns: 1fr; max-width: 100%; }
+  .announcement-youversion-media { max-width: 44rem; margin-inline: auto; }
+}
+@media (max-width: 620px) {
+  .events-grid { grid-template-columns: 1fr; }
+  .events-grid .event-card { aspect-ratio: auto; min-height: 22rem; }
+  .event-detail-youversion-media { grid-template-columns: 1fr; }
+  .event-detail-youversion-media video { width: min(100%, 18rem); max-height: 28rem; justify-self: center; }
+  .event-detail-youversion-media img { max-width: 12rem; }
+  .announcement-youversion-media { grid-template-columns: minmax(0, 1fr) minmax(8rem, .55fr); }
+  .announcement-video-frame video { height: clamp(19rem, 72vw, 30rem); }
+  .announcement-youversion-qr { max-width: 10rem; }
+  .member-portal-hero h1 { max-width: 11ch; white-space: normal; font-size: clamp(2.65rem, 14vw, 4.8rem); }
+}

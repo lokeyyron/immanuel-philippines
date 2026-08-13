@@ -91,7 +91,6 @@ export default function Announcements() {
                     <p className="announcement-date">{announcement.date}</p>
                     <h3>{announcement.title}</h3>
                     <p>{announcement.body}</p>
-                    <span className="announcement-placeholder">Explore the update <span aria-hidden="true">↗</span></span>
                   </div>
                   {announcement.youversion && (
                     <YouVersionMedia active={index === activeIndex} />

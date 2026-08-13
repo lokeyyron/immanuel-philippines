@@ -7,16 +7,18 @@ import { useEffect, useState } from "react";
 import { createClient } from "../../../lib/supabase/client";
 
 const primaryLinks = [
-  { label: "Homepage", href: "/" },
+  { label: "Home", href: "/" },
   { label: "Dashboard", href: "/members/portal" },
   { label: "Journal", href: "/journal" },
   { label: "Events", href: "/events" },
   { label: "Give", href: "/give" },
   { label: "Live", href: "/live" },
+  { label: "About", href: "/about" },
+  { label: "Prayer request", href: "/prayer-request" },
 ];
 
 const menuLinks = [
-  { label: "Homepage", detail: "Visit the public church site", href: "/", icon: "⌂" },
+  { label: "Home", detail: "Visit the public church site", href: "/", icon: "⌂" },
   { label: "Dashboard", detail: "Your week at a glance", href: "/members/portal", icon: "▦" },
   { label: "My profile", detail: "Name, username, password", href: "/members/portal/profile", icon: "◎" },
   { label: "My groups", detail: "Find people who walk with you", href: "/members/portal/groups", icon: "♧" },
@@ -91,13 +93,6 @@ export default function MemberPortalChrome() {
           </Link>
         </div>
       </header>
-
-      <div className="member-portal-subbar" aria-label="Member space context">
-        <span>IMMANUEL / MEMBERS</span>
-        <span className="member-portal-subbar-rule" aria-hidden="true" />
-        <span>Dashboard · profile · groups · events · care</span>
-        <Link href="/">Homepage <span aria-hidden="true">↗</span></Link>
-      </div>
 
       {menuOpen && (
         <>

@@ -25,7 +25,7 @@ export default function AboutPage() {
           <div className="about-story-copy">
             <p>Immanuel means “God with us.” We gather in Iligan City to worship, listen, grow, and practice the good news together. Our Sunday gathering is a starting point—not the finish line.</p>
             <p>Whether you are finding a church for the first time or looking for a place to serve, you are welcome to take a next step at your own pace.</p>
-            <div className="about-story-links"><Link className="button button-light" href="/events">Plan a visit <span aria-hidden="true">↗</span></Link><Link className="text-link" href="/about/beliefs-values">Beliefs &amp; values <span aria-hidden="true">↗</span></Link></div>
+            <div className="about-story-links"><Link className="button button-light" href="/events">Plan a visit <span aria-hidden="true">↗</span></Link><Link className="button button-light" href="/about/beliefs-values">Beliefs &amp; values <span aria-hidden="true">↗</span></Link></div>
           </div>
         </div>
 

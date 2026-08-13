@@ -47,16 +47,6 @@ export default function MemberPortalPage() {
     <main id="main-content" className="member-portal-page">
       <section className="member-portal-hero" id="member-portal-overview">
         <div><p className="kicker"><span /> Immanuel / Member portal</p><h1>Good to see you, <em>{user?.user_metadata?.display_name || "family"}.</em></h1></div>
-        <div className="member-portal-hero-actions"><p>A gentle home base for groups, gatherings, stories, and care.</p></div>
-      </section>
-
-      <section className="member-portal-quick-actions" aria-label="Member quick actions">
-        <div className="member-portal-quick-intro"><span className="member-portal-card-label">Made for the in-between</span><p>Small ways to stay connected between Sundays.</p></div>
-        <Link href="/members/portal/groups"><span aria-hidden="true">♧</span><strong>Find my people</strong><b aria-hidden="true">↗</b></Link>
-        <Link href="/events"><span aria-hidden="true">□</span><strong>See what’s next</strong><b aria-hidden="true">↗</b></Link>
-        <Link href="/journal"><span aria-hidden="true">✦</span><strong>Read a reflection</strong><b aria-hidden="true">↗</b></Link>
-        <Link href="/prayer-request"><span aria-hidden="true">♡</span><strong>Ask for prayer</strong><b aria-hidden="true">↗</b></Link>
-        <Link href="/give"><span aria-hidden="true">＋</span><strong>Give securely</strong><b aria-hidden="true">↗</b></Link>
       </section>
 
       <section className="member-portal-grid" id="member-portal-space" aria-labelledby="member-portal-space-title">

@@ -1,0 +1,68 @@
+export const events = [
+  {
+    slug: "sunday-worship-celebration",
+    number: "01",
+    label: "Every Sunday · 9:30 AM",
+    title: "Sunday Worship Celebration",
+    body: "Worship, a message, and a room to meet people from the Immanuel family.",
+    details: "Join the Immanuel family every Sunday at 9:30 AM for worship, teaching, and prayer. Come as you are—there is a seat waiting for you.",
+    action: "Plan your visit",
+    tone: "event-gold",
+    kind: "visit",
+  },
+  {
+    slug: "youversion-bible",
+    number: "02",
+    label: "Read anytime",
+    title: "YouVersion Bible",
+    body: "Find Immanuel Church PH in the YouVersion Bible App and read along with our notes and plans.",
+    details: "Our church is now on YouVersion. Scan the QR code or open the app to discover reading plans, notes, and resources from the Immanuel family.",
+    action: "Learn more",
+    tone: "event-rust",
+    kind: "youversion",
+  },
+  {
+    slug: "community-moments",
+    label: "Placeholder",
+    title: "Community moments",
+    body: "Prayer nights, outreach, and gatherings around Iligan City are taking shape.",
+    details: "We are preparing more ways to gather throughout the year. Details will be posted here when registration opens.",
+    action: "Stay connected",
+    tone: "event-olive",
+    kind: "placeholder",
+  },
+  {
+    slug: "care-and-prayer-night",
+    label: "Placeholder",
+    title: "Care & prayer night",
+    body: "A quiet evening to bring what is heavy and pray with the church family.",
+    details: "This is a placeholder for a future care gathering. Check back soon for a date and time.",
+    action: "Details soon",
+    tone: "event-ink",
+    kind: "placeholder",
+  },
+  {
+    slug: "journal-workshop",
+    label: "Placeholder",
+    title: "Journal workshop",
+    body: "A future gathering to write, listen, and share what God is teaching us.",
+    details: "This event is a placeholder for a future Immanuel journal workshop. More information will be added when plans are ready.",
+    action: "Details soon",
+    tone: "event-gold",
+    kind: "placeholder",
+  },
+  {
+    slug: "worship-night",
+    label: "Placeholder",
+    title: "Worship night",
+    body: "An evening of songs, prayer, and making room for God together.",
+    details: "This event is a placeholder for a future Immanuel Worship gathering. Check back for the date, time, and registration details.",
+    action: "Details soon",
+    tone: "event-rust",
+    kind: "placeholder",
+  },
+];
+
+export function getEvent(slug) {
+  return events.find((event) => event.slug === slug);
+}
