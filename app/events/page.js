@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import EditorialPage from "../components/EditorialPage";
 
 const events = [
@@ -52,7 +53,7 @@ function EventModal({ event, onClose }) {
     };
   }, [onClose]);
 
-  return (
+  const modal = (
     <div className="event-modal" role="presentation" onMouseDown={(eventTarget) => { if (eventTarget.currentTarget === eventTarget.target) onClose(); }}>
       <div className="event-modal-card" role="dialog" aria-modal="true" aria-labelledby="event-modal-title">
         <button className="event-modal-close" type="button" onClick={onClose} aria-label="Close event details">×</button>
@@ -79,6 +80,9 @@ function EventModal({ event, onClose }) {
       </div>
     </div>
   );
+
+  if (typeof document === "undefined") return null;
+  return createPortal(modal, document.body);
 }
 
 export default function EventsPage() {
@@ -95,10 +99,7 @@ export default function EventsPage() {
             <span className="text-link">{event.action} <span aria-hidden="true">↗</span></span>
           </button>
         ))}
-      </div>
-      <div className="visit-route-card" id="visit">
-        <div><p className="route-card-tag">Visit us in person</p><h2>66HP+XM9, Iligan City</h2><p>2nd Floor, Rosbel Building · Benito Labao, corner Zamora Street · Iligan City</p></div>
-        <a className="button button-light" href="https://www.google.com/maps/search/?api=1&query=66HP%2BXM9%2C+Iligan+City%2C+Lanao+del+Norte" target="_blank" rel="noopener noreferrer">Open Google Maps <span aria-hidden="true">↗</span></a>
+        <div className="event-grid-empty" aria-hidden="true" />
       </div>
       {selectedEvent && <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />}
     </EditorialPage>

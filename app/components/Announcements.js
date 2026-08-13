@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Reveal from "./Reveal";
 
 const announcements = [
@@ -10,6 +10,58 @@ const announcements = [
   { category: "Care", date: "Coming soon", title: "Small acts, lasting hope.", body: "We are preparing a practical way for our church family to care for Iligan together.", symbol: "04", tone: "ink" },
   { category: "Church family", date: "Coming soon", title: "Your story belongs here.", body: "Member stories, devotionals, and shared milestones will find a home in our journal.", symbol: "05", tone: "cream" },
 ];
+
+function YouVersionMedia({ active }) {
+  const videoRef = useRef(null);
+  const [muted, setMuted] = useState(true);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return undefined;
+    if (!active) {
+      video.pause();
+      return undefined;
+    }
+    video.muted = true;
+    setMuted(true);
+    const play = video.play();
+    if (play?.catch) play.catch(() => {});
+    return undefined;
+  }, [active]);
+
+  const toggleMute = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    const nextMuted = !muted;
+    video.muted = nextMuted;
+    setMuted(nextMuted);
+    if (!nextMuted) {
+      const play = video.play();
+      if (play?.catch) play.catch(() => {});
+    }
+  };
+
+  return (
+    <div className="announcement-youversion-media">
+      <div className="announcement-video-frame">
+        <video
+          ref={videoRef}
+          src={active ? "/videos/YouVersion.mp4" : undefined}
+          autoPlay={active}
+          loop
+          muted={muted}
+          playsInline
+          preload={active ? "metadata" : "none"}
+          aria-label="YouVersion announcement video"
+        />
+        <button className="announcement-video-mute" type="button" onClick={toggleMute} aria-label={muted ? "Unmute YouVersion video" : "Mute YouVersion video"}>
+          <img src={muted ? "/assets/sound-off.png" : "/assets/sound-on.png"} alt="" />
+        </button>
+      </div>
+      <img className="announcement-youversion-qr" src="/assets/YouVersion_QR.jpeg" alt="QR code to open Immanuel Church PH on YouVersion" loading="lazy" />
+    </div>
+  );
+}
 
 export default function Announcements() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -42,10 +94,7 @@ export default function Announcements() {
                     <span className="announcement-placeholder">Explore the update <span aria-hidden="true">↗</span></span>
                   </div>
                   {announcement.youversion && (
-                    <div className="announcement-youversion-media">
-                      <video src="/videos/YouVersion.mp4" controls muted playsInline preload="none" aria-label="YouVersion announcement video" />
-                      <img src="/assets/YouVersion_QR.jpeg" alt="QR code to open Immanuel Church PH on YouVersion" loading="lazy" />
-                    </div>
+                    <YouVersionMedia active={index === activeIndex} />
                   )}
                 </div>
                 <div className="announcement-card-art" aria-hidden="true"><span>{announcement.symbol}</span><i /><i /><i /></div>
