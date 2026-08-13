@@ -73,7 +73,7 @@ export default function MemberPortalChrome() {
             <b>{menuOpen ? "Close" : "Menu"}</b>
           </button>
           <Link className="member-portal-brand" href="/members/portal" aria-label="Immanuel member dashboard">
-            <span className="member-portal-brand-mark"><Image src="/favicon-immanuel.svg" alt="" width={38} height={38} priority /></span>
+            <span className="member-portal-brand-mark"><Image src="/favicon-immanuel-v2.svg" alt="" width={38} height={38} priority /></span>
             <span className="member-portal-brand-copy"><strong>Immanuel</strong><small>Member space</small></span>
           </Link>
         </div>
