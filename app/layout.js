@@ -5,7 +5,11 @@ import "../styles.css";
 export const metadata = {
   title: "Immanuel Church PH",
   description: "Immanuel Church PH — a church community in Iligan City growing in faith, hope, and love.",
-  icons: { icon: "/assets/favicon2.png" },
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({ children }) {

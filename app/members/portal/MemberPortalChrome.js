@@ -7,19 +7,25 @@ import { useEffect, useState } from "react";
 import { createClient } from "../../../lib/supabase/client";
 
 const primaryLinks = [
-  { label: "Overview", href: "/members/portal" },
-  { label: "Groups", href: "/members/portal#member-portal-space" },
-  { label: "Events", href: "/events" },
+  { label: "Homepage", href: "/" },
+  { label: "Dashboard", href: "/members/portal" },
   { label: "Journal", href: "/journal" },
+  { label: "Events", href: "/events" },
+  { label: "Give", href: "/give" },
+  { label: "Live", href: "/live" },
 ];
 
 const menuLinks = [
-  { label: "Member overview", detail: "Your week at a glance", href: "/members/portal", icon: "⌂" },
+  { label: "Homepage", detail: "Visit the public church site", href: "/", icon: "⌂" },
+  { label: "Dashboard", detail: "Your week at a glance", href: "/members/portal", icon: "▦" },
   { label: "My profile", detail: "Name, username, password", href: "/members/portal/profile", icon: "◎" },
-  { label: "Groups & care", detail: "Find people who walk with you", href: "/members/portal#member-portal-space", icon: "♧" },
+  { label: "My groups", detail: "Find people who walk with you", href: "/members/portal/groups", icon: "♧" },
   { label: "Church events", detail: "Gather beyond Sunday", href: "/events", icon: "□" },
+  { label: "Give", detail: "Generosity in action", href: "/give", icon: "♡" },
   { label: "Journal", detail: "Read and share reflections", href: "/journal", icon: "✦" },
   { label: "Live gatherings", detail: "Watch from wherever you are", href: "/live", icon: "▶" },
+  { label: "Prayer request", detail: "Ask for care and support", href: "/prayer-request", icon: "♢" },
+  { label: "About Immanuel", detail: "Our church and values", href: "/about", icon: "◈" },
 ];
 
 export default function MemberPortalChrome() {
@@ -64,7 +70,7 @@ export default function MemberPortalChrome() {
             <span aria-hidden="true"><i /><i /><i /></span>
             <b>{menuOpen ? "Close" : "Menu"}</b>
           </button>
-          <Link className="member-portal-brand" href="/members/portal" aria-label="Immanuel member overview">
+          <Link className="member-portal-brand" href="/members/portal" aria-label="Immanuel member dashboard">
             <span className="member-portal-brand-mark"><Image src="/assets/immanuel-logo.png" alt="" width={36} height={36} priority /></span>
             <span className="member-portal-brand-copy"><strong>Immanuel</strong><small>Member space</small></span>
           </Link>
@@ -89,8 +95,8 @@ export default function MemberPortalChrome() {
       <div className="member-portal-subbar" aria-label="Member space context">
         <span>IMMANUEL / MEMBERS</span>
         <span className="member-portal-subbar-rule" aria-hidden="true" />
-        <span>Groups · gatherings · journal · care</span>
-        <Link href="/">Return to public site <span aria-hidden="true">↗</span></Link>
+        <span>Dashboard · profile · groups · events · care</span>
+        <Link href="/">Homepage <span aria-hidden="true">↗</span></Link>
       </div>
 
       {menuOpen && (
@@ -111,7 +117,7 @@ export default function MemberPortalChrome() {
               ))}
             </nav>
             <div className="member-portal-drawer-foot">
-              <Link href="/">Visit public site <span aria-hidden="true">↗</span></Link>
+              <Link href="/">Visit homepage <span aria-hidden="true">↗</span></Link>
               <button type="button" onClick={logOut} disabled={isLoggingOut}>{isLoggingOut ? "Signing out…" : "Sign out"}</button>
             </div>
           </aside>

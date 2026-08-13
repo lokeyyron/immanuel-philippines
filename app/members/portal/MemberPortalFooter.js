@@ -11,8 +11,9 @@ export default function MemberPortalFooter() {
         <div className="member-portal-footer-copy">
           <p>A private home base for the people who call Immanuel Church PH family.</p>
           <div className="member-portal-footer-links">
-            <Link href="/members/portal">Overview <span aria-hidden="true">↗</span></Link>
+            <Link href="/members/portal">Dashboard <span aria-hidden="true">↗</span></Link>
             <Link href="/members/portal/profile">Profile <span aria-hidden="true">↗</span></Link>
+            <Link href="/give">Give <span aria-hidden="true">↗</span></Link>
             <Link href="/">Public site <span aria-hidden="true">↗</span></Link>
           </div>
         </div>

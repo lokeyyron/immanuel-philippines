@@ -4,8 +4,8 @@ import { useState } from "react";
 import Reveal from "./Reveal";
 
 const announcements = [
-  { category: "Gather", date: "Sunday · 10:00 AM", title: "A seat is waiting for you.", body: "Join the Immanuel family for worship, a message, and time to be together.", symbol: "01", tone: "gold" },
-  { category: "Community", date: "Coming soon", title: "Make room for one another.", body: "A new community gathering is taking shape. Details will be shared here soon.", symbol: "02", tone: "rust" },
+  { category: "Gather", date: "Every Sunday · 9:30 AM", title: "Sunday worship celebration.", body: "Join the Immanuel family for worship, a message, and time to be together. Everyone is welcome.", symbol: "01", tone: "gold" },
+  { category: "YouVersion", date: "Read anytime", title: "Find Immanuel on YouVersion.", body: "Our church is now on the YouVersion Bible App. Read notes, follow along, and carry the Word into your week.", symbol: "02", tone: "youversion", youversion: true },
   { category: "Worship", date: "Coming soon", title: "Songs for the journey.", body: "Watch this space for the next Immanuel Worship night and rehearsal updates.", symbol: "03", tone: "olive" },
   { category: "Care", date: "Coming soon", title: "Small acts, lasting hope.", body: "We are preparing a practical way for our church family to care for Iligan together.", symbol: "04", tone: "ink" },
   { category: "Church family", date: "Coming soon", title: "Your story belongs here.", body: "Member stories, devotionals, and shared milestones will find a home in our journal.", symbol: "05", tone: "cream" },
@@ -34,11 +34,19 @@ export default function Announcements() {
             {announcements.map((announcement, index) => (
               <article className={`announcement-card announcement-card-${announcement.tone}`} key={announcement.symbol} aria-hidden={index !== activeIndex}>
                 <div className="announcement-card-meta"><span>{announcement.symbol} / 05</span><span>{announcement.category}</span></div>
-                <div className="announcement-card-content">
-                  <p className="announcement-date">{announcement.date}</p>
-                  <h3>{announcement.title}</h3>
-                  <p>{announcement.body}</p>
-                  <span className="announcement-placeholder">Details will be posted here <span aria-hidden="true">↗</span></span>
+                <div className={`announcement-card-content${announcement.youversion ? " has-youversion" : ""}`}>
+                  <div>
+                    <p className="announcement-date">{announcement.date}</p>
+                    <h3>{announcement.title}</h3>
+                    <p>{announcement.body}</p>
+                    <span className="announcement-placeholder">Explore the update <span aria-hidden="true">↗</span></span>
+                  </div>
+                  {announcement.youversion && (
+                    <div className="announcement-youversion-media">
+                      <video src="/videos/YouVersion.mp4" controls muted playsInline preload="none" aria-label="YouVersion announcement video" />
+                      <img src="/assets/YouVersion_QR.jpeg" alt="QR code to open Immanuel Church PH on YouVersion" loading="lazy" />
+                    </div>
+                  )}
                 </div>
                 <div className="announcement-card-art" aria-hidden="true"><span>{announcement.symbol}</span><i /><i /><i /></div>
               </article>
@@ -59,7 +67,7 @@ export default function Announcements() {
         </div>
       </div>
 
-      <p className="announcements-note">Placeholder bulletin · We’ll replace these cards with real church updates.</p>
+      <p className="announcements-note">More church updates will be added here as the calendar grows.</p>
       <span className="announcement-active-label" aria-live="polite">Now viewing: {activeAnnouncement.category}</span>
     </Reveal>
   );

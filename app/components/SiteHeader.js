@@ -98,7 +98,7 @@ export default function SiteHeader() {
       </nav>
 
       <div className="header-tools">
-        <Link className="header-cta header-member-cta" href="/members" aria-label="Members">
+        <Link className="header-cta header-member-cta" href="/members/portal" aria-label="Members">
           <img src="/assets/account.png" alt="" />
           <span>Members</span>
           <span aria-hidden="true">↗</span>

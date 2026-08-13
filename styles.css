@@ -4151,6 +4151,69 @@ a {
 .prayer-request-submit { margin-top: 1.8rem; }
 .prayer-request-privacy { max-width: 40rem; margin: 1rem 0 0; color: var(--muted-light); font-size: .72rem; line-height: 1.55; }
 
+/* Events and announcement media: readable, responsive, and lazy by default. */
+.event-card-button { width: 100%; border: 0; font: inherit; text-align: left; cursor: pointer; }
+.event-card-button .text-link { color: #fff; }
+.event-card-button:hover .text-link, .event-card-button:focus-visible .text-link { color: var(--ink); }
+.event-modal-open { overflow: hidden; }
+.event-modal { position: fixed; z-index: 120; inset: 0; display: grid; place-items: center; padding: clamp(.75rem, 3vw, 2.5rem); overflow: auto; background: rgba(3,5,3,.78); backdrop-filter: blur(16px) saturate(1.08); animation: event-modal-fade 180ms ease both; }
+.event-modal-card { width: min(68rem, 100%); max-height: min(90dvh, 52rem); position: relative; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(16rem, .95fr); overflow: auto; border: 1px solid rgba(255,255,255,.24); background: #151914; box-shadow: 0 2rem 6rem rgba(0,0,0,.45); animation: event-modal-rise 360ms cubic-bezier(.22,.61,.36,1) both; }
+.event-modal-visual { min-height: 24rem; display: grid; place-items: center; overflow: hidden; background: radial-gradient(circle at 70% 25%, rgba(241,215,143,.25), transparent 14rem), linear-gradient(145deg, #32382e, #0b0d0b); color: var(--gold-light); }
+.event-modal-visual > span { font: 800 clamp(4rem, 10vw, 9rem)/.85 "Manrope", sans-serif; letter-spacing: -.12em; opacity: .78; }
+.event-modal-visual.event-rust { background: linear-gradient(145deg, #9f4d37, #3e211c); color: #fff; }
+.event-modal-visual.event-olive { background: linear-gradient(145deg, #354338, #111713); color: #fff; }
+.event-modal-visual.event-ink { background: linear-gradient(145deg, #1b211c, #080a08); color: #fff; }
+.event-youversion-media { width: 100%; min-height: 24rem; display: grid; grid-template-columns: minmax(0, 1fr) minmax(5rem, 9rem); align-items: center; gap: clamp(.65rem, 2vw, 1.4rem); padding: clamp(1rem, 3vw, 2rem); }
+.event-youversion-media video { width: 100%; height: 100%; max-height: 31rem; display: block; object-fit: contain; background: #080a08; }
+.event-youversion-media img { width: 100%; height: auto; display: block; border: 1px solid rgba(255,255,255,.25); }
+.event-modal-copy { display: flex; flex-direction: column; justify-content: center; min-width: 0; padding: clamp(1.5rem, 4vw, 3.5rem); background: radial-gradient(circle at 100% 0, rgba(166,79,54,.22), transparent 16rem), #151914; color: var(--text); }
+.event-modal-copy .route-card-tag { margin-top: 0; }
+.event-modal-copy h2 { max-width: 11ch; margin: .75rem 0 1rem; font: 800 clamp(2.25rem, 5vw, 4.8rem)/.88 "Manrope", sans-serif; letter-spacing: -.085em; }
+.event-modal-copy > p:not(.route-card-tag) { max-width: 30rem; margin: 0; color: var(--muted-light); line-height: 1.7; }
+.event-modal-copy .button { align-self: flex-start; margin-top: 1.5rem; }
+.event-modal-close { width: 2.65rem; height: 2.65rem; position: absolute; z-index: 2; top: .85rem; right: .85rem; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.5); border-radius: 50%; background: rgba(5,7,5,.52); color: #fff; font: 400 1.65rem/1 "DM Sans", sans-serif; cursor: pointer; transition: background 180ms ease, color 180ms ease, transform 180ms ease; backdrop-filter: blur(10px); }
+.event-modal-close:hover, .event-modal-close:focus-visible { background: var(--gold); color: var(--ink); transform: rotate(8deg); }
+@keyframes event-modal-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes event-modal-rise { from { opacity: 0; transform: translateY(1rem) scale(.98); } to { opacity: 1; transform: none; } }
+
+.announcement-card-youversion { background: linear-gradient(135deg, #242e2a, #0d1713); color: #fff; }
+.announcement-card-content.has-youversion { max-width: min(94%, 68rem); display: grid; grid-template-columns: minmax(0, 1fr) minmax(15rem, .48fr); align-items: center; gap: clamp(1.5rem, 5vw, 5rem); }
+.announcement-youversion-media { display: grid; grid-template-columns: minmax(0, 1fr) minmax(4.5rem, 7rem); align-items: center; gap: 1rem; min-width: 0; }
+.announcement-youversion-media video { width: 100%; height: clamp(15rem, 28vw, 23rem); display: block; object-fit: contain; background: #070907; border: 1px solid rgba(255,255,255,.2); }
+.announcement-youversion-media img { width: 100%; height: auto; border: 1px solid rgba(255,255,255,.24); }
+.announcement-card-youversion .announcement-card-art { opacity: .12; }
+.button-light { color: var(--ink); }
+.prayer-request-submit, .visit-route-card .button-light { color: #fff; border-color: rgba(255,255,255,.36); background: linear-gradient(135deg, rgba(255,255,255,.2), rgba(255,255,255,.06)); }
+.prayer-request-submit:hover, .prayer-request-submit:focus-visible, .visit-route-card .button-light:hover, .visit-route-card .button-light:focus-visible { color: var(--ink); background: var(--gold); }
+.hero-slide-footer .button-light,
+.live-feature-copy .button-light,
+.live-modal-details .button-light { color: #fff; }
+.hero-slide-footer .button-light:hover,
+.hero-slide-footer .button-light:focus-visible,
+.live-feature-copy .button-light:hover,
+.live-feature-copy .button-light:focus-visible,
+.live-modal-details .button-light:hover,
+.live-modal-details .button-light:focus-visible { color: var(--ink); }
+
+/* Announcement copy is wrapped so the YouVersion media can sit beside it. */
+.announcement-card-content > div:first-child > p:not(.announcement-date) { max-width: 29rem; margin: 1.5rem 0 0; font-size: clamp(.95rem,1.25vw,1.15rem); line-height: 1.65; opacity: .74; }
+.announcement-card-content > div:first-child .announcement-placeholder { display: inline-flex; }
+
+.member-portal-placeholder-page { width: min(100%, 90rem); margin: 0 auto; padding: clamp(6rem, 12vw, 11rem) clamp(1rem, 4vw, 3rem) 2rem; }
+.member-portal-placeholder-hero { max-width: 56rem; }
+.member-portal-placeholder-hero h1 { margin: .7rem 0 1rem; font: 800 clamp(3.2rem, 8vw, 8rem)/.86 "Manrope", sans-serif; letter-spacing: -.1em; }
+.member-portal-placeholder-hero h1 em { color: var(--portal-accent); font: 400 1em/.8 Georgia, serif; }
+.member-portal-placeholder-hero > p:last-child { max-width: 40rem; color: var(--portal-muted); font-size: clamp(1rem, 1.5vw, 1.2rem); line-height: 1.7; }
+.member-portal-placeholder-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; margin: clamp(3rem, 8vw, 7rem) 0 2rem; border: 1px solid var(--portal-line); background: var(--portal-line); }
+.member-portal-placeholder-grid article { min-height: 16rem; padding: clamp(1.25rem, 3vw, 2.5rem); background: rgba(255,255,255,.045); }
+.member-portal-placeholder-grid article > span { color: var(--portal-accent); font-size: .62rem; font-weight: 800; letter-spacing: .14em; }
+.member-portal-placeholder-grid h2 { margin: 3.4rem 0 .7rem; font: 800 clamp(1.6rem, 3vw, 2.8rem)/.9 "Manrope", sans-serif; letter-spacing: -.07em; }
+.member-portal-placeholder-grid p { max-width: 24rem; margin: 0; color: var(--portal-muted); line-height: 1.6; }
+.member-portal-placeholder-page > .arrow-link { display: inline-flex; color: var(--text); text-decoration: none; }
+
+/* Keep expensive off-screen sections cheap while preserving their reveal animations. */
+.route-content, .member-portal-week, .member-portal-grid, .member-portal-activity { content-visibility: auto; contain-intrinsic-size: 1px 720px; }
+
 @media (max-width: 1120px) {
   .desktop-nav { gap: clamp(.7rem, 1.6vw, 1.3rem); }
   .desktop-nav a { font-size: .7rem; }
@@ -4162,6 +4225,9 @@ a {
   .about-pillars h3 { margin-top: 2.6rem; }
   .about-visit-strip { align-items: flex-start; flex-direction: column; }
   .prayer-request-types { grid-template-columns: 1fr; }
+  .announcement-card-content.has-youversion { grid-template-columns: 1fr; max-width: 100%; }
+  .announcement-youversion-media { max-width: 32rem; }
+  .member-portal-placeholder-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 620px) {
   .site-menu-issue { margin-top: 1rem; }
@@ -4170,4 +4236,8 @@ a {
   .beliefs-list article:hover { padding-inline: .5rem; }
   .prayer-contact-grid { grid-template-columns: 1fr; gap: 0; }
   .prayer-request-form { margin-top: 3rem; }
+  .event-modal-card { grid-template-columns: 1fr; max-height: calc(100dvh - 1rem); }
+  .event-modal-visual { min-height: 15rem; }
+  .event-youversion-media { min-height: 15rem; }
+  .announcement-youversion-media { grid-template-columns: minmax(0, 1fr) 5.5rem; }
 }

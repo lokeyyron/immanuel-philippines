@@ -6,12 +6,12 @@ import { useRouter } from "next/navigation";
 import { createClient } from "../../../lib/supabase/client";
 
 const portalCards = [
-  { label: "My groups", title: "Find your people", body: "Cell groups, care updates, and conversations between Sundays.", icon: "♧", status: "Coming soon" },
-  { label: "Events", title: "Make room to gather", body: "See upcoming church moments and save your place when sign-ups are connected.", icon: "□", status: "Coming soon" },
-  { label: "Journal", title: "Share a reflection", body: "Write a devotional or story for the Immanuel family to read and carry.", icon: "✦", status: "Coming soon" },
-  { label: "Giving", title: "See your giving history", body: "A private record of gifts and receipts once online giving is connected.", icon: "♡", status: "Planned" },
-  { label: "Profile", title: "Keep your details close", body: "Update your display name, username, and password in one place.", icon: "◎", status: "Available" },
-  { label: "Care", title: "Ask for prayer", body: "Share a care request with the right church leader, privately and thoughtfully.", icon: "✧", status: "Planned" },
+  { label: "My groups", title: "Find your people", body: "Cell groups, care updates, and conversations between Sundays.", icon: "♧", status: "Coming soon", href: "/members/portal/groups" },
+  { label: "Events", title: "Make room to gather", body: "See upcoming church moments and save your place when sign-ups are connected.", icon: "□", status: "Coming soon", href: "/events" },
+  { label: "Journal", title: "Share a reflection", body: "Write a devotional or story for the Immanuel family to read and carry.", icon: "✦", status: "Coming soon", href: "/journal" },
+  { label: "Giving", title: "See your giving history", body: "A private record of gifts and receipts once online giving is connected.", icon: "♡", status: "Planned", href: "/give" },
+  { label: "Profile", title: "Keep your details close", body: "Update your display name, username, and password in one place.", icon: "◎", status: "Available", href: "/members/portal/profile" },
+  { label: "Care", title: "Ask for prayer", body: "Share a care request with the right church leader, privately and thoughtfully.", icon: "✧", status: "Planned", href: "/prayer-request" },
 ];
 
 export default function MemberPortalPage() {
@@ -65,16 +65,17 @@ export default function MemberPortalPage() {
 
       <section className="member-portal-quick-actions" aria-label="Member quick actions">
         <div className="member-portal-quick-intro"><span className="member-portal-card-label">Made for the in-between</span><p>Small ways to stay connected between Sundays.</p></div>
-        <Link href="#member-portal-space"><span aria-hidden="true">♧</span><strong>Find my people</strong><b aria-hidden="true">↗</b></Link>
+        <Link href="/members/portal/groups"><span aria-hidden="true">♧</span><strong>Find my people</strong><b aria-hidden="true">↗</b></Link>
         <Link href="/events"><span aria-hidden="true">□</span><strong>See what’s next</strong><b aria-hidden="true">↗</b></Link>
         <Link href="/journal"><span aria-hidden="true">✦</span><strong>Read a reflection</strong><b aria-hidden="true">↗</b></Link>
-        <Link href="#member-portal-care"><span aria-hidden="true">♡</span><strong>Ask for prayer</strong><b aria-hidden="true">↗</b></Link>
+        <Link href="/prayer-request"><span aria-hidden="true">♡</span><strong>Ask for prayer</strong><b aria-hidden="true">↗</b></Link>
+        <Link href="/give"><span aria-hidden="true">＋</span><strong>Give securely</strong><b aria-hidden="true">↗</b></Link>
       </section>
 
       <section className="member-portal-week" aria-labelledby="member-portal-week-title">
         <div className="member-portal-section-head"><div><p className="kicker"><span /> This week</p><h2 id="member-portal-week-title">Stay close to <em>home.</em></h2></div><span className="member-portal-section-note">A quick glance</span></div>
         <div className="member-portal-week-grid">
-          <article><span className="member-portal-card-label">Next gathering</span><h3>Sunday worship</h3><p>Come as you are. There’s a seat waiting for you.</p><strong>Sunday · 10:00 AM</strong></article>
+          <article><span className="member-portal-card-label">Next gathering</span><h3>Sunday worship</h3><p>Come as you are. There’s a seat waiting for you.</p><strong>Sunday · 9:30 AM</strong></article>
           <article><span className="member-portal-card-label">Journal prompt</span><h3>What is God teaching you?</h3><p>Read a reflection or make room for your own story.</p><strong>Read &amp; reflect ↗</strong></article>
           <article id="member-portal-care"><span className="member-portal-card-label">Care corner</span><h3>Need prayer?</h3><p>A future private path to ask for support from the church family.</p><strong>Coming soon</strong></article>
         </div>
@@ -85,9 +86,7 @@ export default function MemberPortalPage() {
         <div className="member-portal-card-grid">
           {portalCards.map((card) => {
             const content = <><div className="member-portal-card-top"><span className="member-portal-icon" aria-hidden="true">{card.icon}</span><span className="member-portal-card-status">{card.status}</span></div><p>{card.label}</p><h3>{card.title}</h3><span>{card.body}</span><b aria-hidden="true">↗</b></>;
-            return card.label === "Profile"
-              ? <Link className="member-portal-card" href="/members/portal/profile" key={card.label}>{content}</Link>
-              : <article className="member-portal-card" key={card.label}>{content}</article>;
+            return <Link className="member-portal-card" href={card.href} key={card.label}>{content}</Link>;
           })}
         </div>
       </section>
