@@ -1,5 +1,4 @@
-import SiteFooter from "./components/SiteFooter";
-import SiteHeader from "./components/SiteHeader";
+import PublicChrome from "./components/PublicChrome";
 import ScrollAtmosphere from "./components/ScrollAtmosphere";
 import "../styles.css";
 
@@ -15,9 +14,7 @@ export default function RootLayout({ children }) {
       <body>
         <ScrollAtmosphere />
         <a className="skip-link" href="#main-content">Skip to content</a>
-        <SiteHeader />
-        {children}
-        <SiteFooter />
+        <PublicChrome>{children}</PublicChrome>
       </body>
     </html>
   );

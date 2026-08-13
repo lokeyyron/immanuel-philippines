@@ -58,9 +58,17 @@ export default function MemberPortalPage() {
 
   return (
     <main id="main-content" className="member-portal-page">
-      <section className="member-portal-hero">
+      <section className="member-portal-hero" id="member-portal-overview">
         <div><p className="kicker"><span /> Immanuel / Member portal</p><h1>Good to see you, <em>{user?.user_metadata?.display_name || "family"}.</em></h1></div>
         <div className="member-portal-hero-actions"><span className="member-preview-badge">Preview space</span><p>A gentle home base for groups, gatherings, stories, and care.</p><div className="member-portal-hero-buttons"><Link className="member-profile-link button" href="/members/portal/profile">Profile <span aria-hidden="true">◎</span></Link><button className="member-logout button" type="button" onClick={logOut} disabled={isLoggingOut}>{isLoggingOut ? "Signing out…" : "Log out"} <span aria-hidden="true">↗</span></button></div></div>
+      </section>
+
+      <section className="member-portal-quick-actions" aria-label="Member quick actions">
+        <div className="member-portal-quick-intro"><span className="member-portal-card-label">Made for the in-between</span><p>Small ways to stay connected between Sundays.</p></div>
+        <Link href="#member-portal-space"><span aria-hidden="true">♧</span><strong>Find my people</strong><b aria-hidden="true">↗</b></Link>
+        <Link href="/events"><span aria-hidden="true">□</span><strong>See what’s next</strong><b aria-hidden="true">↗</b></Link>
+        <Link href="/journal"><span aria-hidden="true">✦</span><strong>Read a reflection</strong><b aria-hidden="true">↗</b></Link>
+        <Link href="#member-portal-care"><span aria-hidden="true">♡</span><strong>Ask for prayer</strong><b aria-hidden="true">↗</b></Link>
       </section>
 
       <section className="member-portal-week" aria-labelledby="member-portal-week-title">
@@ -68,11 +76,11 @@ export default function MemberPortalPage() {
         <div className="member-portal-week-grid">
           <article><span className="member-portal-card-label">Next gathering</span><h3>Sunday worship</h3><p>Come as you are. There’s a seat waiting for you.</p><strong>Sunday · 10:00 AM</strong></article>
           <article><span className="member-portal-card-label">Journal prompt</span><h3>What is God teaching you?</h3><p>Read a reflection or make room for your own story.</p><strong>Read &amp; reflect ↗</strong></article>
-          <article><span className="member-portal-card-label">Care corner</span><h3>Need prayer?</h3><p>A future private path to ask for support from the church family.</p><strong>Coming soon</strong></article>
+          <article id="member-portal-care"><span className="member-portal-card-label">Care corner</span><h3>Need prayer?</h3><p>A future private path to ask for support from the church family.</p><strong>Coming soon</strong></article>
         </div>
       </section>
 
-      <section className="member-portal-grid" aria-labelledby="member-portal-space-title">
+      <section className="member-portal-grid" id="member-portal-space" aria-labelledby="member-portal-space-title">
         <div className="member-portal-grid-heading"><p className="kicker"><span /> Your space</p><h2 id="member-portal-space-title">Everything that helps you <em>belong.</em></h2></div>
         <div className="member-portal-card-grid">
           {portalCards.map((card) => {
@@ -81,6 +89,17 @@ export default function MemberPortalPage() {
               ? <Link className="member-portal-card" href="/members/portal/profile" key={card.label}>{content}</Link>
               : <article className="member-portal-card" key={card.label}>{content}</article>;
           })}
+        </div>
+      </section>
+      <section className="member-portal-activity" aria-labelledby="member-portal-activity-title">
+        <div>
+          <p className="kicker"><span /> A quiet pulse</p>
+          <h2 id="member-portal-activity-title">Keep a little room<br /><em>for one another.</em></h2>
+        </div>
+        <div className="member-portal-activity-list">
+          <div><span>01</span><p><strong>Sunday gathering</strong><small>New replay and notes will appear here.</small></p><b aria-hidden="true">↗</b></div>
+          <div><span>02</span><p><strong>Journal prompt</strong><small>What is God teaching you this week?</small></p><b aria-hidden="true">↗</b></div>
+          <div><span>03</span><p><strong>Care circle</strong><small>Private prayer requests are coming soon.</small></p><b aria-hidden="true">↗</b></div>
         </div>
       </section>
       <p className="member-portal-footer-note">This preview is intentionally private-by-design. Real accounts, records, and publishing permissions will be connected before launch.</p>
