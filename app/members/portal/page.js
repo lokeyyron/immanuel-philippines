@@ -50,7 +50,7 @@ export default function MemberPortalPage() {
       </section>
 
       <section className="member-portal-grid" id="member-portal-space" aria-labelledby="member-portal-space-title">
-        <div className="member-portal-grid-heading"><p className="kicker"><span /> Your space</p><h2 id="member-portal-space-title">Everything that helps you <em>belong.</em></h2></div>
+        <div className="member-portal-grid-heading"><h2 id="member-portal-space-title">Everything that helps you <em>belong.</em></h2></div>
         <div className="member-portal-card-grid">
           {portalCards.map((card) => {
             const content = <><div className="member-portal-card-top"><span className="member-portal-icon" aria-hidden="true">{card.icon}</span><span className="member-portal-card-status">{card.status}</span></div><p>{card.label}</p><h3>{card.title}</h3><span>{card.body}</span><b aria-hidden="true">↗</b></>;

@@ -12,16 +12,17 @@ export default function ScrollAtmosphere() {
     if (reduceMotion) return undefined;
 
     let frame = 0;
+    let refreshFrame = 0;
     let previousY = window.scrollY || 0;
+    const activeSections = new Set();
+    const activeLiveTargets = new Set();
+    const observedSections = new WeakSet();
+    const observedLiveTargets = new WeakSet();
     // Route content and individual replay rows have their own reveal timing.
     // Keeping them out of the global fade prevents a row from appearing late
     // or becoming too dim while the page-level canvas moves behind it.
-    const sections = Array.from(document.querySelectorAll(
-      ".section-reveal:not(.route-content):not(.live-replay-reveal)"
-    ));
-    const liveTargets = Array.from(document.querySelectorAll(
-      ".live-library-heading, .live-feature-card, .live-replay-reveal"
-    ));
+    const sectionSelector = ".section-reveal:not(.route-content):not(.live-replay-reveal)";
+    const liveSelector = ".live-library-heading, .live-feature-card, .live-replay-reveal";
 
     const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 
@@ -47,7 +48,7 @@ export default function ScrollAtmosphere() {
       // when it comes back toward the viewport centre, it naturally returns.
       const centre = viewportHeight * 0.5;
       const travelRange = Math.max(viewportHeight * 0.78, 1);
-      sections.forEach((section) => {
+      activeSections.forEach((section) => {
         const rect = section.getBoundingClientRect();
         const sectionCentre = rect.top + rect.height * 0.5;
         const distance = clamp((sectionCentre - centre) / travelRange, -1.15, 1.15);
@@ -58,28 +59,24 @@ export default function ScrollAtmosphere() {
         const fade = clamp(1 - Math.max(0, distanceFromCentre - 0.12) * 1.2, 0.08, 1);
         const scale = 1 - Math.min(0.09, Math.max(0, distanceFromCentre - 0.08) * 0.095);
         const shift = distance * 88;
-        const blur = Math.min(5, Math.max(0, distanceFromCentre - 0.2) * 5.5);
         section.style.setProperty("--parallax-shift", `${shift.toFixed(2)}px`);
         section.style.setProperty("--parallax-opacity", fade.toFixed(3));
         section.style.setProperty("--parallax-scale", scale.toFixed(3));
-        section.style.setProperty("--parallax-blur", `${blur.toFixed(2)}px`);
         section.dataset.scrollPhase = distance < -0.2 ? "leaving-up" : distance > 0.2 ? "entering-down" : "center";
       });
 
       // Live content follows the same plane, but with a softer fade. This
       // lets cards dissolve as they leave the viewport and return naturally
       // when the reader scrolls back to them.
-      liveTargets.forEach((target) => {
+      activeLiveTargets.forEach((target) => {
         const rect = target.getBoundingClientRect();
         const targetCentre = rect.top + rect.height * 0.5;
         const distance = clamp((targetCentre - centre) / Math.max(viewportHeight * 1.15, 1), -1.2, 1.2);
         const distanceFromCentre = Math.abs(distance);
         const fade = clamp(1 - Math.max(0, distanceFromCentre - 0.28) * 1.35, 0.08, 1);
         const shift = distance * 42;
-        const blur = Math.min(3, Math.max(0, distanceFromCentre - 0.28) * 3.2);
         target.style.setProperty("--parallax-shift", `${shift.toFixed(2)}px`);
         target.style.setProperty("--parallax-opacity", fade.toFixed(3));
-        target.style.setProperty("--parallax-blur", `${blur.toFixed(2)}px`);
       });
 
       previousY = y;
@@ -89,14 +86,57 @@ export default function ScrollAtmosphere() {
       if (!frame) frame = window.requestAnimationFrame(update);
     };
 
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) activeSections.add(entry.target);
+        else activeSections.delete(entry.target);
+      });
+      onScroll();
+    }, { rootMargin: "70% 0px", threshold: 0 });
+
+    const liveObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) activeLiveTargets.add(entry.target);
+        else activeLiveTargets.delete(entry.target);
+      });
+      onScroll();
+    }, { rootMargin: "70% 0px", threshold: 0 });
+
+    const collectTargets = () => {
+      document.querySelectorAll(sectionSelector).forEach((section) => {
+        if (observedSections.has(section)) return;
+        observedSections.add(section);
+        sectionObserver.observe(section);
+      });
+      document.querySelectorAll(liveSelector).forEach((target) => {
+        if (observedLiveTargets.has(target)) return;
+        observedLiveTargets.add(target);
+        liveObserver.observe(target);
+      });
+    };
+
+    const mutationObserver = new MutationObserver(() => {
+      if (refreshFrame) return;
+      refreshFrame = window.requestAnimationFrame(() => {
+        refreshFrame = 0;
+        collectTargets();
+      });
+    });
+
+    collectTargets();
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll, { passive: true });
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
 
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
+      mutationObserver.disconnect();
+      sectionObserver.disconnect();
+      liveObserver.disconnect();
       if (frame) window.cancelAnimationFrame(frame);
+      if (refreshFrame) window.cancelAnimationFrame(refreshFrame);
     };
   }, []);
 
