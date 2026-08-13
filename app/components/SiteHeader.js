@@ -10,26 +10,28 @@ const navItems = [
   { href: "/events", label: "Events" },
   { href: "/give", label: "Give" },
   { href: "/live", label: "Live" },
+  { href: "/about", label: "About" },
+  { href: "/prayer-request", label: "Prayer request" },
 ];
 
 const involvedItems = [
   { href: "/", label: "Home", description: "A place to worship, connect, and grow.", icon: "⌂" },
   { href: "/journal", label: "Journal", description: "Devotionals and stories from our family.", icon: "✦" },
   { href: "/events", label: "Events", description: "Meaningful experiences throughout the year.", icon: "□" },
-  { href: "/give", label: "Give", description: "Generosity in action.", icon: "♡" },
+  { href: "/give", label: "Give", description: "A simple way to practice generosity.", icon: "♡" },
   { href: "/live", label: "Live", description: "Join us from wherever you are.", icon: "▷" },
+  { href: "/prayer-request", label: "Prayer request", description: "A quiet place to ask for care.", icon: "♧" },
 ];
 
-const discoverItems = [
-  { href: "/live", label: "Sermons", description: "Listen, learn, and carry the Word.", icon: "▣" },
-  { href: "/journal", label: "Study guides", description: "Small steps for the week ahead.", icon: "▤" },
-  { href: "/events", label: "Community", description: "Find people who will walk with you.", icon: "♧" },
+const aboutItems = [
+  { href: "/about", label: "Immanuel Church", description: "Our story, people, and place in Iligan.", icon: "⌂" },
+  { href: "/about/beliefs-values", label: "Beliefs & values", description: "The convictions that shape our life together.", icon: "✧" },
 ];
 
 const ministryItems = [
-  { href: "/events", label: "Outreach", description: "Bring hope to our city.", icon: "◎" },
-  { href: "/members", label: "Prayer", description: "Support one another through faith.", icon: "✧" },
-  { href: "/members", label: "NextGen", description: "For the next generation.", icon: "◈" },
+  { href: "/about#ministries", label: "Placeholder 01", description: "Ministry details will be added soon.", icon: "◎" },
+  { href: "/about#ministries", label: "Placeholder 02", description: "Ministry details will be added soon.", icon: "✧" },
+  { href: "/about#ministries", label: "Placeholder 03", description: "Ministry details will be added soon.", icon: "◈" },
 ];
 
 function MenuSection({ title, items, pathname }) {
@@ -89,7 +91,7 @@ export default function SiteHeader() {
 
       <nav className="desktop-nav" aria-label="Main navigation">
         {navItems.map((item) => (
-          <Link key={item.href} className={pathname === item.href ? "is-current" : ""} href={item.href}>
+          <Link key={item.href} className={pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href)) ? "is-current" : ""} href={item.href}>
             {item.label}
           </Link>
         ))}
@@ -113,9 +115,13 @@ export default function SiteHeader() {
               <button className="site-menu-close" type="button" aria-label="Close navigation" onClick={() => setMenuOpen(false)}>×</button>
             </div>
             <MenuSection title="Explore" items={involvedItems} pathname={pathname} />
-            <MenuSection title="Discover" items={discoverItems} pathname={pathname} />
+            <MenuSection title="About" items={aboutItems} pathname={pathname} />
             <MenuSection title="Ministries" items={ministryItems} pathname={pathname} />
-            <p className="site-menu-note">Need a hand? <a href="mailto:hello@immanuelphilippines.church">Contact the church ↗</a></p>
+            <div className="site-menu-issue">
+              <span className="site-menu-item-icon" aria-hidden="true">!</span>
+              <span><strong>Notice an issue?</strong><small>Tell us so we can fix it.</small></span>
+              <a href="mailto:hello@immanuelphilippines.church?subject=Website%20issue" aria-label="Report a website issue">↗</a>
+            </div>
           </aside>
         </>
       )}

@@ -4071,3 +4071,103 @@ a {
   .member-portal-footer-grid { grid-template-columns: 1fr; gap: 2rem; }
   .member-portal-footer-bottom { align-items: flex-start; flex-direction: column; gap: .55rem; }
 }
+
+/* Public menu additions and the new care/about routes. These styles keep the
+   pages in the same visual language while allowing their content to breathe
+   on small screens. */
+.site-menu-issue {
+  display: grid;
+  grid-template-columns: 1.8rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: .75rem;
+  margin-top: 1.35rem;
+  padding: 1.1rem .55rem .3rem;
+  border-top: 1px solid rgba(255,255,255,.12);
+}
+.site-menu-issue .site-menu-item-icon { color: var(--text); border-color: rgba(255,255,255,.28); }
+.site-menu-issue strong, .site-menu-issue small { display: block; }
+.site-menu-issue strong { color: var(--text); font-size: .82rem; font-weight: 700; }
+.site-menu-issue small { margin-top: .2rem; color: rgba(255,255,255,.55); font-size: .7rem; line-height: 1.35; }
+.site-menu-issue > a { color: var(--gold-light); font-size: .95rem; text-decoration: none; transition: transform 180ms ease, color 180ms ease; }
+.site-menu-issue > a:hover, .site-menu-issue > a:focus-visible { color: var(--text); transform: translate(2px, -2px); }
+
+.about-story-grid,
+.beliefs-intro,
+.beliefs-list,
+.about-pillars,
+.about-visit-strip { width: min(100%, 96rem); margin-inline: auto; }
+.about-story-grid { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1fr); gap: clamp(2rem, 8vw, 10rem); align-items: start; }
+.about-story-grid h2, .beliefs-intro h2 { max-width: 10ch; margin: 1rem 0 0; font: 800 clamp(2.6rem, 5vw, 5.7rem)/.87 "Manrope", sans-serif; letter-spacing: -.09em; }
+.about-story-grid h2 em, .beliefs-intro h2 em { color: var(--gold-light); font: 400 1em/.8 Georgia, serif; letter-spacing: -.06em; }
+.about-story-copy { max-width: 38rem; padding-top: .25rem; }
+.about-story-copy p, .beliefs-intro > p:last-child { margin: 0 0 1.15rem; color: var(--muted-light); font-size: clamp(1rem, 1.5vw, 1.2rem); line-height: 1.75; }
+.about-story-links { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin-top: 2rem; }
+.about-story-links .text-link { color: var(--text); text-underline-offset: .3rem; }
+.about-story-links .text-link:hover, .about-story-links .text-link:focus-visible { color: var(--gold-light); }
+.about-pillars { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; margin-top: clamp(4rem, 10vw, 9rem); border: 1px solid var(--line-light); background: var(--line-light); }
+.about-pillars article { min-height: 18rem; padding: clamp(1.4rem, 3vw, 2.5rem); background: var(--surface-raised); color: var(--text); transition: transform 220ms ease, background 220ms ease; }
+.about-pillars article:hover { z-index: 1; background: var(--gold); color: var(--ink); transform: translateY(-.35rem); }
+.about-pillars article > span { color: var(--gold-light); font-size: .64rem; font-weight: 800; letter-spacing: .16em; }
+.about-pillars article:hover > span { color: rgba(11,13,11,.56); }
+.about-pillars h3 { margin: 4rem 0 .75rem; font: 800 clamp(1.5rem, 2.6vw, 2.5rem)/.95 "Manrope", sans-serif; letter-spacing: -.06em; }
+.about-pillars p { max-width: 20rem; margin: 0; color: var(--muted-light); line-height: 1.6; }
+.about-pillars article:hover p { color: rgba(11,13,11,.7); }
+.about-visit-strip { display: flex; align-items: center; justify-content: space-between; gap: 2rem; margin-top: clamp(3rem, 8vw, 8rem); padding: clamp(1.5rem, 4vw, 3rem); border-top: .25rem solid var(--gold); background: radial-gradient(circle at 90% 5%, rgba(166,79,54,.22), transparent 20rem), var(--surface-raised); }
+.about-visit-strip h2 { margin: .7rem 0 .45rem; font: 800 clamp(2rem, 4vw, 4rem)/.9 "Manrope", sans-serif; letter-spacing: -.08em; }
+.about-visit-strip p:not(.route-card-tag) { max-width: 35rem; margin: 0; color: var(--muted-light); line-height: 1.6; }
+.beliefs-intro { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, .8fr); gap: clamp(2rem, 7vw, 8rem); align-items: end; padding-bottom: clamp(3rem, 7vw, 6rem); border-bottom: 1px solid var(--line-light); }
+.beliefs-intro > p:last-child { max-width: 34rem; margin: 0; }
+.beliefs-list { display: grid; margin-top: clamp(2.5rem, 6vw, 5rem); border-top: 1px solid var(--line-light); }
+.beliefs-list article { display: grid; grid-template-columns: 3rem minmax(0, 1fr) 2rem; align-items: center; gap: 1.5rem; padding: clamp(1.4rem, 3vw, 2.4rem) 0; border-bottom: 1px solid var(--line-light); transition: padding 220ms ease, background 220ms ease; }
+.beliefs-list article:hover { padding-inline: 1rem; background: rgba(255,255,255,.045); }
+.beliefs-list article > span { color: var(--gold-light); font-size: .68rem; font-weight: 800; letter-spacing: .14em; }
+.beliefs-list h3 { margin: 0 0 .45rem; font: 800 clamp(1.35rem, 2.4vw, 2.3rem)/1 "Manrope", sans-serif; letter-spacing: -.055em; }
+.beliefs-list p { max-width: 40rem; margin: 0; color: var(--muted-light); line-height: 1.65; }
+.beliefs-list b { color: var(--gold-light); font-size: 1.15rem; font-weight: 400; transition: transform 180ms ease; }
+.beliefs-list article:hover b { transform: translate(3px, -3px); }
+
+.prayer-request-content { max-width: 96rem; margin: 0 auto; }
+.prayer-request-type-block { padding-bottom: clamp(2.5rem, 6vw, 5rem); border-bottom: 1px solid var(--line-light); }
+.prayer-request-type-block h2, .prayer-request-form h2 { margin: 0 0 1.35rem; font: 800 clamp(2rem, 4vw, 3.8rem)/.92 "Manrope", sans-serif; letter-spacing: -.075em; }
+.prayer-request-types { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .85rem; }
+.prayer-request-types button { display: flex; align-items: center; gap: .85rem; min-height: 5rem; padding: 1rem 1.1rem; border: 1px solid rgba(255,255,255,.3); border-radius: .8rem; background: rgba(255,255,255,.08); color: var(--text); text-align: left; font: inherit; cursor: pointer; transition: border-color 180ms ease, background 180ms ease, transform 180ms ease; }
+.prayer-request-types button:hover, .prayer-request-types button:focus-visible { border-color: var(--gold-light); transform: translateY(-2px); }
+.prayer-request-types button.is-selected { border-color: rgba(255,255,255,.75); background: rgba(255,255,255,.17); box-shadow: inset 0 0 0 1px rgba(255,255,255,.16); }
+.prayer-request-types button > span { display: grid; width: 2.25rem; height: 2.25rem; flex: 0 0 auto; place-items: center; border-radius: 50%; background: var(--text); color: var(--ink); font-weight: 800; }
+.prayer-request-types strong { font-size: .9rem; line-height: 1.3; }
+.prayer-request-form { max-width: 68rem; margin-top: clamp(3rem, 7vw, 6rem); }
+.prayer-request-form-heading { margin-bottom: 2rem; }
+.prayer-request-form-heading .kicker { margin-bottom: .8rem; }
+.prayer-request-form label { display: grid; gap: .5rem; margin-top: 1.4rem; color: var(--text-soft); font-size: .8rem; font-weight: 600; }
+.prayer-request-form label > span { color: var(--gold-light); }
+.prayer-request-form label > small { display: inline; margin-left: .35rem; color: var(--muted-light); font-size: .72rem; font-weight: 400; }
+.prayer-request-form input, .prayer-request-form textarea { width: 100%; border: 1px solid rgba(255,255,255,.2); border-radius: .85rem; outline: none; background: rgba(0,0,0,.2); color: var(--text); font: inherit; transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease; }
+.prayer-request-form input { min-height: 3rem; padding: .8rem .9rem; }
+.prayer-request-form textarea { min-height: 8rem; resize: vertical; padding: .9rem; }
+.prayer-request-form input::placeholder, .prayer-request-form textarea::placeholder { color: rgba(255,255,255,.45); }
+.prayer-request-form input:focus, .prayer-request-form textarea:focus { border-color: var(--gold-light); background: rgba(0,0,0,.3); box-shadow: 0 0 0 3px rgba(241,215,143,.12); }
+.prayer-contact-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.prayer-request-success { margin: 1.5rem 0 0; padding: 1rem; border-left: 2px solid var(--gold); background: rgba(222,184,94,.1); color: var(--text); line-height: 1.55; }
+.prayer-request-submit { margin-top: 1.8rem; }
+.prayer-request-privacy { max-width: 40rem; margin: 1rem 0 0; color: var(--muted-light); font-size: .72rem; line-height: 1.55; }
+
+@media (max-width: 1120px) {
+  .desktop-nav { gap: clamp(.7rem, 1.6vw, 1.3rem); }
+  .desktop-nav a { font-size: .7rem; }
+}
+@media (max-width: 900px) {
+  .about-story-grid, .beliefs-intro { grid-template-columns: 1fr; gap: 2rem; }
+  .about-pillars { grid-template-columns: 1fr; }
+  .about-pillars article { min-height: 14rem; }
+  .about-pillars h3 { margin-top: 2.6rem; }
+  .about-visit-strip { align-items: flex-start; flex-direction: column; }
+  .prayer-request-types { grid-template-columns: 1fr; }
+}
+@media (max-width: 620px) {
+  .site-menu-issue { margin-top: 1rem; }
+  .about-story-grid h2, .beliefs-intro h2 { max-width: 11ch; }
+  .beliefs-list article { grid-template-columns: 2.1rem minmax(0, 1fr) 1.3rem; gap: .75rem; }
+  .beliefs-list article:hover { padding-inline: .5rem; }
+  .prayer-contact-grid { grid-template-columns: 1fr; gap: 0; }
+  .prayer-request-form { margin-top: 3rem; }
+}

@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "../../lib/supabase/client";
-import { isSupabaseConfigured } from "../../lib/supabase/config";
 import { memberAuthEmail } from "../../lib/supabase/member-identity";
 
 const memberHighlights = [
@@ -74,7 +73,7 @@ export default function MemberLogin() {
 
         <div className="member-login-side">
           <div className="member-login-card">
-            <div className="member-login-card-top"><span>Member access</span><span className="member-preview-badge">Preview</span></div>
+            <div className="member-login-card-top"><span>Member access</span></div>
             <form className="member-login-form" onSubmit={handleSubmit}>
               <label htmlFor="member-username">Username</label>
               <input id="member-username" name="username" type="text" autoComplete="username" value={username} onChange={(event) => setUsername(event.target.value)} placeholder="your username" />
@@ -84,8 +83,6 @@ export default function MemberLogin() {
               <button className="member-login-submit button" type="submit" disabled={isSubmitting}>{isSubmitting ? "Signing in…" : "Enter member space"} <span aria-hidden="true">↗</span></button>
             </form>
             <p className="member-login-help">If you do not have an account, contact your Discipler.</p>
-            <p className="member-login-login-note">Use the username your Discipler gave you. Public sign-up is disabled.</p>
-            <p className="member-login-disclaimer">{isSupabaseConfigured ? "Secure sign-in is connected. Member tools are still being built." : "This is a front-end preview. Secure sign-in is waiting for the church project settings."}</p>
           </div>
           <div className="member-login-side-note"><span>COMING TOGETHER</span><p>Groups · Gatherings · Journal · Care</p></div>
         </div>
