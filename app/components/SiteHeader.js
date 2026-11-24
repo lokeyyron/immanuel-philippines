@@ -43,7 +43,7 @@ function MenuSection({ title, items, pathname }) {
           <Link key={`${title}-${item.label}`} className={pathname === item.href ? "is-current" : ""} href={item.href}>
             <span className="site-menu-item-icon" aria-hidden="true">{item.icon}</span>
             <span className="site-menu-item-copy"><strong>{item.label}</strong><small>{item.description}</small></span>
-            <span className="site-menu-item-arrow" aria-hidden="true">↗</span>
+
           </Link>
         ))}
       </div>
@@ -101,7 +101,7 @@ export default function SiteHeader() {
         <Link className="header-cta header-member-cta" href="/members/portal" aria-label="Members">
           <img src="/assets/account.png" alt="" />
           <span>Members</span>
-          <span aria-hidden="true">↗</span>
+
         </Link>
       </div>
 
@@ -111,7 +111,7 @@ export default function SiteHeader() {
           <button className="site-menu-scrim" type="button" aria-label="Close navigation" onClick={() => setMenuOpen(false)} />
           <aside className="site-menu-panel" aria-label="Church menu">
             <div className="site-menu-panel-head">
-              <div><p className="site-menu-kicker">Immanuel Church PH</p><h2>Get involved</h2></div>
+              <div><p className="site-menu-kicker">Immanuel Church PH</p><h2>Find your place.</h2></div>
               <button className="site-menu-close" type="button" aria-label="Close navigation" onClick={() => setMenuOpen(false)}>×</button>
             </div>
             <MenuSection title="Explore" items={involvedItems} pathname={pathname} />

@@ -17,10 +17,10 @@ export default function PublicChrome({ children }) {
   if (!pathname || pathname.startsWith("/members/portal")) return children;
 
   return (
-    <>
+    <div className="public-site">
       <SiteHeader />
       {children}
       <SiteFooter />
-    </>
+    </div>
   );
 }

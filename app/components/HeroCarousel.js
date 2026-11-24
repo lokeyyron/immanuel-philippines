@@ -1,197 +1,29 @@
 "use client";
-
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
-const slides = [
-  {
-    id: "welcome",
-    eyebrow: "A church community in Iligan City",
-    title: <><span>You are</span><em>welcome here.</em></>,
-    description: "Come as you are and discover a community following Jesus, growing in faith, and living with purpose together.",
-    cta: "Join us in person",
-    href: "/events#visit",
-    kind: "local",
-    src: "/videos/intro.mp4",
-    poster: "/assets/church-building.jpeg",
-  },
-  {
-    id: "sermon",
-    eyebrow: "Pastor Khan Santos",
-    title: <><span>Watch the</span><em>latest sermon.</em></>,
-    description: "A message for the ordinary week — biblical teaching, honest questions, and hope to carry with you.",
-    cta: "Watch latest sermon",
-    href: "/live",
-    kind: "youtube",
-    videoId: "oZOAVExNEdY",
-    start: 8,
-    poster: "/assets/ptrkhan.jpg",
-  },
-  {
-    id: "worship",
-    eyebrow: "Immanuel Worship",
-    title: <><span>Make room</span><em>for worship.</em></>,
-    description: "Sing along with the Immanuel Worship family and let a little more room open up for God in your day.",
-    cta: "Watch Immanuel Worship",
-    href: "https://www.youtube.com/@ImmanuelWorshipPhilippines",
-    kind: "youtube",
-    videoId: "MZQZTn8hsf8",
-    poster: null,
-  },
+const features = [
+  { label: "Welcome home", eyebrow: "IMMANUEL CHURCH PH · ILIGAN CITY", title: <>Life is better<br />together.</>, text: "A church family in Iligan City. Following Jesus, sharing life, and making room for you.", image: "/assets/church-building.jpeg", alt: "The Immanuel church building in Iligan City", link: "/#location", action: "Join us this Sunday" },
+  { label: "The message", eyebrow: "TEACHING · PASTOR KHAN SANTOS", title: <>Faith for the<br />everyday.</>, text: "Watch a message from Immanuel, or catch up on our Sunday worship celebrations.", image: "/assets/ptrkhan.jpg", alt: "Pastor Khan Santos", link: "/live", action: "Watch the messages", video: "oZOAVExNEdY" },
+  { label: "Immanuel Worship", eyebrow: "MUSIC · IMMANUEL WORSHIP", title: <>A song.<br />A prayer.</>, text: "Make space for worship. Join the songs and moments from Immanuel Worship.", image: "/assets/church-building.jpeg", alt: "Immanuel Church PH", link: "https://www.youtube.com/@ImmanuelWorshipPhilippines", action: "Explore our worship", video: "MZQZTn8hsf8" },
 ];
-
-function youtubeUrl(videoId, start = 0) {
-  const params = new URLSearchParams({
-    autoplay: "1",
-    mute: "1",
-    rel: "0",
-    modestbranding: "1",
-    playsinline: "1",
-    enablejsapi: "1",
-  });
-  if (start) params.set("start", String(start));
-  return `https://www.youtube-nocookie.com/embed/${videoId}?${params.toString()}`;
-}
-
-function ActionLink({ href, children }) {
-  const isInternal = href.startsWith("/");
-  if (isInternal) return <Link className="button button-light" href={href}>{children} <span aria-hidden="true">↗</span></Link>;
-  return <a className="button button-light" href={href} target="_blank" rel="noopener noreferrer">{children} <span aria-hidden="true">↗</span></a>;
-}
-
 export default function HeroCarousel() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [revealed, setRevealed] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [hovered, setHovered] = useState(false);
-  const [introFailed, setIntroFailed] = useState(false);
-  const videoRef = useRef(null);
-  const activeSlide = slides[activeIndex];
-
-  useEffect(() => {
-    setRevealed(false);
-    setIsPlaying(false);
-    setIntroFailed(false);
-    const timer = window.setTimeout(() => setRevealed(true), 3000);
-    return () => window.clearTimeout(timer);
-  }, [activeIndex]);
-
-  useEffect(() => {
-    if (!revealed || activeSlide.kind !== "local" || introFailed) return;
-    const playPromise = videoRef.current?.play();
-    if (!playPromise) return;
-    playPromise.then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
-  }, [activeSlide.kind, activeIndex, revealed, introFailed]);
-
-  useEffect(() => {
-    if (revealed && activeSlide.kind === "youtube") setIsPlaying(true);
-  }, [activeSlide.kind, activeIndex, revealed]);
-
-  useEffect(() => {
-    if (hovered) return;
-    const timer = window.setTimeout(() => setActiveIndex((index) => (index + 1) % slides.length), 10500);
-    return () => window.clearTimeout(timer);
-  }, [activeIndex, hovered]);
-
-  const selectSlide = useCallback((nextIndex) => {
-    setActiveIndex((nextIndex + slides.length) % slides.length);
-  }, []);
-
-
-  const handleKeyDown = (event) => {
-    if (event.key === "ArrowLeft") {
-      event.preventDefault();
-      selectSlide(activeIndex - 1);
-    }
-    if (event.key === "ArrowRight") {
-      event.preventDefault();
-      selectSlide(activeIndex + 1);
-    }
-  };
-
-  return (
-    <section className="hero hero-carousel" id="top" aria-labelledby="hero-title">
-      <div
-        className="hero-stage"
-        tabIndex={0}
-        onMouseEnter={() => { setHovered(true); setRevealed(true); }}
-        onMouseLeave={() => setHovered(false)}
-        onKeyDown={handleKeyDown}
-      >
-        <div className="hero-carousel-viewport" aria-live="polite">
-          <div className="hero-carousel-track" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
-            {slides.map((slide, index) => {
-              const isActive = index === activeIndex;
-              const showPlayback = isActive && revealed && !introFailed;
-              const showPoster = isActive && (!revealed || (slide.kind === "local" && introFailed));
-              return (
-                <article className={`hero-slide ${isActive ? "is-active" : ""} ${isActive && isPlaying ? "is-playing" : ""}`} key={slide.id} aria-hidden={!isActive}>
-                  <div className="hero-slide-media">
-                    <div className={`hero-media-layer ${slide.poster ? "has-poster" : "is-abstract"}`}>
-                      {slide.kind === "local" ? (
-                        <video
-                          ref={isActive ? videoRef : undefined}
-                          className="hero-media-video"
-                          src={slide.src}
-                          poster={slide.poster}
-                          muted
-                          loop
-                          playsInline
-                          preload={isActive ? "metadata" : "none"}
-                          autoPlay={showPlayback}
-                          onError={() => { setIntroFailed(true); setIsPlaying(false); }}
-                          aria-label="Immanuel Church PH intro video"
-                        />
-                      ) : (
-                        <iframe
-                          className="hero-media-video"
-                          title={`${slide.eyebrow} video`}
-                          src={showPlayback ? youtubeUrl(slide.videoId, slide.start) : undefined}
-                          loading={isActive ? "eager" : "lazy"}
-                          allow="autoplay; encrypted-media; picture-in-picture"
-                          allowFullScreen
-                        />
-                      )}
-
-                      {showPoster && (
-                        <button className={`hero-media-poster ${introFailed ? "is-static" : ""}`} type="button" disabled={introFailed} onClick={() => setRevealed(true)} aria-label={`Play ${slide.eyebrow} video`}>
-                          {slide.poster ? <img src={slide.poster} alt="" /> : <span className="hero-abstract-poster" aria-hidden="true"><i /><i /><i /></span>}
-                          <span className="hero-poster-shade" aria-hidden="true" />
-                        </button>
-                      )}
-
-                    </div>
-                  </div>
-
-                  <div className="hero-slide-overlay" aria-hidden="true" />
-                  <div className="hero-slide-content">
-                    <div className="hero-slide-heading">
-                      <p className="kicker"><span /> {slide.eyebrow}</p>
-                      <h1 id={isActive ? "hero-title" : undefined}>{slide.title}</h1>
-                    </div>
-                    <div className="hero-slide-footer">
-                      <p>{slide.description}</p>
-                      <ActionLink href={slide.href}>{slide.cta}</ActionLink>
-                    </div>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-
-        <div className="hero-carousel-controls">
-          <div className="hero-carousel-dots" role="tablist" aria-label="Choose a homepage video">
-            {slides.map((slide, index) => (
-              <button key={slide.id} className={index === activeIndex ? "is-active" : ""} type="button" role="tab" aria-selected={index === activeIndex} aria-label={`Show ${slide.eyebrow}`} onClick={() => selectSlide(index)}><span /></button>
-            ))}
-          </div>
-          <div className="hero-carousel-arrows">
-            <button type="button" aria-label="Previous homepage video" onClick={() => selectSlide(activeIndex - 1)}>←</button>
-            <button type="button" aria-label="Next homepage video" onClick={() => selectSlide(activeIndex + 1)}>→</button>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+  const [active, setActive] = useState(0);
+  const [playing, setPlaying] = useState(false);
+  const item = features[active];
+  function select(index) { setActive(index); setPlaying(false); }
+  return <section className="home-feature" aria-label="Welcome to Immanuel" id="top">
+    <div className="feature-copy" key={item.label}>
+      <p className="editorial-label">{item.eyebrow}</p>
+      <h1>{item.title}</h1>
+      <div className="feature-bottom"><p>{item.text}</p><Link className="solid-link" href={item.link}>{item.action}</Link></div>
+    </div>
+    <div className="feature-image">
+      <img src={item.image} alt={item.alt} fetchPriority="high" />
+      {playing && <iframe title={`${item.label} video`} src={`https://www.youtube-nocookie.com/embed/${item.video}?autoplay=1&mute=1&rel=0`} allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen />}
+      {item.video ? <button type="button" className="feature-play" onClick={() => setPlaying(!playing)}>{playing ? "Close video" : "Play video"}</button> : <div className="image-caption"><span>There’s a place for you here.</span><span>Iligan City, Philippines</span></div>}
+    </div>
+    <div className="feature-tabs" aria-label="Featured stories">{features.map((feature, index) => <button type="button" key={feature.label} aria-pressed={active === index} onClick={() => select(index)} className={active === index ? "is-selected" : ""}>{feature.label}</button>)}</div>
+    <div className="sunday-strip"><span>See you on Sunday</span><strong>9:30 AM</strong><span>2nd Floor, Rosbel Building · Iligan City</span><a href="#location">Plan your visit</a></div>
+  </section>;
 }

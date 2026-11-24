@@ -1,6 +1,6 @@
 import PublicChrome from "./components/PublicChrome";
-import ScrollAtmosphere from "./components/ScrollAtmosphere";
 import "../styles.css";
+import "../redesign.css";
 
 export const metadata = {
   title: "Immanuel Church PH",
@@ -16,7 +16,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <ScrollAtmosphere />
         <a className="skip-link" href="#main-content">Skip to content</a>
         <PublicChrome>{children}</PublicChrome>
       </body>

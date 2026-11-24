@@ -11,10 +11,10 @@ export default function SiteFooter() {
         <span>God with us.</span>
       </div>
       <div className="footer-links">
-        <a href="https://www.facebook.com/immanuelchurchiligan" target="_blank" rel="noopener noreferrer">Facebook ↗</a>
-        <a href="https://www.youtube.com/@ImmanuelChurchIligan" target="_blank" rel="noopener noreferrer">YouTube ↗</a>
-        <Link href="/events#visit">Visit us</Link>
-        <a href="#main-content">Back to top ↑</a>
+        <a href="https://www.facebook.com/immanuelchurchiligan" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://www.youtube.com/@ImmanuelChurchIligan" target="_blank" rel="noopener noreferrer">YouTube</a>
+        <Link href="/#location">Visit us</Link>
+        <a href="#main-content">Back to top</a>
       </div>
       <p className="copyright">© 2024 Immanuel Church PH · Iligan City</p>
     </footer>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Reveal from "./Reveal";
+import Link from "next/link";
 
 const announcements = [
   { category: "Gather", date: "Every Sunday · 9:30 AM", title: "Sunday worship celebration.", body: "Join the Immanuel family for worship, a message, and time to be together. Everyone is welcome.", symbol: "01", tone: "gold" },
@@ -72,23 +72,24 @@ export default function Announcements() {
   };
 
   return (
-    <Reveal as="section" className="announcements section section-dark" id="announcements" aria-labelledby="announcements-title">
+    <section className="announcements section section-dark" id="announcements" aria-labelledby="announcements-title">
       <div className="announcements-heading">
         <div className="section-heading">
           <p className="kicker"><span /> Announcements</p>
-          <h2 id="announcements-title">What’s <em>happening.</em></h2>
+          <h2 id="announcements-title">Life at Immanuel.</h2>
         </div>
       </div>
 
+      <Link className="announcement-events-link text-link" href="/events">View all events</Link>
       <div className="announcement-carousel" role="region" aria-roledescription="carousel" aria-label="Church announcements">
         <div className="announcement-viewport">
           <div className="announcement-track" id="announcement-track" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
             {announcements.map((announcement, index) => (
-              <article className={`announcement-card announcement-card-${announcement.tone}`} key={announcement.symbol} aria-hidden={index !== activeIndex}>
-                <div className="announcement-card-meta"><span>{announcement.symbol} / 05</span><span>{announcement.category}</span></div>
+              <article className={`announcement-card announcement-card-${announcement.tone}`} key={announcement.symbol} aria-hidden={index !== activeIndex} inert={index !== activeIndex ? true : undefined}>
+                <div className="announcement-card-meta"><span>{announcement.date}</span><span>{announcement.category}</span></div>
                 <div className={`announcement-card-content${announcement.youversion ? " has-youversion" : ""}`}>
                   <div>
-                    <p className="announcement-date">{announcement.date}</p>
+
                     <h3>{announcement.title}</h3>
                     <p>{announcement.body}</p>
                   </div>
@@ -96,7 +97,7 @@ export default function Announcements() {
                     <YouVersionMedia active={index === activeIndex} />
                   )}
                 </div>
-                <div className="announcement-card-art" aria-hidden="true"><span>{announcement.symbol}</span><i /><i /><i /></div>
+                {index === 0 && <img className="announcement-church-photo" src="/assets/church-building.jpeg" alt="Immanuel Church building" loading="lazy" />}
               </article>
             ))}
           </div>
@@ -108,15 +109,15 @@ export default function Announcements() {
             ))}
           </div>
           <div className="announcement-arrows">
-            <button type="button" aria-label="Previous announcement" onClick={() => selectAnnouncement(activeIndex - 1)}>←</button>
+            <button type="button" aria-label="Previous announcement" onClick={() => selectAnnouncement(activeIndex - 1)}>Previous</button>
             <span>{String(activeIndex + 1).padStart(2, "0")} / {String(announcements.length).padStart(2, "0")}</span>
-            <button type="button" aria-label="Next announcement" onClick={() => selectAnnouncement(activeIndex + 1)}>→</button>
+            <button type="button" aria-label="Next announcement" onClick={() => selectAnnouncement(activeIndex + 1)}>Next</button>
           </div>
         </div>
       </div>
 
       <p className="announcements-note">More church updates will be added here as the calendar grows.</p>
       <span className="announcement-active-label" aria-live="polite">Now viewing: {activeAnnouncement.category}</span>
-    </Reveal>
+    </section>
   );
 }
