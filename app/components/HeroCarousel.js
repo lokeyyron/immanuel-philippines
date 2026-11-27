@@ -13,8 +13,9 @@ const features = [
 export default function HeroCarousel() {
   const [active, setActive] = useState(0);
   const [playing, setPlaying] = useState(false);
+  const [originalImage, setOriginalImage] = useState(false);
   const item = features[active];
-  function select(index) { setActive(index); setPlaying(false); }
+  function select(index) { setActive(index); setPlaying(false); setOriginalImage(false); }
   return <section className="home-feature" aria-label="Welcome to Immanuel" id="top">
     <div className="feature-copy" key={item.label}>
       <p className="editorial-label">{item.eyebrow}</p>
@@ -22,7 +23,7 @@ export default function HeroCarousel() {
       <div className="feature-bottom"><p>{item.text}</p><Link className="solid-link" href={item.link}>{item.action}</Link></div>
     </div>
     <div className="feature-image">
-      <Image key={item.image} src={active === 1 ? pastorPhoto : churchPhoto} alt={item.alt} fill priority placeholder="blur" sizes="(max-width: 1800px) 92vw, 1656px" />
+      <Image key={item.image} src={active === 1 ? pastorPhoto : churchPhoto} alt={item.alt} unoptimized={originalImage} onError={() => setOriginalImage(true)} fill priority placeholder="blur" sizes="(max-width: 1800px) 92vw, 1656px" />
       {playing && <iframe title={`${item.label} video`} src={`https://www.youtube-nocookie.com/embed/${item.video}?autoplay=1&mute=1&rel=0`} allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen />}
       {item.video ? <button type="button" className="feature-play" onClick={() => setPlaying(!playing)}>{playing ? "Close video" : "Play video"}</button> : <div className="image-caption"><span>There’s a place for you here.</span><span>Iligan City, Philippines</span></div>}
     </div>

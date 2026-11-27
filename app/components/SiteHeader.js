@@ -84,7 +84,7 @@ export default function SiteHeader() {
           <span className="menu-icon" aria-hidden="true"><i /><i /><i /></span>
         </button>
         <Link className="brand" href="/" aria-label="Immanuel Church PH home">
-          <img src="/assets/immanuel-logo.png" alt="" />
+          <img src="/assets/immanuel-logo.png" width="500" height="500" alt="" />
           <span>Immanuel Church PH</span>
         </Link>
       </div>
@@ -99,7 +99,7 @@ export default function SiteHeader() {
 
       <div className="header-tools">
         <Link className="header-cta header-member-cta" href="/members/portal" aria-label="Members">
-          <img src="/assets/account.png" alt="" />
+          <img src="/assets/account.png" width="200" height="200" alt="" />
           <span>Members</span>
 
         </Link>

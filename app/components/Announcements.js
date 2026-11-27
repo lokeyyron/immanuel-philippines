@@ -58,7 +58,7 @@ function YouVersionMedia({ active }) {
           <img src={muted ? "/assets/sound-off.png" : "/assets/sound-on.png"} alt="" />
         </button>
       </div>
-      <img className="announcement-youversion-qr" src="/assets/YouVersion_QR.jpeg" alt="QR code to open Immanuel Church PH on YouVersion" loading="lazy" />
+      <img className="announcement-youversion-qr" src="/assets/YouVersion_QR.jpeg" width="1080" height="1080" decoding="async" alt="QR code to open Immanuel Church PH on YouVersion" loading="lazy" />
     </div>
   );
 }

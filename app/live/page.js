@@ -116,17 +116,20 @@ function embedUrlFor(video) {
 }
 
 function hideUnavailableThumbnail(event) {
-  // YouTube's thumbnail host can be blocked by a network, ad blocker, or
-  // privacy setting. Keep the card usable and let its designed background
-  // carry the visual weight instead of leaving a broken-image icon behind.
-  event.currentTarget.dataset.unavailable = "true";
+  const image = event.currentTarget;
+  if (image.dataset.fallback === "true") {
+    image.dataset.unavailable = "true";
+    return;
+  }
+  image.dataset.fallback = "true";
+  image.src = "/assets/replay-placeholder.svg";
 }
 
 function ReplayCard({ video, onOpen }) {
   return (
     <button className="live-replay-card" type="button" onClick={() => onOpen(video)}>
       <span className="live-replay-image">
-        <img src={thumbnailFor(video)} alt="" loading="lazy" onError={hideUnavailableThumbnail} />
+        <img src={thumbnailFor(video)} alt="" width="480" height="360" decoding="async" loading="lazy" onError={hideUnavailableThumbnail} />
         <span className="live-replay-play" aria-hidden="true">▶</span>
       </span>
       <span className="live-replay-body">
@@ -214,7 +217,7 @@ export default function LivePage() {
 
         <article className="live-feature-card">
           <button className="live-feature-media" type="button" onClick={() => setSelectedVideo(latest)} aria-label={`Watch ${latest.title}`}>
-            <img src={thumbnailFor(latest)} alt="Latest Immanuel Church PH live replay" onError={hideUnavailableThumbnail} />
+            <img src={thumbnailFor(latest)} alt="Latest Immanuel Church PH live replay" width="480" height="360" decoding="async" onError={hideUnavailableThumbnail} />
             <span className="live-feature-wash" aria-hidden="true" />
             <span className="live-feature-play" aria-hidden="true">▶</span>
           </button>

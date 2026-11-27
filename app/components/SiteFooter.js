@@ -4,7 +4,7 @@ export default function SiteFooter() {
   return (
     <footer className="site-footer">
       <div className="footer-brand">
-        <img src="/assets/immanuel-logo.png" alt="" />
+        <img src="/assets/immanuel-logo.png" width="500" height="500" alt="" />
         <p>Immanuel Church PH</p>
       </div>
       <div className="footer-message">
