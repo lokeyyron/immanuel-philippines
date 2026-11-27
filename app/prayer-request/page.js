@@ -27,16 +27,17 @@ export default function PrayerRequestPage() {
         <p className="route-hero-description">Have a question, need support, or just want to connect? Let us know how we can help.</p>
       </Reveal>
       <Reveal as="section" className="prayer-request-content route-content">
-        <div className="prayer-request-type-block"><h2>How can we help?</h2><div className="prayer-request-types">{requestTypes.map((type) => <button className={selectedType === type.value ? "is-selected" : ""} type="button" onClick={() => { setSelectedType(type.value); setSubmitted(false); }} key={type.value}><span aria-hidden="true">{type.icon}</span><strong>{type.title}</strong></button>)}</div></div>
+        <p className="care-preview-note">Online requests are coming soon. This form is a preview and does not send messages. To reach the church now, use the contact links in our footer.</p>
+        <div className="prayer-request-type-block"><h2>How can we help?</h2><div className="prayer-request-types">{requestTypes.map((type) => <button className={selectedType === type.value ? "is-selected" : ""} type="button" aria-pressed={selectedType === type.value} onClick={() => { setSelectedType(type.value); setSubmitted(false); }} key={type.value}><span aria-hidden="true">{type.icon}</span><strong>{type.title}</strong></button>)}</div></div>
         <form className="prayer-request-form" onSubmit={submit}>
-          <div className="prayer-request-form-heading"><p className="kicker"><span /> {selectedType === "prayer" ? "Private care" : "We’d love to hear from you"}</p><h2>{selectedType === "prayer" ? "Prayer request" : selectedType === "question" ? "Your question" : "Your story"}</h2></div>
+          <div className="prayer-request-form-heading"><p className="kicker"><span /> {selectedType === "prayer" ? "Care form preview" : "We’d love to hear from you"}</p><h2>{selectedType === "prayer" ? "Prayer request" : selectedType === "question" ? "Your question" : "Your story"}</h2></div>
           <label htmlFor="prayer-message">How can we help you today? <span>*</span></label>
-          <textarea id="prayer-message" name="message" placeholder={selectedType === "prayer" ? "Share as much as you feel comfortable sharing." : "Write a few words and we’ll get back to you."} required />
+          <textarea id="prayer-message" name="message" placeholder={selectedType === "prayer" ? "Share as much as you feel comfortable sharing." : "Write a few words for your preview."} required />
           <div className="prayer-contact-grid"><label htmlFor="prayer-name">First name <span>*</span><input id="prayer-name" name="firstName" placeholder="First name" required /></label><label htmlFor="prayer-last-name">Last name <span>*</span><input id="prayer-last-name" name="lastName" placeholder="Last name" required /></label></div>
           <label htmlFor="prayer-email">Email address <span>*</span><input id="prayer-email" name="email" type="email" placeholder="you@example.com" required /></label>
           <label htmlFor="prayer-phone">Phone number <small>optional</small><input id="prayer-phone" name="phone" type="tel" placeholder="09XX XXX XXXX" /></label>
-          {submitted && <p className="prayer-request-success" role="status">Thank you for trusting us with this. A member of the church team will follow up soon.</p>}
-          <button className="button button-light prayer-request-submit" type="submit">Send securely <span aria-hidden="true">↗</span></button>
+          {submitted && <p className="prayer-request-success" role="status">Preview complete. Your request has not been sent. Please contact the church directly for a response.</p>}
+          <button className="button button-light prayer-request-submit" type="submit">Preview request <span aria-hidden="true">↗</span></button>
           <p className="prayer-request-privacy">Your message is a placeholder for now. When connected, it will be shared only with the appropriate church care team.</p>
         </form>
       </Reveal>

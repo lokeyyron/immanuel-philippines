@@ -128,7 +128,7 @@ export default function BlogIndex({ posts }) {
         <div className="blog-stream-heading">
           <div>
             <p className="blog-index-kicker"><span /> From the community</p>
-            <h2>Keep <em>moving.</em></h2>
+            <h2>Stories to <em>carry with you.</em></h2>
           </div>
         </div>
 

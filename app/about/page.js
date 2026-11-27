@@ -25,7 +25,7 @@ export default function AboutPage() {
           <div className="about-story-copy">
             <p>Immanuel means “God with us.” We gather in Iligan City to worship, listen, grow, and practice the good news together. Our Sunday gathering is a starting point—not the finish line.</p>
             <p>Whether you are finding a church for the first time or looking for a place to serve, you are welcome to take a next step at your own pace.</p>
-            <div className="about-story-links"><Link className="button button-light" href="/events">Plan a visit <span aria-hidden="true">↗</span></Link><Link className="button button-light" href="/about/beliefs-values">Beliefs &amp; values <span aria-hidden="true">↗</span></Link></div>
+            <div className="about-story-links"><Link className="button button-light" href="/#location">Plan a visit <span aria-hidden="true">↗</span></Link><Link className="button button-light" href="/about/beliefs-values">Beliefs &amp; values <span aria-hidden="true">↗</span></Link></div>
           </div>
         </div>
 
@@ -35,7 +35,7 @@ export default function AboutPage() {
           <article><span>03</span><h3>Bring hope</h3><p>We serve our city with the gifts, time, and kindness God has already placed in our hands.</p></article>
         </div>
 
-        <div className="about-visit-strip"><div><p className="route-card-tag">Find us in Iligan City</p><h2>66HP+XM9</h2><p>2nd Floor, Rosbel Building · Benito Labao, corner Zamora Street</p></div><a className="button button-light" href="https://www.google.com/maps/search/?api=1&query=66HP%2BXM9%2C+Iligan+City%2C+Lanao+del+Norte" target="_blank" rel="noopener noreferrer">Open Google Maps <span aria-hidden="true">↗</span></a></div>
+        <div className="about-visit-strip"><div><p className="route-card-tag">Find us in Iligan City</p><h2>See you on Sunday.</h2><p>2nd Floor, Rosbel Building · Benito Labao, corner Zamora Street</p></div><a className="button button-light" href="https://www.google.com/maps/search/?api=1&query=66HP%2BXM9%2C+Iligan+City%2C+Lanao+del+Norte" target="_blank" rel="noopener noreferrer">Open Google Maps <span aria-hidden="true">↗</span></a></div>
       </Reveal>
     </main>
   );
