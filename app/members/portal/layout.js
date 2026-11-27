@@ -1,3 +1,4 @@
+import "../../../portal-design.css";
 import MemberPortalChrome from "./MemberPortalChrome";
 import MemberPortalFooter from "./MemberPortalFooter";
 

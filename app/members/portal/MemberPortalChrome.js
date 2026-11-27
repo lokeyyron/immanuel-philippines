@@ -3,18 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createClient } from "../../../lib/supabase/client";
 
 const primaryLinks = [
-  { label: "Home", href: "/" },
   { label: "Dashboard", href: "/members/portal" },
+  { label: "My groups", href: "/members/portal/groups" },
   { label: "Journal", href: "/journal" },
-  { label: "Events", href: "/events" },
-  { label: "Give", href: "/give" },
-  { label: "Live", href: "/live" },
-  { label: "About", href: "/about" },
-  { label: "Prayer request", href: "/prayer-request" },
+  { label: "Church website", href: "/" },
 ];
 
 const menuLinks = [
@@ -34,6 +30,8 @@ export default function MemberPortalChrome() {
   const pathname = usePathname();
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
+  const drawerRef = useRef(null);
+  const menuButtonRef = useRef(null);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   useEffect(() => {
@@ -43,6 +41,30 @@ export default function MemberPortalChrome() {
   useEffect(() => {
     document.body.classList.toggle("member-portal-menu-open", menuOpen);
     return () => document.body.classList.remove("member-portal-menu-open");
+  }, [menuOpen]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const drawer = drawerRef.current;
+    const focusable = () => [...drawer.querySelectorAll('a[href], button:not([disabled])')];
+    focusable()[0]?.focus();
+    const handleKey = (event) => {
+      if (event.key === "Escape") setMenuOpen(false);
+      if (event.key !== "Tab") return;
+      const elements = focusable();
+      const first = elements[0];
+      const last = elements[elements.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault(); last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault(); first?.focus();
+      }
+    };
+    drawer.addEventListener("keydown", handleKey);
+    return () => {
+      drawer.removeEventListener("keydown", handleKey);
+      menuButtonRef.current?.focus();
+    };
   }, [menuOpen]);
 
   const logOut = async () => {
@@ -63,6 +85,8 @@ export default function MemberPortalChrome() {
       <header className="member-portal-header">
         <div className="member-portal-brand-wrap">
           <button
+            ref={menuButtonRef}
+            aria-label={menuOpen ? "Close member navigation" : "Open member navigation"}
             className={`member-portal-menu-toggle${menuOpen ? " is-open" : ""}`}
             type="button"
             aria-expanded={menuOpen}
@@ -80,7 +104,7 @@ export default function MemberPortalChrome() {
 
         <nav className="member-portal-nav" aria-label="Member space navigation">
           {primaryLinks.map((link) => (
-            <Link className={pathname === link.href ? "is-active" : ""} href={link.href} key={link.label}>{link.label}</Link>
+            <Link aria-current={pathname === link.href ? "page" : undefined} className={pathname === link.href ? "is-active" : ""} href={link.href} key={link.label}>{link.label}</Link>
           ))}
         </nav>
 
@@ -97,14 +121,14 @@ export default function MemberPortalChrome() {
       {menuOpen && (
         <>
           <button className="member-portal-drawer-backdrop" type="button" aria-label="Close member menu" onClick={() => setMenuOpen(false)} />
-          <aside className="member-portal-drawer" id="member-portal-drawer" aria-label="Member space menu">
+          <aside ref={drawerRef} role="dialog" aria-modal="true" className="member-portal-drawer" id="member-portal-drawer" aria-label="Member space menu">
             <div className="member-portal-drawer-head">
               <div><span className="member-portal-drawer-kicker">Your space</span><h2>Stay close to <em>home.</em></h2></div>
               <button type="button" onClick={() => setMenuOpen(false)} aria-label="Close menu">×</button>
             </div>
             <nav className="member-portal-drawer-links">
               {menuLinks.map((link) => (
-                <Link href={link.href} key={link.label}>
+                <Link href={link.href} key={link.label} aria-current={pathname === link.href ? "page" : undefined} onClick={() => setMenuOpen(false)}>
                   <span className="member-portal-drawer-icon" aria-hidden="true">{link.icon}</span>
                   <span><strong>{link.label}</strong><small>{link.detail}</small></span>
                   <b aria-hidden="true">↗</b>

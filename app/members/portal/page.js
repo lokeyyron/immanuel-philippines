@@ -54,13 +54,13 @@ export default function MemberPortalPage() {
         <div className="member-portal-card-grid">
           {portalCards.map((card) => {
             const content = <><div className="member-portal-card-top"><span className="member-portal-icon" aria-hidden="true">{card.icon}</span><span className="member-portal-card-status">{card.status}</span></div><p>{card.label}</p><h3>{card.title}</h3><span>{card.body}</span><b aria-hidden="true">↗</b></>;
-            return <Link className="member-portal-card" href={card.href} key={card.label}>{content}</Link>;
+            return <Link className={`member-portal-card${card.label === "Profile" ? " member-portal-card-profile" : ""}`} href={card.href} key={card.label}>{content}</Link>;
           })}
         </div>
       </section>
       <section className="member-portal-activity" aria-labelledby="member-portal-activity-title">
         <div>
-          <p className="kicker"><span /> A quiet pulse</p>
+          <p className="kicker"><span /> Between Sundays</p>
           <h2 id="member-portal-activity-title">Keep a little room<br /><em>for one another.</em></h2>
         </div>
         <div className="member-portal-activity-list">
@@ -69,7 +69,7 @@ export default function MemberPortalPage() {
           <div><span>03</span><p><strong>Care circle</strong><small>Private prayer requests are coming soon.</small></p><b aria-hidden="true">↗</b></div>
         </div>
       </section>
-      <p className="member-portal-footer-note">This preview is intentionally private-by-design. Real accounts, records, and publishing permissions will be connected before launch.</p>
+      <p className="member-portal-footer-note">Profile settings are available now. Groups, giving records, and member publishing are still being prepared.</p>
     </main>
   );
 }

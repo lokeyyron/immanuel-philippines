@@ -1,0 +1,141 @@
+/* Member workspace: the same editorial palette as the public homepage. */
+.member-portal-app {
+  --portal-bg:#141715; --portal-panel:#20271f; --portal-panel-strong:#252d23;
+  --portal-line:#394039; --portal-muted:#c2c7c0; --portal-accent:#e6a77d;
+  background:var(--portal-bg); color:#f5f5ee; overflow-wrap:anywhere;
+}
+.member-portal-app main::before,.member-portal-app main::after,
+.member-portal-app::before,.member-portal-app::after,
+.member-portal-app .member-portal-grid-heading::after { display:none; }
+.member-portal-app :is(a,button,input):focus-visible { outline:2px solid #f2c5a6; outline-offset:4px; }
+.member-portal-app :is(h1,h2,h3) { font-family:"Manrope",sans-serif; font-weight:500; line-height:1.15; letter-spacing:-.045em; }
+.member-portal-app :is(h1,h2,h3) em { color:#b6c0a8; font:inherit; letter-spacing:inherit; }
+.member-portal-app .kicker { font-size:13px; color:var(--portal-accent); letter-spacing:.12em; }
+.member-portal-app .kicker>span { display:none; }
+.member-portal-app .member-portal-header { position:relative; min-height:100px; grid-template-columns:auto 1fr auto; padding:20px 4vw; gap:32px; background:#141715; box-shadow:none; backdrop-filter:none; }
+.member-portal-app .member-portal-brand-mark { border:0; border-radius:0; background:none; box-shadow:none; width:32px; height:36px; }
+.member-portal-app .member-portal-brand-mark img { object-fit:contain; }
+.member-portal-app .member-portal-brand-copy strong { font-size:16px; font-weight:500; }
+.member-portal-app .member-portal-brand-copy small { display:block; font-size:12px; color:var(--portal-muted); letter-spacing:.03em; }
+.member-portal-app .member-portal-menu-toggle { min-width:44px; min-height:44px; border:0; background:none; box-shadow:none; border-radius:3px; }
+.member-portal-app .member-portal-menu-toggle b { display:none; }
+.member-portal-app .member-portal-nav { gap:28px; flex-wrap:nowrap; }
+.member-portal-app .member-portal-nav a { font-size:15px; font-weight:500; text-transform:none; letter-spacing:0; }
+.member-portal-app .member-portal-nav a.is-active { color:var(--portal-accent); }
+.member-portal-app .member-portal-private-chip { display:none; }
+.member-portal-app .member-portal-profile-pill { border-radius:3px; min-height:44px; padding:10px 14px; gap:8px; background:none; font-size:14px; font-weight:500; }
+.member-portal-app .member-portal-profile-pill span { display:block; }
+.member-portal-app .member-portal-profile-pill b { display:none; }
+.member-portal-app .member-portal-profile-pill img { background:none; padding:0; filter:invert(1); }
+.member-portal-app .member-portal-page { width:min(100%,1600px); min-height:0; padding:64px 4vw 72px; margin:auto; }
+.member-portal-app .member-portal-loading { min-height:60vh; font-size:16px; }
+.member-portal-app .member-portal-hero { padding:0 0 48px; margin:0 auto 48px; border-bottom:1px solid var(--portal-line); }
+.member-portal-app .member-portal-hero>div:last-child { display:block; max-width:none; }
+.member-portal-app .member-portal-hero h1 { max-width:18ch; font-size:clamp(44px,6vw,88px); line-height:1.08; margin:22px 0 0; white-space:normal; }
+.member-portal-app :is(.member-portal-grid,.member-portal-activity,.member-portal-footer-note) { width:100%; content-visibility:visible; }
+.member-portal-app .member-portal-grid-heading { margin-bottom:28px; }
+.member-portal-app .member-portal-grid-heading h2 { max-width:26ch; font-size:clamp(28px,3vw,44px); text-wrap:initial; }
+.member-portal-app .member-portal-card-grid { gap:24px; background:none; }
+.member-portal-app .member-portal-card { display:flex; min-height:320px; padding:28px; border:1px solid var(--portal-line); background:#20271f; border-radius:0; }
+.member-portal-app .member-portal-card:hover { background:#2a3428; color:#f5f5ee; transform:translateY(-3px); }
+.member-portal-app .member-portal-card-top { min-height:28px; }
+.member-portal-app .member-portal-icon { border:0; border-radius:0; color:var(--portal-accent); width:28px; height:28px; font-size:24px; }
+.member-portal-app .member-portal-card-status { color:#c2c7c0; font-size:12px; font-weight:500; letter-spacing:.04em; }
+.member-portal-app .member-portal-card>p { margin:24px 0 12px; font-size:13px; color:var(--portal-accent); font-weight:500; letter-spacing:.08em; }
+.member-portal-app .member-portal-card h3 { font-size:clamp(26px,2.5vw,36px); max-width:16ch; margin-bottom:16px; }
+.member-portal-app .member-portal-card>span:not(.member-portal-icon):not(.member-portal-card-status) { font-size:16px; line-height:1.7; color:#c2c7c0; max-width:32ch; }
+.member-portal-app .member-portal-card b { padding-top:20px; }
+.member-portal-app .member-portal-card:hover :is(.member-portal-icon,.member-portal-card-status) { color:var(--portal-accent); }
+.member-portal-app .member-portal-card-profile { background:#a8b39a; color:#1e291d; border-color:#a8b39a; }
+.member-portal-app .member-portal-card-profile :is(.member-portal-icon,.member-portal-card-status),
+.member-portal-app .member-portal-card-profile>p,
+.member-portal-app .member-portal-card-profile>span:not(.member-portal-icon):not(.member-portal-card-status) { color:#34402d; }
+.member-portal-app .member-portal-card-profile:hover { background:#bac5ac; color:#1e291d; }
+.member-portal-app .member-portal-card-profile:hover :is(.member-portal-icon,.member-portal-card-status) { color:#34402d; }
+.member-portal-app .member-portal-activity { margin-top:64px; padding-top:40px; gap:48px; }
+.member-portal-app .member-portal-activity h2 { font-size:clamp(30px,3.4vw,48px); }
+.member-portal-app .member-portal-activity-list>div { padding:20px 0; grid-template-columns:28px minmax(0,1fr); }
+.member-portal-app .member-portal-activity-list b { display:none; }
+.member-portal-app .member-portal-activity-list strong { font-size:17px; font-weight:500; }
+.member-portal-app .member-portal-activity-list small { font-size:15px; line-height:1.6; }
+.member-portal-app .member-portal-footer-note { color:var(--portal-muted); font-size:14px; line-height:1.7; margin-top:32px; }
+.member-portal-app .member-portal-placeholder-hero h1,.member-portal-app .member-profile-intro h1 { font-size:clamp(44px,6vw,88px); line-height:1.08; max-width:12ch; }
+.member-portal-app .member-portal-placeholder-hero>p:last-child { font-size:18px; line-height:1.7; }
+.member-portal-app .member-portal-placeholder-grid { margin:48px 0 32px; border:0; background:none; gap:24px; }
+.member-portal-app .member-portal-placeholder-grid article { border-top:1px solid #71806a; background:#20271f; padding:28px; min-height:260px; }
+.member-portal-app .member-portal-placeholder-grid article>span { font-size:12px; font-weight:500; }
+.member-portal-app .member-portal-placeholder-grid h2 { font-size:32px; margin:36px 0 16px; }
+.member-portal-app .member-portal-placeholder-grid p { font-size:16px; line-height:1.7; }
+.member-portal-app .member-profile-shell { width:100%; grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:start; gap:7vw; }
+.member-portal-app .member-profile-back { font-size:14px; text-transform:none; letter-spacing:0; margin-bottom:40px; min-height:44px; align-items:center; }
+.member-portal-app .member-profile-intro>p:not(.kicker) { font-size:18px; line-height:1.7; }
+.member-portal-app .member-profile-account-note { margin-top:32px; }
+.member-portal-app .member-profile-account-note span { font-size:12px; }
+.member-portal-app .member-profile-account-note strong { font-size:15px; overflow:visible; overflow-wrap:anywhere; }
+.member-portal-app .member-profile-card { padding:36px; background:#252d23; border:1px solid var(--portal-line); border-radius:0; box-shadow:none; backdrop-filter:none; }
+.member-portal-app .member-profile-card h2 { font-size:32px; }
+.member-portal-app .member-profile-mark { display:none; }
+.member-portal-app .member-preview-badge { border:0; padding:0; background:none; color:var(--portal-accent); font-size:12px; }
+.member-portal-app .member-profile-card>label { font-size:15px; letter-spacing:0; text-transform:none; margin-top:24px; font-weight:500; }
+.member-portal-app .member-profile-card>input { min-height:50px; border-radius:3px; border-color:#596151; background:#141715; font-size:16px; }
+.member-portal-app .member-profile-card>input::placeholder { color:#aeb5aa; }
+.member-portal-app :is(.member-profile-field-note,.member-profile-security-note) { color:var(--portal-muted); font-size:14px; line-height:1.7; }
+.member-portal-app .member-profile-divider { margin-top:32px; }
+.member-portal-app .member-profile-divider span { font-size:14px; }
+.member-portal-app .member-profile-save { min-height:50px; font-size:16px; background:var(--portal-accent); color:#191e18; border:0; border-radius:3px; box-shadow:none; }
+.member-portal-app :is(.member-profile-error,.member-profile-notice) { font-size:15px; line-height:1.6; }
+.member-portal-app .member-portal-footer { background:#10130f; margin-top:0; padding:48px 4vw 28px; }
+.member-portal-app .member-portal-footer h2 { font-size:clamp(36px,4vw,60px); }
+.member-portal-app .member-portal-footer-grid { gap:48px; }
+.member-portal-app .member-portal-footer-kicker { font-size:12px; font-weight:500; }
+.member-portal-app .member-portal-footer-copy p { font-size:16px; }
+.member-portal-app .member-portal-footer-links { gap:12px 24px; }
+.member-portal-app .member-portal-footer-links a { display:inline-flex; align-items:center; min-height:44px; font-size:14px; font-weight:500; text-transform:none; }
+.member-portal-app .member-portal-footer-bottom { margin-top:36px; font-size:12px; color:var(--portal-muted); line-height:1.6; }
+.member-portal-app .member-portal-drawer { padding:28px; width:min(440px,100vw); background:#20271f; box-shadow:none; overscroll-behavior:contain; }
+.member-portal-app .member-portal-drawer-head h2 { font-size:34px; }
+.member-portal-app .member-portal-drawer-head button { width:44px; height:44px; flex-shrink:0; border-radius:3px; }
+.member-portal-app .member-portal-drawer-kicker { font-size:12px; }
+.member-portal-app .member-portal-drawer-links a { grid-template-columns:minmax(0,1fr) auto; border-bottom:1px solid var(--portal-line); border-radius:0; padding:14px 0; }
+.member-portal-app .member-portal-drawer-icon { display:none; }
+.member-portal-app .member-portal-drawer-links strong { font-size:16px; font-weight:500; }
+.member-portal-app .member-portal-drawer-links small { font-size:14px; line-height:1.5; }
+.member-portal-app .member-portal-drawer-links a[aria-current="page"] strong { color:var(--portal-accent); }
+.member-portal-app .member-portal-drawer-foot :is(a,button) { font-size:14px; min-height:44px; display:inline-flex; align-items:center; }
+@media(max-width:1100px) {
+ .member-portal-app .member-portal-header { grid-template-columns:1fr auto; }
+ .member-portal-app .member-portal-nav { display:none; }
+ .member-portal-app .member-portal-card-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:800px) {
+ .member-portal-app .member-profile-shell,.member-portal-app .member-portal-activity { grid-template-columns:minmax(0,1fr); gap:36px; }
+ .member-portal-app .member-portal-placeholder-grid { grid-template-columns:1fr; }
+}
+@media(max-width:600px) {
+ .member-portal-app .member-portal-header { min-height:80px; padding:16px 20px; gap:12px; }
+ .member-portal-app .member-portal-brand-wrap { gap:4px; }
+ .member-portal-app .member-portal-brand { gap:8px; }
+ .member-portal-app .member-portal-brand-mark { width:24px; height:28px; }
+ .member-portal-app .member-portal-brand-copy strong { font-size:14px; }
+ .member-portal-app .member-portal-brand-copy small { font-size:11px; }
+ .member-portal-app .member-portal-profile-pill { padding:10px; }
+ .member-portal-app .member-portal-profile-pill img { display:none; }
+ .member-portal-app .member-portal-page { padding:40px 20px 56px; }
+ .member-portal-app .member-portal-hero { margin-bottom:32px; padding-bottom:32px; }
+ .member-portal-app .member-portal-hero h1 { font-size:clamp(38px,10vw,58px); }
+ .member-portal-app .member-portal-card-grid { grid-template-columns:minmax(0,1fr); gap:16px; }
+ .member-portal-app .member-portal-card { min-height:280px; padding:24px; }
+ .member-portal-app .member-portal-card h3 { max-width:none; font-size:30px; }
+ .member-portal-app .member-portal-activity { margin-top:44px; }
+ .member-portal-app .member-profile-card { padding:24px; }
+ .member-portal-app .member-profile-save { width:100%; justify-content:space-between; }
+ .member-portal-app .member-profile-back { margin-bottom:24px; }
+ .member-portal-app .member-profile-intro>p:not(.kicker),.member-portal-app .member-portal-placeholder-hero>p:last-child { font-size:16px; }
+ .member-portal-app .member-portal-footer { padding:40px 20px 24px; }
+ .member-portal-app .member-portal-footer-grid { grid-template-columns:1fr; gap:24px; }
+ .member-portal-app .member-portal-footer-bottom { flex-direction:column; }
+ .member-portal-app .member-portal-drawer { padding:24px 20px; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .member-portal-app *, .member-portal-app *::before,.member-portal-app *::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; }
+}

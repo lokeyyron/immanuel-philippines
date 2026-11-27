@@ -137,7 +137,8 @@ export default function ProfileSettings() {
 
           <div className="member-profile-divider"><span>Change password</span></div>
           <label htmlFor="profile-password">New password</label>
-          <input id="profile-password" type="password" autoComplete="new-password" value={newPassword} onChange={(event) => setNewPassword(event.target.value)} placeholder="Leave blank to keep your current password" />
+          <input id="profile-password" type="password" autoComplete="new-password" value={newPassword} onChange={(event) => setNewPassword(event.target.value)} aria-describedby="profile-password-help" placeholder="At least 8 characters" />
+          <p id="profile-password-help" className="member-profile-field-note">Leave both password fields blank to keep your current password.</p>
           <label htmlFor="profile-password-confirm">Confirm new password</label>
           <input id="profile-password-confirm" type="password" autoComplete="new-password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} placeholder="Type it again" />
 
